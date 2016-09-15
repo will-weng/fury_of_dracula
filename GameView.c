@@ -9,8 +9,7 @@
      
 struct gameView {
     //REPLACE THIS WITH YOUR OWN IMPLEMENTATION
-
-    first change
+change no2
     int hello;
 };
      
