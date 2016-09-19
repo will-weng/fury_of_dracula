@@ -33,10 +33,6 @@ DOING:
 Martin
 
 William:
--   Round giveMeTheRound(HunterView currentView);
--   PlayerID whoAmI(HunterView currentView);
--   int giveMeTheScore(HunterView currentView);
--   int howHealthyIs(HunterView currentView, PlayerID player);
 
 Andy
 
@@ -59,3 +55,7 @@ William:
 -   int howHealthyIs(DracView currentView, PlayerID player);
 -   LocationID whereIs(DracView currentView, PlayerID player);
 -   LocationID getLocation(GameView currentView, PlayerID player);
+-   Round giveMeTheRound(HunterView currentView);
+-   PlayerID whoAmI(HunterView currentView);
+-   int giveMeTheScore(HunterView currentView);
+-   int howHealthyIs(HunterView currentView, PlayerID player);
