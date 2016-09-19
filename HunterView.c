@@ -10,7 +10,12 @@
      
 struct hunterView {
     //REPLACE THIS WITH YOUR OWN IMPLEMENTATION
-    int hello;
+    Round roundNum;
+    PlayerID player;
+    int currLocation[NUM_PLAYERS];
+    int score; 
+    int health[NUM_PLAYERS];  
+    char *pastPlays;
 };
      
 
@@ -19,7 +24,6 @@ HunterView newHunterView(char *pastPlays, PlayerMessage messages[])
 {
     //REPLACE THIS WITH YOUR OWN IMPLEMENTATION
     HunterView hunterView = malloc(sizeof(struct hunterView));
-    hunterView->hello = 42;
     return hunterView;
 }
      
@@ -38,7 +42,7 @@ void disposeHunterView(HunterView toBeDeleted)
 Round giveMeTheRound(HunterView currentView)
 {
     //REPLACE THIS WITH YOUR OWN IMPLEMENTATION
-    return 0;
+    return currentView->roundNum;
 }
 
 // Get the id of current player

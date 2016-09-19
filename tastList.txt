@@ -20,10 +20,6 @@ DracView.c
 
 HunterView.c
 -   HunterView newHunterView(char *pastPlays, PlayerMessage messages[]);
--   Round giveMeTheRound(HunterView currentView);
--   PlayerID whoAmI(HunterView currentView);
--   int giveMeTheScore(HunterView currentView);
--   int howHealthyIs(HunterView currentView, PlayerID player);
 -   LocationID whereIs(HunterView currentView, PlayerID player);
 -   void giveMeTheTrail(HunterView currentView, PlayerID player,
                         LocationID trail[TRAIL_SIZE]);
@@ -37,6 +33,10 @@ DOING:
 Martin
 
 William:
+-   Round giveMeTheRound(HunterView currentView);
+-   PlayerID whoAmI(HunterView currentView);
+-   int giveMeTheScore(HunterView currentView);
+-   int howHealthyIs(HunterView currentView, PlayerID player);
 
 Andy
 
