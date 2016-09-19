@@ -1,5 +1,5 @@
 TODO:
-GameView.h
+GameView.c
 -   GameView newGameView(char *pastPlays, PlayerMessage messages[]);
 -   void disposeGameView(GameView toBeDeleted);
 -   Round getRound(GameView currentView);
@@ -12,6 +12,38 @@ GameView.h
 -   LocationID *connectedLocations(GameView currentView, int *numLocations,
                                 LocationID from, PlayerID player, Round round,
                                 int road, int rail, int sea);
+DracView.c
+-   DracView newDracView(char *pastPlays, PlayerMessage messages[]);
+-   void disposeDracView(DracView toBeDeleted);
+-   Round giveMeTheRound(DracView currentView);
+-   int giveMeTheScore(DracView currentView);
+-   int howHealthyIs(DracView currentView, PlayerID player);
+-   LocationID whereIs(DracView currentView, PlayerID player);
+-   void lastMove(DracView currentView, PlayerID player,
+                 LocationID *start, LocationID *end);
+-   void whatsThere(DracView currentView, LocationID where,
+                         int *numTraps, int *numVamps);
+-   void giveMeTheTrail(DracView currentView, PlayerID player,
+                        LocationID trail[TRAIL_SIZE]);
+-   LocationID *whereCanIgo(DracView currentView, int *numLocations, int road, int sea);
+-   LocationID *whereCanTheyGo(DracView currentView, int *numLocations,
+                           PlayerID player, int road, int rail, int sea);
+
+HunterView.c
+-   HunterView newHunterView(char *pastPlays, PlayerMessage messages[]);
+-   void disposeHunterView(HunterView toBeDeleted);
+-   Round giveMeTheRound(HunterView currentView);
+-   PlayerID whoAmI(HunterView currentView);
+-   int giveMeTheScore(HunterView currentView);
+-   int howHealthyIs(HunterView currentView, PlayerID player);
+-   LocationID whereIs(HunterView currentView, PlayerID player);
+-   void giveMeTheTrail(HunterView currentView, PlayerID player,
+                        LocationID trail[TRAIL_SIZE]);
+-   LocationID *whereCanIgo(HunterView currentView, int *numLocations,
+                        int road, int rail, int sea);
+-   LocationID *whereCanTheyGo(HunterView currentView, int *numLocations,
+                           PlayerID player, int road, int rail, int sea);
+
 
 DOING:
 martin
