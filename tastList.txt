@@ -1,6 +1,5 @@
 TODO:
 GameView.c
--   GameView newGameView(char *pastPlays, PlayerMessage messages[]);
 -   void getHistory(GameView currentView, PlayerID player,
                     LocationID trail[TRAIL_SIZE]);
 -   LocationID *connectedLocations(GameView currentView, int *numLocations,
@@ -33,6 +32,7 @@ DOING:
 Martin
 
 William:
+-   GameView newGameView(char *pastPlays, PlayerMessage messages[]);
 
 Andy
 
