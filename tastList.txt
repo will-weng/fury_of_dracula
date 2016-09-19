@@ -2,7 +2,6 @@ TODO:
 GameView.c
 -   GameView newGameView(char *pastPlays, PlayerMessage messages[]);
 -   void disposeGameView(GameView toBeDeleted);
--   LocationID getLocation(GameView currentView, PlayerID player);
 -   void getHistory(GameView currentView, PlayerID player,
                     LocationID trail[TRAIL_SIZE]);
 -   LocationID *connectedLocations(GameView currentView, int *numLocations,
@@ -38,21 +37,23 @@ HunterView.c
 
 
 DOING:
-martin
+Martin
 
-william:
--   Round getRound(GameView currentView);
--   PlayerID getCurrentPlayer(GameView currentView);
--   int getScore(GameView currentView);
--   int getHealth(GameView currentView, PlayerID player);
+William:
 -   Round giveMeTheRound(DracView currentView);
 -   int giveMeTheScore(DracView currentView);
 -   int howHealthyIs(DracView currentView, PlayerID player);
 -   LocationID whereIs(DracView currentView, PlayerID player);
 
 
-andy
+Andy
 
-sophie
+Sophie
 
 DONE:
+William:
+-   Round getRound(GameView currentView);
+-   PlayerID getCurrentPlayer(GameView currentView);
+-   int getScore(GameView currentView);
+-   int getHealth(GameView currentView, PlayerID player);
+-   LocationID getLocation(GameView currentView, PlayerID player);

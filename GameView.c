@@ -8,7 +8,7 @@
 // #include "Map.h" ... if you decide to use the Map ADT
      
 
-struct gameView {
+struct _gameView {
     Round roundNum;
     PlayerID player;
     int currLocation[NUM_PLAYERS];
@@ -16,6 +16,8 @@ struct gameView {
     int health[NUM_PLAYERS];  
     char *pastPlays;
 };
+
+typedef struct _gameView *GameView;
 
 // Creates a new GameView to summarise the current state of the game
 GameView newGameView(char *pastPlays, PlayerMessage messages[])
@@ -40,35 +42,35 @@ void disposeGameView(GameView toBeDeleted)
 Round getRound(GameView currentView)
 {
     //REPLACE THIS WITH YOUR OWN IMPLEMENTATION
-    return 0;
+    return currentView->roundNum;
 }
 
 // Get the id of current player - ie whose turn is it?
 PlayerID getCurrentPlayer(GameView currentView)
 {
     //REPLACE THIS WITH YOUR OWN IMPLEMENTATION
-    return 0;
+    return currentView->player;
 }
 
 // Get the current score
 int getScore(GameView currentView)
 {
     //REPLACE THIS WITH YOUR OWN IMPLEMENTATION
-    return 0;
+    return currentView->score;
 }
 
 // Get the current health points for a given player
 int getHealth(GameView currentView, PlayerID player)
 {
     //REPLACE THIS WITH YOUR OWN IMPLEMENTATION
-    return 0;
+    return currentView->health[player];
 }
 
 // Get the current location id of a given player
 LocationID getLocation(GameView currentView, PlayerID player)
 {
     //REPLACE THIS WITH YOUR OWN IMPLEMENTATION
-    return 0;
+    return currentView->currLocation[player];
 }
 
 //// Functions that return information about the history of the game
