@@ -8,9 +8,8 @@
 // #include "Map.h" ... if you decide to use the Map ADT
      
 struct gameView {
-    //REPLACE THIS WITH YOUR OWN IMPLEMENTATION
-change 3
-check
+    
+
     int hello;
 };
      
