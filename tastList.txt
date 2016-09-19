@@ -1,7 +1,6 @@
 TODO:
 GameView.c
 -   GameView newGameView(char *pastPlays, PlayerMessage messages[]);
--   void disposeGameView(GameView toBeDeleted);
 -   void getHistory(GameView currentView, PlayerID player,
                     LocationID trail[TRAIL_SIZE]);
 -   LocationID *connectedLocations(GameView currentView, int *numLocations,
@@ -9,7 +8,6 @@ GameView.c
                                 int road, int rail, int sea);
 DracView.c
 -   DracView newDracView(char *pastPlays, PlayerMessage messages[]);
--   void disposeDracView(DracView toBeDeleted);
 -   void lastMove(DracView currentView, PlayerID player,
                  LocationID *start, LocationID *end);
 -   void whatsThere(DracView currentView, LocationID where,
@@ -22,7 +20,6 @@ DracView.c
 
 HunterView.c
 -   HunterView newHunterView(char *pastPlays, PlayerMessage messages[]);
--   void disposeHunterView(HunterView toBeDeleted);
 -   Round giveMeTheRound(HunterView currentView);
 -   PlayerID whoAmI(HunterView currentView);
 -   int giveMeTheScore(HunterView currentView);
@@ -46,6 +43,12 @@ Andy
 Sophie
 
 DONE:
+pretty sure the default is already done
+-   void disposeHunterView(HunterView toBeDeleted);
+-   void disposeDracView(DracView toBeDeleted);
+-   void disposeGameView(GameView toBeDeleted);
+
+
 William:
 -   Round getRound(GameView currentView);
 -   PlayerID getCurrentPlayer(GameView currentView);
