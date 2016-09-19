@@ -1,7 +1,17 @@
 TODO:
-
-
-
+    GameView.h
+    -   GameView newGameView(char *pastPlays, PlayerMessage messages[]);
+    -   void disposeGameView(GameView toBeDeleted);
+    -   Round getRound(GameView currentView);
+    -   PlayerID getCurrentPlayer(GameView currentView);
+    -   int getScore(GameView currentView);
+    -   int getHealth(GameView currentView, PlayerID player);
+    -   LocationID getLocation(GameView currentView, PlayerID player);
+    -   void getHistory(GameView currentView, PlayerID player,
+                         LocationID trail[TRAIL_SIZE]);
+    -   LocationID *connectedLocations(GameView currentView, int *numLocations,
+                                    LocationID from, PlayerID player, Round round,
+                                    int road, int rail, int sea);
 
 DOING:
 martin
