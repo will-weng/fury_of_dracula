@@ -10,7 +10,13 @@
      
 struct dracView {
     //REPLACE THIS WITH YOUR OWN IMPLEMENTATION
-    int hello;
+    Round roundNum;
+    PlayerID player;
+    int currLocation[NUM_PLAYERS];
+    int score; 
+    int health[NUM_PLAYERS];  
+    char *pastPlays;
+    
 };
      
 
@@ -19,7 +25,6 @@ DracView newDracView(char *pastPlays, PlayerMessage messages[])
 {
     //REPLACE THIS WITH YOUR OWN IMPLEMENTATION
     DracView dracView = malloc(sizeof(struct dracView));
-    dracView->hello = 42;
     return dracView;
 }
      
