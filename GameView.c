@@ -7,21 +7,21 @@
 #include "GameView.h"
 // #include "Map.h" ... if you decide to use the Map ADT
      
+
 struct gameView {
     Round roundNum;
     PlayerID player;
-    int health[NUM_PLAYERS];
-    int vert[72]
-    
+    int currLocation[NUM_PLAYERS];
+    int score; 
+    int health[NUM_PLAYERS];  
+    char *pastPlays;
 };
-     
 
 // Creates a new GameView to summarise the current state of the game
 GameView newGameView(char *pastPlays, PlayerMessage messages[])
 {
     //REPLACE THIS WITH YOUR OWN IMPLEMENTATION
     GameView gameView = malloc(sizeof(struct gameView));
-    gameView->hello = 42;
     return gameView;
 }
      
