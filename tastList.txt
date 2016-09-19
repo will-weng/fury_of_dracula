@@ -5,8 +5,12 @@ TODO:
 
 DOING:
 martin
+
 william
+
 andy
+void disposeGameView(GameView toBeDeleted);
+
 sophie
 
 
