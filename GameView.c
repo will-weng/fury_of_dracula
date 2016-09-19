@@ -8,7 +8,7 @@
 // #include "Map.h" ... if you decide to use the Map ADT
      
 
-struct _gameView {
+struct gameView {
     Round roundNum;
     PlayerID player;
     int currLocation[NUM_PLAYERS];
@@ -17,7 +17,6 @@ struct _gameView {
     char *pastPlays;
 };
 
-typedef struct _gameView *GameView;
 
 // Creates a new GameView to summarise the current state of the game
 GameView newGameView(char *pastPlays, PlayerMessage messages[])

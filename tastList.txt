@@ -40,11 +40,6 @@ DOING:
 Martin
 
 William:
--   Round giveMeTheRound(DracView currentView);
--   int giveMeTheScore(DracView currentView);
--   int howHealthyIs(DracView currentView, PlayerID player);
--   LocationID whereIs(DracView currentView, PlayerID player);
-
 
 Andy
 
@@ -56,4 +51,8 @@ William:
 -   PlayerID getCurrentPlayer(GameView currentView);
 -   int getScore(GameView currentView);
 -   int getHealth(GameView currentView, PlayerID player);
+-   Round giveMeTheRound(DracView currentView);
+-   int giveMeTheScore(DracView currentView);
+-   int howHealthyIs(DracView currentView, PlayerID player);
+-   LocationID whereIs(DracView currentView, PlayerID player);
 -   LocationID getLocation(GameView currentView, PlayerID player);
