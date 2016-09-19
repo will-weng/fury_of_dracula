@@ -2,10 +2,6 @@ TODO:
 GameView.c
 -   GameView newGameView(char *pastPlays, PlayerMessage messages[]);
 -   void disposeGameView(GameView toBeDeleted);
--   Round getRound(GameView currentView);
--   PlayerID getCurrentPlayer(GameView currentView);
--   int getScore(GameView currentView);
--   int getHealth(GameView currentView, PlayerID player);
 -   LocationID getLocation(GameView currentView, PlayerID player);
 -   void getHistory(GameView currentView, PlayerID player,
                     LocationID trail[TRAIL_SIZE]);
@@ -15,10 +11,6 @@ GameView.c
 DracView.c
 -   DracView newDracView(char *pastPlays, PlayerMessage messages[]);
 -   void disposeDracView(DracView toBeDeleted);
--   Round giveMeTheRound(DracView currentView);
--   int giveMeTheScore(DracView currentView);
--   int howHealthyIs(DracView currentView, PlayerID player);
--   LocationID whereIs(DracView currentView, PlayerID player);
 -   void lastMove(DracView currentView, PlayerID player,
                  LocationID *start, LocationID *end);
 -   void whatsThere(DracView currentView, LocationID where,
@@ -48,7 +40,16 @@ HunterView.c
 DOING:
 martin
 
-william
+william:
+-   Round getRound(GameView currentView);
+-   PlayerID getCurrentPlayer(GameView currentView);
+-   int getScore(GameView currentView);
+-   int getHealth(GameView currentView, PlayerID player);
+-   Round giveMeTheRound(DracView currentView);
+-   int giveMeTheScore(DracView currentView);
+-   int howHealthyIs(DracView currentView, PlayerID player);
+-   LocationID whereIs(DracView currentView, PlayerID player);
+
 
 andy
 
