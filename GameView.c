@@ -15,6 +15,7 @@ struct gameView {
     int score; 
     int health[NUM_PLAYERS];  
     char *pastPlays;
+    int pastPos[NUM_PLAYERS][TRAIL_SIZE];
 };
 
 
@@ -79,6 +80,10 @@ void getHistory(GameView currentView, PlayerID player,
                             LocationID trail[TRAIL_SIZE])
 {
     //REPLACE THIS WITH YOUR OWN IMPLEMENTATION
+  int i;
+  for(i=0; i<TRAIL_SIZE; i++){
+    trail[i] = currentView->pastPos[player][i];
+  }
 }
 
 //// Functions that query the map to find information about connectivity
