@@ -7,6 +7,15 @@
 #include "GameView.h"
 // #include "Map.h" ... if you decide to use the Map ADT
      
+static int score(char *pastPlays);
+static int hospital(char *pastPlays);
+static int matured(char *pastPlays);
+
+static int rounds;
+
+#define STRING_OF_ROUND 40
+#define STRING_OF_MOVE 8
+#define PERIOD_OF_VAMPIRE_SPAWN 13
 
 struct gameView {
     Round roundNum;
@@ -24,6 +33,11 @@ GameView newGameView(char *pastPlays, PlayerMessage messages[])
 {
     //REPLACE THIS WITH YOUR OWN IMPLEMENTATION
     GameView gameView = malloc(sizeof(struct gameView));
+    gameView->roundNum = (sizeof(pastPlays)/(STRING_OF_ROUND*sizeof(char)));
+    rounds = gameView->roundNum;
+    gameView->player = (rounds % 5);
+    //gameView->health = 
+    gameView->score = score(gameView->pastPlays);
     return gameView;
 }
      
@@ -96,4 +110,47 @@ LocationID *connectedLocations(GameView currentView, int *numLocations,
 {
     //REPLACE THIS WITH YOUR OWN IMPLEMENTATION
     return NULL;
+}
+
+// static function to calculate current score of the game
+static int score(char *pastPlays) {
+    // initialzing total score to 366
+    int totalScore = GAME_START_SCORE;
+
+    // decreasing score by hospital visits
+    totalScore = totalScore - (SCORE_LOSS_HUNTER_HOSPITAL * hospital(pastPlays));
+
+    // decreasing score by vampires matured
+    totalScore = totalScore - (SCORE_LOSS_VAMPIRE_MATURES * matured(pastPlays));
+
+    // decrease score by the rounds played
+    totalScore = totalScore - rounds;
+    
+    return totalScore;
+}
+
+// static function to calculate hospital visits used to calculate score
+static int hospital(char *pastPlays) {
+    int visits = 0;
+
+//    char moveRead[STRING_OF_MOVES] = {};
+
+    return visits;
+}
+
+// static function to calculate vampires matured used to calculate score
+static int matured(char *pastPlays) {
+
+    int vampires = 0;
+    int counter;
+    int firstMature = 6 * STRING_OF_ROUND + 37;
+
+    // reads for if a vampire matures
+    for(counter = 0; counter * PERIOD_OF_VAMPIRE_SPAWN + 6 < rounds; counter++) {
+        if(pastPlays[firstMature + STRING_OF_ROUND * PERIOD_OF_VAMPIRE_SPAWN * counter] == 'V') {
+            vampires++;
+        }
+    }
+
+    return vampires;
 }
