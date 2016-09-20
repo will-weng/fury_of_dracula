@@ -1,7 +1,5 @@
 TODO:
 GameView.c
--   void getHistory(GameView currentView, PlayerID player,
-                    LocationID trail[TRAIL_SIZE]);
 -   LocationID *connectedLocations(GameView currentView, int *numLocations,
                                 LocationID from, PlayerID player, Round round,
                                 int road, int rail, int sea);
@@ -59,3 +57,7 @@ William:
 -   PlayerID whoAmI(HunterView currentView);
 -   int giveMeTheScore(HunterView currentView);
 -   int howHealthyIs(HunterView currentView, PlayerID player);
+
+Sophie
+-   void getHistory(GameView currentView, PlayerID player,
+                    LocationID trail[TRAIL_SIZE]);
