@@ -11,15 +11,15 @@
 static void readPlay(GameView currentView);
 static void draculaPlays(char *play, GameView currentView);
 static void hunterPlays(char *play, GameView currentView);
-
 static void score(GameView currentView);
-// static void health(GameView currentView);
 
+// global variables that is useful for newGameView
 static int rounds;
 static int hospital;
 static int matured;
 static int draculaHealth;
 
+// some #defines to use
 #define STRING_OF_ROUND 40
 #define STRING_OF_MOVE 8
 #define PERIOD_OF_VAMPIRE_SPAWN 13
@@ -45,15 +45,18 @@ GameView newGameView(char *pastPlays, PlayerMessage messages[])
     rounds = gameView->roundNum;
     gameView->player = (rounds % 5);
 
+    // initialises all hunters health and location, dracs health is updated later
     int counter;
     for(counter = 0; counter < 5; counter++) {
         gameView->health[counter] = GAME_START_HUNTER_LIFE_POINTS;
         gameView->currLocation[counter] = NOWHERE;
     }
 
+    // reads the past plays string and updates location and health of players
     readPlay(gameView);
     gameView->health[PLAYER_DRACULA] = draculaHealth;
     
+    // updates score of the game
     score(gameView);
 
     return gameView;
@@ -132,22 +135,28 @@ LocationID *connectedLocations(GameView currentView, int *numLocations,
 // static function that reads the pastplay string
 static void readPlay(GameView currentView) {
     
+    // initialises some global variables and variables to be used
     draculaHealth = GAME_START_BLOOD_POINTS;
     hospital = 0;
     matured = 0;
     char play[STRING_OF_MOVE] = {0};
     int counter, string;
 
+    // while loop that reads until the end off the pastplay string
     while(currentView->pastPlays[counter] != 0) {
+        // loop that reads every 8 char of the past plays
         for(string = 0; string < STRING_OF_MOVE; counter++, string++) {
             play[string] = currentView->pastPlays[counter];
         }
+
+        // pass the "play" string into functions depending on player
         if(play[0] == 'D') {
             draculaPlays(play, currentView);
         } else {
             hunterPlays(play, currentView);
         }
 
+        // loop to check for when a hunter dies
         int i = 0;
         while(i < 4) {
             if(currentView->health[i] < 1) {
@@ -163,17 +172,21 @@ static void readPlay(GameView currentView) {
 // static function to read the dracula's move
 static void draculaPlays(char *play, GameView currentView) {
 
+    // a terrible way to keep track of location
     char abbrev[3] = {0};
     abbrev[0] = play[1];
     abbrev[1] = play[2];
     abbrev[2] = 0;
 
+    // updates the global variable of how many vampires matured
     if(play[6] == 'V') {
         matured++;
     }
 
+    // updates the latest location of dracula
     currentView->currLocation[PLAYER_DRACULA] = abbrevToID(abbrev);
 
+    // updates health of dracula depending on the location
     if(idToType(currentView->currLocation[PLAYER_DRACULA]) == SEA) {
         draculaHealth =- LIFE_LOSS_SEA;
     } else if(currentView->currLocation[PLAYER_DRACULA] == CASTLE_DRACULA ||
@@ -182,14 +195,17 @@ static void draculaPlays(char *play, GameView currentView) {
     }
 }
 
+// static funciton that read the hunters move
 static void hunterPlays(char *play, GameView currentView) {
 
+    // similar terrible way to keep track of location
     char abbrev[3] = {0};
     abbrev[0] = play[1];
     abbrev[1] = play[2];
     abbrev[2] = 0;
+    
+    // an alright way to keep of which hunter it is
     int player;
-
     if(play[0] == 'G') {
         player = PLAYER_LORD_GODALMING;
     } else if(play[0] == 'S') {
@@ -200,14 +216,17 @@ static void hunterPlays(char *play, GameView currentView) {
         player = PLAYER_MINA_HARKER;
     }
 
+    // if the hunters last location was resting or the hospital
     if(currentView->currLocation[player] == abbrevToID(abbrev)) {
         currentView->health[player] =+ LIFE_GAIN_REST;
-    } else if(currentView->currLocation[player] == ST_JOSEPH_AND_ST_MARYS) {
+    } else if(currentView->currLocation[player] == ST_JOSEPH_AND_ST_MARYS
+            && currentView->health[player] < 1) {
         currentView->health[player] = GAME_START_HUNTER_LIFE_POINTS;
     }
 
     currentView->currLocation[player] = abbrevToID(abbrev);
 
+    // loss of health from encounters
     if(play[3] == 'T' || play[4] == 'T' || play[5] == 'T') {
         currentView->health[player] =- LIFE_LOSS_TRAP_ENCOUNTER;
     } else if(play[3] == 'D' || play[4] == 'D' || play[5] == 'D') {
@@ -215,25 +234,6 @@ static void hunterPlays(char *play, GameView currentView) {
         draculaHealth=- LIFE_LOSS_HUNTER_ENCOUNTER;      
     }
 }
-
-/*
-// static function to calculate health of all players
-static void health(GameView currentView) {
-    
-    hospital = 0;
-    int string, counter = 0;
-    char readPlay[STRING_OF_MOVE] = {0};
-    char lastPlace[]
-
-    while(pastPlays[counter] != NULL) {
-        for(string = 0; string < STRING_OF_MOVE; counter++, string++) {
-            readPlay[counter] = pastPlays[counter];
-        }
-
-        if(readPlay[])
-    }
-}
-*/
 
 // static function to calculate current score of the game
 static void score(GameView currentView) {
