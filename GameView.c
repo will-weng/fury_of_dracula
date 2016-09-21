@@ -46,17 +46,18 @@ GameView newGameView(char *pastPlays, PlayerMessage messages[])
     gameView->player = (rounds % 5);
 
     int counter;
-    for(counter = 0; counter < 4; counter++) {
+    for(counter = 0; counter < 5; counter++) {
         gameView->health[counter] = GAME_START_HUNTER_LIFE_POINTS;
+        gameView->currLocation[counter] = NOWHERE;
     }
 
     readPlay(gameView);
-
+    gameView->health[PLAYER_DRACULA] = draculaHealth;
+    
     score(gameView);
 
     return gameView;
 }
-     
      
 // Frees all memory previously allocated for the GameView toBeDeleted
 void disposeGameView(GameView toBeDeleted)
@@ -146,6 +147,16 @@ static void readPlay(GameView currentView) {
         } else {
             hunterPlays(play, currentView);
         }
+
+        int i = 0;
+        while(i < 4) {
+            if(currentView->health[i] < 1) {
+                hospital++;
+                currentView->health[i] = 0;
+                currentView->currLocation[i] = ST_JOSEPH_AND_ST_MARYS;
+            }
+            i++;
+        }
     }
 }
 
@@ -164,10 +175,10 @@ static void draculaPlays(char *play, GameView currentView) {
     currentView->currLocation[PLAYER_DRACULA] = abbrevToID(abbrev);
 
     if(idToType(currentView->currLocation[PLAYER_DRACULA]) == SEA) {
-        draculaHealth = draculaHealth - LIFE_LOSS_SEA;
+        draculaHealth =- LIFE_LOSS_SEA;
     } else if(currentView->currLocation[PLAYER_DRACULA] == CASTLE_DRACULA ||
             (abbrev[0] == 'T' && abbrev[1] == 'P')) {
-        draculaHealth = draculaHealth + LIFE_GAIN_CASTLE_DRACULA;
+        draculaHealth =+ LIFE_GAIN_CASTLE_DRACULA;
     }
 }
 
@@ -177,7 +188,6 @@ static void hunterPlays(char *play, GameView currentView) {
     abbrev[0] = play[1];
     abbrev[1] = play[2];
     abbrev[2] = 0;
-
     int player;
 
     if(play[0] == 'G') {
@@ -190,6 +200,20 @@ static void hunterPlays(char *play, GameView currentView) {
         player = PLAYER_MINA_HARKER;
     }
 
+    if(currentView->currLocation[player] == abbrevToID(abbrev)) {
+        currentView->health[player] =+ LIFE_GAIN_REST;
+    } else if(currentView->currLocation[player] == ST_JOSEPH_AND_ST_MARYS) {
+        currentView->health[player] = GAME_START_HUNTER_LIFE_POINTS;
+    }
+
+    currentView->currLocation[player] = abbrevToID(abbrev);
+
+    if(play[3] == 'T' || play[4] == 'T' || play[5] == 'T') {
+        currentView->health[player] =- LIFE_LOSS_TRAP_ENCOUNTER;
+    } else if(play[3] == 'D' || play[4] == 'D' || play[5] == 'D') {
+        currentView->health[player] =- LIFE_LOSS_DRACULA_ENCOUNTER;
+        draculaHealth=- LIFE_LOSS_HUNTER_ENCOUNTER;      
+    }
 }
 
 /*
