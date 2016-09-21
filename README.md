@@ -1,5 +1,6 @@
 THE STEPS WHILE WHEN WORKING:
 ************************************************************************
+PLEASE PLEASE PLEASE READ THE PAST COMMITS TO KEEP UP TO DATE !!@#!@#!@#
 git status  
 git pull  
 ************************************************************************
