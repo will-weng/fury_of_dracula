@@ -1,5 +1,8 @@
 TODO:
 GameView.c
+-   LocationID *connectedLocations(GameView currentView, int *numLocations,
+                                LocationID from, PlayerID player, Round round,
+                                int road, int rail, int sea);
 
 DracView.c
 -   DracView newDracView(char *pastPlays, PlayerMessage messages[]);
@@ -31,9 +34,7 @@ William:
 Andy
 -   void lastMove(DracView currentView, PlayerID player,
                  LocationID *start, LocationID *end);
--   LocationID *connectedLocations(GameView currentView, int *numLocations,
-                                LocationID from, PlayerID player, Round round,
-                                int road, int rail, int sea);
+
 
 Sophie
 
