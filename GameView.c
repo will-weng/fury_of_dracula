@@ -131,7 +131,7 @@ static int score(char *pastPlays) {
 
 // static function to calculate hospital visits used to calculate score
 static int hospital(char *pastPlays) {
-    int visits = 0;
+    int visits = 0;e
 
 //    char moveRead[STRING_OF_MOVES] = {};
 
