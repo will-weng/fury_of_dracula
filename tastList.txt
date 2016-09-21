@@ -15,7 +15,6 @@ DracView.c
                            PlayerID player, int road, int rail, int sea);
 
 HunterView.c
--   HunterView newHunterView(char *pastPlays, PlayerMessage messages[]);
 -   LocationID whereIs(HunterView currentView, PlayerID player);
 -   void giveMeTheTrail(HunterView currentView, PlayerID player,
                         LocationID trail[TRAIL_SIZE]);
@@ -27,6 +26,7 @@ HunterView.c
 
 DOING:
 Martin
+-   HunterView newHunterView(char *pastPlays, PlayerMessage messages[]);
 
 William:
 
