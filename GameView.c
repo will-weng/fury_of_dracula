@@ -156,7 +156,7 @@ static void readPlay(GameView currentView) {
     hospital = 0;
     matured = 0;
     char play[STRING_OF_MOVE] = {0};
-    int counter, string;
+    int string, counter = 0;
 
     // while loop that reads until the end off the pastplay string
     while(currentView->pastPlays[counter] != 0) {
