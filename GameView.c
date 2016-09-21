@@ -12,6 +12,8 @@ static void readPlay(GameView currentView);
 static void draculaPlays(char *play, GameView currentView);
 static void hunterPlays(char *play, GameView currentView);
 static void score(GameView currentView);
+static int charToID(char playerChar);
+static char iDToChar(int playerID);
 
 // global variables that is useful for newGameView
 static int rounds;
@@ -166,7 +168,7 @@ static void readPlay(GameView currentView) {
         }
 
         // pass the "play" string into functions depending on player
-        if(play[0] == 'D') {
+        if(play[0] == iDToChar(PLAYER_DRACULA)) {
             draculaPlays(play, currentView);
         } else {
             hunterPlays(play, currentView);
@@ -221,17 +223,8 @@ static void hunterPlays(char *play, GameView currentView) {
     abbrev[2] = 0;
     
     // an alright way to keep of which hunter it is
-    int player;
-    if(play[0] == 'G') {
-        player = PLAYER_LORD_GODALMING;
-    } else if(play[0] == 'S') {
-        player = PLAYER_DR_SEWARD;
-    } else if(play[0] == 'H') {
-        player = PLAYER_VAN_HELSING;
-    } else if(play[0] == 'M') {
-        player = PLAYER_MINA_HARKER;
-    }
-
+    int player = charToID(play[0]);
+    
     // if the hunters last location was resting or the hospital
     if(currentView->currLocation[player] == abbrevToID(abbrev)) {
         currentView->health[player] =+ LIFE_GAIN_REST;
@@ -266,4 +259,42 @@ static void score(GameView currentView) {
     totalScore = totalScore - rounds;
     
     currentView->score = totalScore;
+}
+
+// changes a character to an id number
+static int charToID(char playerChar) {
+
+    int player;
+
+    if(playerChar == 'G') {
+        player = PLAYER_LORD_GODALMING;
+    } else if(playerChar == 'S') {
+        player = PLAYER_DR_SEWARD;
+    } else if(playerChar == 'H') {
+        player = PLAYER_VAN_HELSING;
+    } else if(playerChar == 'M') {
+        player = PLAYER_MINA_HARKER;
+    } else if(playerChar == 'D') {
+        player = PLAYER_DRACULA;
+    }
+    return player;
+}
+
+// changes an id number to a character
+static char iDToChar(int playerID) {
+
+    char playerChar;
+
+    if(playerID == PLAYER_LORD_GODALMING) {
+        playerChar = 'G';
+    } else if(playerID == PLAYER_DR_SEWARD) {
+        playerChar = 'S';
+    } else if(playerID == PLAYER_VAN_HELSING) {
+        playerChar = 'H';
+    } else if(playerID == PLAYER_MINA_HARKER) {
+        playerChar = 'M';
+    } else if(playerID == PLAYER_DRACULA) {
+        playerChar = 'D';
+    }
+    return playerChar;
 }
