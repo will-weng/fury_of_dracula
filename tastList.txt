@@ -29,7 +29,6 @@ DOING:
 Martin
 
 William:
--   GameView newGameView(char *pastPlays, PlayerMessage messages[]);
 
 Andy
 -   void lastMove(DracView currentView, PlayerID player,
@@ -37,6 +36,8 @@ Andy
 
 
 Sophie
+-   void getHistory(GameView currentView, PlayerID player,
+                    LocationID trail[TRAIL_SIZE]);
 
 DONE:
 pretty sure the default is already done
@@ -59,7 +60,8 @@ William:
 -   PlayerID whoAmI(HunterView currentView);
 -   int giveMeTheScore(HunterView currentView);
 -   int howHealthyIs(HunterView currentView, PlayerID player);
+== MIGHT BE BUGGY ==
+-   GameView newGameView(char *pastPlays, PlayerMessage messages[]);
+
 
 Sophie
--   void getHistory(GameView currentView, PlayerID player,
-                    LocationID trail[TRAIL_SIZE]);
