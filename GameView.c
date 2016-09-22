@@ -34,7 +34,6 @@ struct gameView {
     int score; 
     int health[NUM_PLAYERS];  
     char *pastPlays;
-    int pastPos[NUM_PLAYERS][TRAIL_SIZE];
 };
 
 
