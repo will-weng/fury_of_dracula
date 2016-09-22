@@ -29,7 +29,7 @@ int  nElems(Set);
 
 static Link newNode(LocationID);
 static void disposeNode(Link);
-static int  findNode(Link,LocationID,Link *,Link *);
+static int  findNode(Link,LocationID);
 
 
 // newSet()
@@ -61,30 +61,30 @@ void disposeSet(Set s)
 void insertInto(Set s, LocationID id)
 {
 	assert(s != NULL);
-	Link curr, prev;
-	int found = findNode(s->elems,id,&curr,&prev);
+	Link curr = s->elems;
+	int found = findNode(s->elems,id);
 	if (found) return; // already in Set
 	Link new = newNode(id);
 	s->nelems++;
-	if (prev == NULL) {
-		// add at start of list of elems
-		new->next = s->elems;
-		s->elems = new;
-	}
-	else {
-		// add into list of elems
-		new->next = prev->next;
-		prev->next = new;
-	}
-}
 
+    //If the list is empty
+    if(curr == NULL) {
+        curr->next = new; 
+    } else {
+        while (curr->next != NULL) {
+            curr = curr->next; 
+        }
+        curr->next = new;
+    }
+}
+/*
 // dropFrom(Set,Str)
 // - ensure that Str is not in Set
 void dropFrom(Set s, LocationID id)
 {
 	assert(s != NULL);
 	Link curr, prev;
-	int found = findNode(s->elems,id,&curr,&prev);
+	int found = findNode(s->elems,id);
 	if (!found) return;
 	s->nelems--;
 	if (prev == NULL)
@@ -92,15 +92,14 @@ void dropFrom(Set s, LocationID id)
 	else
 		prev->next = curr->next;
 	disposeNode(curr);
-}
+}*/
 
 // isElem(Set,Str)
 // - check whether Str is contained in Set
 int isElem(Set s, LocationID id)
 {
 	assert(s != NULL);
-	Link curr, prev;
-	return findNode(s->elems,id,&curr,&prev);
+	return findNode(s->elems,id);
 }
 
 // nElems(Set)
@@ -147,18 +146,12 @@ static void disposeNode(Link curr)
 	free(curr);
 }
 
-// findNode(L,Str)
-// - finds where Str could be added into L
-// - if already in L, curr->val == Str
-// - if not already in L, curr and prev indicate where to insert
-// - return value indicates whether Str found or not
-static int findNode(Link list, LocationID id, Link *cur, Link *pre)
+static int findNode(Link list, LocationID id)
 {
-	Link curr = list, prev = NULL;
-	while (curr != NULL && strLT(curr->val,id)) {
-		prev = curr;
-		curr = curr->next;
-	}
-	*cur = curr; *pre = prev;
-	return (curr != NULL && strEQ(id,curr->val));
+    int num  = id;
+    Link curr = list->next;
+    while (curr->next != NULL) {
+        if(curr->val == num) return TRUE;
+    }
+    return FALSE;
 }
