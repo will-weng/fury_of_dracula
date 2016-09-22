@@ -69,7 +69,7 @@ void insertInto(Set s, LocationID id)
 
     //If the list is empty
     if(curr == NULL) {
-        curr->next = new; 
+        curr = new; 
     } else {
         while (curr->next != NULL) {
             curr = curr->next; 

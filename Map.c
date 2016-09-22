@@ -13,6 +13,7 @@
 
 typedef struct vNode *VList;
 LocationID *Locations(Map g, GameView currentView, int *numLocations, LocationID from, PlayerID player, Round round, int road, int rail, int sea);
+//int *setToArray (Set s);
 
 struct vNode {
    LocationID  v;    // ALICANTE, etc
@@ -372,9 +373,40 @@ LocationID *Locations(Map g, GameView currentView, int *numLocations, LocationID
         }
     }
     //Add rail connection to the set
+
+    /*
+    int maxRail = (player + round)%4;
+    int railCounter = 0;
     if(rail == 1) {
-
-
+        Queue railQueue = newQueue();
+        enterQueue(railQueue, from);
+        while(!emptyQueue(railQueue) && railCounter < maxRail) {
+            LocationID id = leaveQueue(railQueue);
+            curr = g->connections[id];
+            insertInto(seen, curr->v);
+            while (curr != NULL) {
+                if(curr->type == RAIL && !isElem(seen, curr->v)) {
+                    enterQueue(railQueue, curr->v);
+                    curr = curr->next;
+                }
+           }
+            railCounter++;        
+        }
     }
+    return setToArray(seen);
+    */
     return NULL;
 }
+/*
+//Function that converts a set (linked list) to an array
+int *setToArray (Set s) {
+    int i = 0;
+    int *array = malloc(sizeof(int) * s->elems);
+    Link curr = s->elems
+    while(curr!= NULL) {
+        array[i] = curr->val;
+        curr = curr->next;
+        i++;
+    }
+    return *array;
+}*/
