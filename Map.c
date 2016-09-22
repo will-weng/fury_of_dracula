@@ -7,7 +7,7 @@
 #include <stdlib.h>
 #include "Map.h"
 #include "Places.h"
-#include "Queue.h"
+#include "queue.h"
 #include "Set.h"
 #include "GameView.h"
 
