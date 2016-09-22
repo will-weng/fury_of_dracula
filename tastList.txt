@@ -2,14 +2,7 @@ TODO:
 GameView.c
 
 DracView.c
--   DracView newDracView(char *pastPlays, PlayerMessage messages[]);
--   void whatsThere(DracView currentView, LocationID where,
-                         int *numTraps, int *numVamps);
--   void giveMeTheTrail(DracView currentView, PlayerID player,
-                        LocationID trail[TRAIL_SIZE]);
--   LocationID *whereCanIgo(DracView currentView, int *numLocations, int road, int sea);
--   LocationID *whereCanTheyGo(DracView currentView, int *numLocations,
-                           PlayerID player, int road, int rail, int sea);
+
 
 HunterView.c
 
@@ -21,8 +14,7 @@ Martin
 -  LocationID *whereCanIgo(HunterView currentView, int *numLocations,
 
 Andy
--   void lastMove(DracView currentView, PlayerID player,
-                 LocationID *start, LocationID *end);
+-   DracView newDracView(char *pastPlays, PlayerMessage messages[]);
 
 
 Sophie
@@ -53,7 +45,18 @@ William:
 == MIGHT BE BUGGY ==
 -   GameView newGameView(char *pastPlays, PlayerMessage messages[]);
 
+Andy
+-   void lastMove(DracView currentView, PlayerID player,
+                 LocationID *start, LocationID *end);
 
+-   void whatsThere(DracView currentView, LocationID where,
+                         int *numTraps, int *numVamps);
+-   void giveMeTheTrail(DracView currentView, PlayerID player,
+                        LocationID trail[TRAIL_SIZE]);
+-   LocationID *whereCanIgo(DracView currentView, int *numLocations, int road, int sea);
+-   LocationID *whereCanTheyGo(DracView currentView, int *numLocations,
+                           PlayerID player, int road, int rail, int sea);
+                 
 Sophie
 
 Martin
