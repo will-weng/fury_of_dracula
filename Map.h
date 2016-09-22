@@ -4,6 +4,7 @@
 #define MAP_H
 
 #include "Places.h"
+#include "GameView.h"
 
 typedef struct edge{
     LocationID  start;
