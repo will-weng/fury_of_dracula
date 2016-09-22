@@ -6,7 +6,7 @@
 #include "Game.h"
 #include "GameView.h"
 #include "Places.h"
-// #include "Map.h" ... if you decide to use the Map ADT
+#include "Map.h"
      
 static void readPlay(GameView currentView);
 static void draculaPlays(char *play, GameView currentView);
@@ -27,6 +27,7 @@ static int draculaHealth;
 #define PERIOD_OF_VAMPIRE_SPAWN 13
 
 struct gameView {
+    Map map;
     Round roundNum;
     PlayerID player;
     int currLocation[NUM_PLAYERS];
@@ -60,6 +61,9 @@ GameView newGameView(char *pastPlays, PlayerMessage messages[])
     
     // updates score of the game
     score(gameView);
+
+    //Initialise game map
+    gameView->map = newMap();
 
     return gameView;
 }
@@ -105,7 +109,6 @@ int getHealth(GameView currentView, PlayerID player)
 // Get the current location id of a given player
 LocationID getLocation(GameView currentView, PlayerID player)
 {
-    //REPLACE THIS WITH YOUR OWN IMPLEMENTATION
     return currentView->currLocation[player];
 }
 
@@ -115,8 +118,7 @@ LocationID getLocation(GameView currentView, PlayerID player)
 void getHistory(GameView currentView, PlayerID player,
                             LocationID trail[TRAIL_SIZE])
 {
-  //REPLACE THIS WITH YOUR OWN IMPLEMENTATION
-  int counter; 
+  int counter = 0; 
   int i, j;
   
   for(i = 0; i < TRAIL_SIZE; counter++, i++) {
@@ -146,7 +148,6 @@ LocationID *connectedLocations(GameView currentView, int *numLocations,
                                LocationID from, PlayerID player, Round round,
                                int road, int rail, int sea)
 {
-    //REPLACE THIS WITH YOUR OWN IMPLEMENTATION
     return NULL;
 }
 
@@ -264,7 +265,7 @@ static void score(GameView currentView) {
 // changes a character to an id number
 static int charToID(char playerChar) {
 
-    int player;
+    PlayerID player = 0;
 
     if(playerChar == 'G') {
         player = PLAYER_LORD_GODALMING;
@@ -283,7 +284,7 @@ static int charToID(char playerChar) {
 // changes an id number to a character
 static char iDToChar(int playerID) {
 
-    char playerChar;
+    char playerChar = '\0';
 
     if(playerID == PLAYER_LORD_GODALMING) {
         playerChar = 'G';

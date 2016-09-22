@@ -4,6 +4,7 @@
 #define MAP_H
 
 #include "Places.h"
+#include "Queue.h"
 
 typedef struct edge{
     LocationID  start;

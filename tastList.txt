@@ -1,8 +1,5 @@
 TODO:
 GameView.c
--   LocationID *connectedLocations(GameView currentView, int *numLocations,
-                                LocationID from, PlayerID player, Round round,
-                                int road, int rail, int sea);
 
 DracView.c
 -   DracView newDracView(char *pastPlays, PlayerMessage messages[]);
@@ -15,18 +12,13 @@ DracView.c
                            PlayerID player, int road, int rail, int sea);
 
 HunterView.c
--   void giveMeTheTrail(HunterView currentView, PlayerID player,
-                        LocationID trail[TRAIL_SIZE]);
--   LocationID *whereCanIgo(HunterView currentView, int *numLocations,
-                        int road, int rail, int sea);
--   LocationID *whereCanTheyGo(HunterView currentView, int *numLocations,
-                           PlayerID player, int road, int rail, int sea);
-
 
 DOING:
 Martin
--   HunterView newHunterView(char *pastPlays, PlayerMessage messages[]);
--   LocationID whereIs(HunterView currentView, PlayerID player);
+-   LocationID *connectedLocations(GameView currentView, int *numLocations,
+-   LocationID *whereCanTheyGo(HunterView currentView, int *numLocations,
+                           PlayerID player, int road, int rail, int sea);
+-  LocationID *whereCanIgo(HunterView currentView, int *numLocations,
 
 Andy
 -   void lastMove(DracView currentView, PlayerID player,
@@ -63,3 +55,8 @@ William:
 
 
 Sophie
+
+Martin
+-   LocationID whereIs(HunterView currentView, PlayerID player);
+-   HunterView newHunterView(char *pastPlays, PlayerMessage messages[]);
+-   void giveMeTheTrail(HunterView currentView, PlayerID player,

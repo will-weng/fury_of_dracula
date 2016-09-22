@@ -7,8 +7,12 @@
 #include <stdlib.h>
 #include "Map.h"
 #include "Places.h"
+#include "Queue.h"
+#include "Set.h"
+#include "GameView.h"
 
 typedef struct vNode *VList;
+LocationID *Locations(Map g, GameView currentView, int *numLocations, LocationID from, PlayerID player, Round round, int road, int rail, int sea);
 
 struct vNode {
    LocationID  v;    // ALICANTE, etc
@@ -343,4 +347,34 @@ static void addConnections(Map g)
    addLink(g, MEDITERRANEAN_SEA, TYRRHENIAN_SEA, BOAT);
    addLink(g, NAPLES, TYRRHENIAN_SEA, BOAT);
    addLink(g, ROME, TYRRHENIAN_SEA, BOAT);
+}
+
+LocationID *Locations(Map g, GameView currentView, int *numLocations, LocationID from, PlayerID player, Round round, int road, int rail, int sea) {
+    
+    Set seen = newSet();
+    VList curr = g->connections[from];
+
+    //Add stating location to the set
+    insertInto(seen, curr->v);
+
+    //Add road connection to the set
+    if(road == 1) {
+        while (curr != NULL) {
+            if(curr->type == ROAD && !isElem(seen,curr->v)) insertInto(seen,curr->v);
+            curr = curr->next;
+        }
+    }
+    //Add boat connection to the set
+    if(sea == 1) {
+        while(curr != NULL) {
+            if(curr->type == BOAT && !isElem(seen,curr->v)) insertInto(seen,curr->v);
+            curr = curr->next;
+        }
+    }
+    //Add rail connection to the set
+    if(rail == 1) {
+
+
+    }
+    return NULL;
 }
