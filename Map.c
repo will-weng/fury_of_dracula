@@ -387,24 +387,9 @@ LocationID *Locations(Map g, GameView currentView, int *numLocations, LocationID
                     enterQueue(railQueue, curr->v);
                     curr = curr->next;
                 }
-           }
+            }
             railCounter++;        
         }
     }
     return setToArray(seen);
-    
-    return NULL;
 }
-
-/*//Function that converts a set (linked list) to an array
-int *setToArray (Set s) {
-    int i = 0;
-    int *array = malloc(sizeof(int) * s->nelems);
-    Link curr = s->elems
-    while(curr!= NULL) {
-        array[i] = curr->val;
-        curr = curr->next;
-        i++;
-    }
-    return array;
-}*/
