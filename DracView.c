@@ -2,32 +2,121 @@
 
 #include <stdlib.h>
 #include <assert.h>
+#include <string.h>
 #include "Globals.h"
 #include "Game.h"
 #include "GameView.h"
 #include "DracView.h"
+#include "Places.h"
+
 // #include "Map.h" ... if you decide to use the Map ADT
-     
+
+#define TURN_SIZE 8
+#define ROUND_SIZE 40     
 struct dracView {
     //REPLACE THIS WITH YOUR OWN IMPLEMENTATION
-    Round roundNum;
+	GameView gameview;
+	
+	Round roundNum;
     PlayerID player;
     int currLocation[NUM_PLAYERS];
     int score; 
     int health[NUM_PLAYERS];  
     char *pastPlays;
+    int pastPos[NUM_PLAYERS][TRAIL_SIZE];
     
+	int traps[NUM_MAP_LOCATIONS];
+	int vampires[NUM_MAP_LOCATIONS];
 };
      
-
+LocationID findthelegitID (char *pastPlays, int turnNum);
 
 // Creates a new DracView to summarise the current state of the game
+// newDracView() creates a new game view to summarise the current state of
+// the game.
+// pastPlays is a string of all the plays made in the game so far by all
+// players (including Dracula) from earliest to most recent.
+// For Dracula
+// * the pastPlays string should contain full details of all moves
+// * the last move should always be by Mina Harker
+// messages is an array containing a playerMessage for each play in the game
+// so far. It will have exactly the same number of elements as there are plays
+// in pastPlays. The message from the first play will be at index 0, and so on.
+// The contents of each playerMessage will be exactly as provided by the player.
+// The "PlayerMessage" type is defined in Game.h.
+// You are free to ignore messages if you wish.
 DracView newDracView(char *pastPlays, PlayerMessage messages[])
 {
     //REPLACE THIS WITH YOUR OWN IMPLEMENTATION
     DracView dracView = malloc(sizeof(struct dracView));
+	//copy everything=
+	dracView->gameview = newGameView(pastPlays,messages);
+	dracView->roundNum = getRound(dracView->gameview);
+	dracView->player = getCurrentPlayer(dracView->gameview);
+	
+	dracView->score = getScore(dracView->gameview );
+	
+	int i = 0;
+	while(i<NUM_PLAYERS) {
+	dracView->health[i] = getHealth(dracView->gameview, i);
+	dracView->currLocation[i] = getLocation(dracView->gameview,dracView->currLocation[i]);
+	i++;
+	}	
+	//traps
+	i = 0;
+	while(i<NUM_MAP_LOCATIONS) {
+		dracView->traps[i] = 0;	
+		i++;
+	}
+	i = 0;
+	while(i<NUM_MAP_LOCATIONS) {
+		dracView->vampires[i] = 0;
+		i++;
+	}
+    int turn = 0;    
+    while (turn < strlen(pastPlays)) {
+        //locate the first action of the turn in the string
+        int action = turn+3;
+        
+        LocationID currentLocation = findID(pastPlays, turn+1);
+        
+        //update health points, locations of traps etc based on action
+        if (pastPlays[turn] == 'D') {
+           if (pastPlays[action] == 'T') {
+				dracView->traps[currentLocation]++;
+            }
+            
+            if (pastPlays[action+1] == 'V') {
+				dracView->vampires[currentLocation]++;
+            }
+            
+            if (pastPlays[action+2] == 'M') {
+				//lose a trap
+            }
+            
+            // If vampire matured (not placed)
+            if (pastPlays[action+2]== 'V') {
+				//lose a vampire
+            }
+        } else {
+			while(action % TURN_SIZE != 0) {
+				if(pastPlays[action] == 'T') {
+					dracView->traps[currentLocation]--;				
+				} else if (pastPlays[action] == 'V'){
+					dracView->vampires[currentLocation]--;
+				}
+			action++;			
+			}
+        }
+        turn = turn + TURN_SIZE;
+    }
+    
     return dracView;
 }
+
+LocationID findID (char *pastPlays, int turnNum) {
+	return NULL;
+}  
      
      
 // Frees all memory previously allocated for the DracView toBeDeleted
@@ -69,18 +158,29 @@ LocationID whereIs(DracView currentView, PlayerID player)
 }
 
 // Get the most recent move of a given player
+// Returns the start location and end location of that move
+// Since Dracula moves last, the end location for other players is always known,
+//   but the start location may be UNKNOWN_LOCATION (for a hunter's first move)
+// The start and end locations can be the same
 void lastMove(DracView currentView, PlayerID player,
                  LocationID *start, LocationID *end)
 {
     //REPLACE THIS WITH YOUR OWN IMPLEMENTATION
-    return;
+	LocationID pastMoves[TRAIL_SIZE];
+	getHistory(currentView->gameview, player, pastMoves);
+	*start = pastMoves[1];
+	*end = pastMoves[0];
+    return;	
 }
+
 
 // Find out what minions are placed at the specified location
 void whatsThere(DracView currentView, LocationID where,
                          int *numTraps, int *numVamps)
 {
     //REPLACE THIS WITH YOUR OWN IMPLEMENTATION
+	*numTraps = currentView->traps[where];
+	*numVamps = currentView->vampires[where];
     return;
 }
 
@@ -91,6 +191,7 @@ void giveMeTheTrail(DracView currentView, PlayerID player,
                             LocationID trail[TRAIL_SIZE])
 {
     //REPLACE THIS WITH YOUR OWN IMPLEMENTATION
+	getHistory(currentView->gameview, player, trail);
 }
 
 //// Functions that query the map to find information about connectivity
@@ -99,7 +200,8 @@ void giveMeTheTrail(DracView currentView, PlayerID player,
 LocationID *whereCanIgo(DracView currentView, int *numLocations, int road, int sea)
 {
     //REPLACE THIS WITH YOUR OWN IMPLEMENTATION
-    return NULL;
+	
+    return connectedLocations(currentView->gameview, numLocations,getLocation(currentView->gameview,PLAYER_DRACULA),PLAYER_DRACULA, getRound(currentView->gameview),road,0,sea);
 }
 
 // What are the specified player's next possible moves
@@ -107,5 +209,8 @@ LocationID *whereCanTheyGo(DracView currentView, int *numLocations,
                            PlayerID player, int road, int rail, int sea)
 {
     //REPLACE THIS WITH YOUR OWN IMPLEMENTATION
-    return NULL;
+    return connectedLocations(currentView->gameview, numLocations,getLocation(currentView->gameview,player),player,getRound(currentView->gameview),road,rail,sea);
 }
+
+
+
