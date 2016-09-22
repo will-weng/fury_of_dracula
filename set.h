@@ -1,10 +1,10 @@
 // set.h ... interface to simple Set of Strings
 // Written by John Shepherd, September 2015
 
-#include "GameView.h"
-
 #ifndef SET_H
 #define SET_H
+
+#include "GameView.h"
 
 typedef struct SetRep *Set;
 

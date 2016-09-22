@@ -10,7 +10,7 @@
 typedef struct Node *Link;
 
 typedef struct Node {
-	char *val;
+	LocationID id;
 	Link  next;
 } Node;
 	
@@ -23,12 +23,12 @@ typedef struct QueueRep {
 
 Queue newQueue();
 void disposeQueue(Queue);
-void enterQueue(Queue,char *);
-char *leaveQueue(Queue);
+void enterQueue(Queue,LocationID);
+LocationID leaveQueue(Queue);
 int  emptyQueue(Queue);
 void showQueue(Queue q);
 
-static Link newNode(char *);
+static Link newNode(LocationID);
 static void disposeNode(Link);
 
 
@@ -57,10 +57,9 @@ void disposeQueue(Queue q)
 }
 
 // enterQueue(Queue,Str)
-// - add Str to back of Queue
-void enterQueue(Queue q, char *str)
+void enterQueue(Queue q, LocationID id)
 {
-	Link new = newNode(str);
+	Link new = newNode(id);
 	if (q->front == NULL)
 		q->front = q->back = new;
 	else {
@@ -72,16 +71,16 @@ void enterQueue(Queue q, char *str)
 
 // leaveQueue(Queue)
 // - return string at front of Queue
-char *leaveQueue(Queue q)
+LocationID leaveQueue(Queue q)
 {
 	assert (q->front != NULL);
-    char *str = q->front->val;
+    LocationID id = q->front->id;
 	Link old = q->front;
 	q->front = old->next;
 	if (q->front == NULL)
 		q->back = NULL;
 	free(old);
-	return str;
+	return id;
 }
 
 // emptyQueue(Queue)
@@ -103,7 +102,7 @@ void showQueue(Queue q)
 		int id = 0;
 		curr = q->front;
 		while (curr != NULL) {
-			printf("[%03d] %s\n", id, curr->val);
+			printf("[%03d] %d\n", id, curr->id);
 			id++;
 			curr = curr->next;
 		}
@@ -112,11 +111,11 @@ void showQueue(Queue q)
 
 // Helper functions
 
-static Link newNode(char *str)
+static Link newNode(LocationID id)
 {
 	Link new = malloc(sizeof(Node));
 	assert(new != NULL);
-	new->val = strdup(str);
+	new->id = id;
 	new->next = NULL;
 	return new;
 }
@@ -124,7 +123,6 @@ static Link newNode(char *str)
 static void disposeNode(Link curr)
 {
 	assert(curr != NULL);
-	free(curr->val);
 	free(curr);
 }
 

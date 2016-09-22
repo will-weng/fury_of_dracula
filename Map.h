@@ -16,10 +16,13 @@ typedef struct edge{
 typedef struct MapRep *Map; 
 
 // operations on graphs 
-Map  newMap();  
+Map newMap();
 void disposeMap(Map g); 
 void showMap(Map g); 
-int  numV(Map g);
-int  numE(Map g, TransportID t);
+int numV(Map g);
+int numE(Map g, TransportID t);
+
+//Custom Functions
+LocationID *Locations(Map g, GameView currentView, int *numLocations, LocationID from, PlayerID player, Round round, int road, int rail, int sea);
 
 #endif

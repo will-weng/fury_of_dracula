@@ -155,3 +155,16 @@ static int findNode(Link list, LocationID id)
     }
     return FALSE;
 }
+
+//Function that converts a set (linked list) to an array
+ int *setToArray (Set s) {
+     int i = 0;
+     int *array = malloc(sizeof(int) * s->nelems);
+     Link curr = s->elems;
+     while(curr!= NULL) {
+        array[i] = curr->val;
+        curr = curr->next;
+        i++;
+     }
+     return array;
+ }

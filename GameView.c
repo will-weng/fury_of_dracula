@@ -148,7 +148,7 @@ LocationID *connectedLocations(GameView currentView, int *numLocations,
                                LocationID from, PlayerID player, Round round,
                                int road, int rail, int sea)
 {
-    return NULL;
+    return Locations(currentView->map, currentView, numLocations, from, player, round, road, rail, sea);
 }
 
 // static function that reads the pastplay string
