@@ -8,7 +8,7 @@
 
 int main()
 {
-//    int i;
+    int i;
     GameView gv;
     
     printf("Test basic empty initialisation\n");
@@ -27,8 +27,8 @@ int main()
 
     printf("Test for Dracula trail and basic functions\n");
     PlayerMessage messages2[] = {"Hello","Rubbish","Stuff","","Mwahahah"};
-    gv = newGameView("GST.... SAO.... HZU.... MBB.... DC?....", messages2);
-/*
+    gv = newGameView("GST.... SAO.... HZU.... MBB.... DC?....", messages2);    
+
     assert(getCurrentPlayer(gv) == PLAYER_LORD_GODALMING);
     assert(getRound(gv) == 1);
     assert(getLocation(gv,PLAYER_LORD_GODALMING) == STRASBOURG);
@@ -113,7 +113,7 @@ int main()
     free(edges);
     printf("passed\n");
     disposeGameView(gv);
-    */
+    
     return 0;
 }
 

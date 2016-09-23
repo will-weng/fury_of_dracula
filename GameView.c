@@ -44,8 +44,11 @@ struct gameView {
 GameView newGameView(char *pastPlays, PlayerMessage messages[])
 {
     GameView gameView = malloc(sizeof(struct gameView));
-    gameView->pastPlays = strcpy(gameView->pastPlays, pastPlays);
+    printf("=====   testing     =====\n");
+    gameView->pastPlays = pastPlays;
+    //strcpy(gameView->pastPlays, pastPlays);
     
+
     //Set number of rounds
     //**Using global variable instead of variable in struct
     //gameView->roundNum = strlen(pastPlays)/STRING_OF_ROUND;
@@ -63,8 +66,6 @@ GameView newGameView(char *pastPlays, PlayerMessage messages[])
 
     // reads the past plays string and updates location and health of players
 
-
-    printf("draculaHealth is %d\n", draculaHealth);
     readPlay(gameView);
 
     gameView->health[PLAYER_DRACULA] = draculaHealth;
@@ -157,7 +158,6 @@ void getHistory(GameView currentView, PlayerID player,
             }
             
             trail[0] = abbrevToID(abbrev);
-            
         }
     }
 }
@@ -228,11 +228,20 @@ static void draculaPlays(char *play, GameView currentView) {
     if(play[6] == 'V') {
         matured++;
     }
-
+    
     // updates the latest location of dracula
-    currentView->currLocation[PLAYER_DRACULA] = abbrevToID(abbrev);
+    if(play[0] == 'C') {
+        currentView->currLocation[PLAYER_DRACULA] = CITY_UNKNOWN;
+    } else if(play[0] == 'S') {
+        currentView->currLocation[PLAYER_DRACULA] = SEA_UNKNOWN;
+    } else if(play[1] != '?' && play[0] != 'H' && play[0] != 'D' && play[0] != 'T') {
+        currentView->currLocation[PLAYER_DRACULA] = abbrevToID(abbrev);
+    }
+
     // updates health of dracula depending on the location
-    if(idToType(currentView->currLocation[PLAYER_DRACULA]) == SEA) {
+    if(play[0] == 'S') {
+        draculaHealth =  draculaHealth - LIFE_LOSS_SEA;
+    } else if(play[1] != '?' && play[0] != 'H' && play[0] != 'D' && play[0] != 'T') {
         draculaHealth =  draculaHealth - LIFE_LOSS_SEA;
     } else if(currentView->currLocation[PLAYER_DRACULA] == CASTLE_DRACULA ||
             (abbrev[0] == 'T' && abbrev[1] == 'P')) {
