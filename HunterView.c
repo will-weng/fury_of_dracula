@@ -77,14 +77,15 @@ void giveMeTheTrail(HunterView currentView, PlayerID player,
 LocationID *whereCanIgo(HunterView currentView, int *numLocations,
                         int road, int rail, int sea)
 {
-    //REPLACE THIS WITH YOUR OWN IMPLEMENTATION
-    return NULL;
+    
+    LocationID from = whereIs(currentView, whoAmI(currentView));
+    return connectedLocations(currentView->game, numLocations, from, whoAmI(currentView), giveMeTheRound(currentView), road, rail, sea);
 }
 
 // What are the specified player's next possible moves
 LocationID *whereCanTheyGo(HunterView currentView, int *numLocations,
                            PlayerID player, int road, int rail, int sea)
 {
-    //REPLACE THIS WITH YOUR OWN IMPLEMENTATION
-    return NULL;
+
+    return connectedLocations(currentView->game, numLocations, whereIs(currentView,player),player,giveMeTheRound(currentView),road,rail,sea);
 }
