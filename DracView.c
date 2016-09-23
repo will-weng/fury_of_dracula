@@ -121,16 +121,16 @@ static LocationID findID (char *pastPlays, int turnNum) {
 	char abbrev[3] = {pastPlays[turnNum],pastPlays[turnNum+1],'\0'};	
 	if (strcmp(abbrev, "HI") == 0 ||
         strcmp(abbrev, "D1") == 0) {        
-        return findID(pastPlays, indexOfLocation-ROUND_SIZE);        
+        return findID(pastPlays, turnNum-ROUND_SIZE);        
     } else if (strcmp(abbrev, "D2") == 0) {        
-        return findID(pastPlays,indexOfLocation-ROUND_SIZE*2);        
+        return findID(pastPlays,turnNum-ROUND_SIZE*2);        
     } else if (strcmp(abbrev, "D3") == 0) {        
         return findID(pastPlays,
-                                indexOfLocation-ROUND_SIZE*3);        
+                                turnNum-ROUND_SIZE*3);        
     } else if (strcmp(abbrev, "D4") == 0) {        
-        return findID(pastPlays,indexOfLocation-ROUND_SIZE*4);        
+        return findID(pastPlays,turnNum-ROUND_SIZE*4);        
     } else if (strcmp(abbrev, "D5") == 0) {        
-        return findID(pastPlays,indexOfLocation-ROUND_SIZE*5);        
+        return findID(pastPlays,turnNum-ROUND_SIZE*5);        
     } else {        
         return abbrevToID(abbrev);
 }  
