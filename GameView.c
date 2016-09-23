@@ -30,7 +30,7 @@ static int draculaHealth;
 
 struct gameView {
     Map map;
-    Round roundNum;
+    //Round roundNum;
     PlayerID player;
     int currLocation[NUM_PLAYERS];
     int score; 
@@ -46,10 +46,11 @@ GameView newGameView(char *pastPlays, PlayerMessage messages[])
     gameView->pastPlays = pastPlays;
     
     //Set number of rounds
-    gameView->roundNum = strlen(pastPlays)/STRING_OF_ROUND;
+    //**Using global variable instead of variable in struct
+    //gameView->roundNum = strlen(pastPlays)/STRING_OF_ROUND;
+    rounds = strlen(pastPlays)/STRING_OF_ROUND;
 
     //Set the Player
-    int rounds = gameView->roundNum;
     gameView->player = (rounds % 5);
 
     // initialises all hunters health and location, dracs health is updated later
@@ -83,7 +84,7 @@ void disposeGameView(GameView toBeDeleted)
 // Get the current round
 Round getRound(GameView currentView)
 {
-    return currentView->roundNum;
+    return rounds;
 }
 
 // Get the id of current player - ie whose turn is it?
