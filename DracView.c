@@ -3,18 +3,22 @@
 #include <stdlib.h>
 #include <assert.h>
 #include <string.h>
+#include <stdio.h>
 #include "Globals.h"
 #include "Game.h"
 #include "GameView.h"
 #include "DracView.h"
 #include "Places.h"
+#include "Globals.h"
+#include "Map.h"
 
 // #include "Map.h" ... if you decide to use the Map ADT
 
 #define TURN_SIZE 8
 #define ROUND_SIZE 40     
 struct dracView {
-	GameView game;
+    //REPLACE THIS WITH YOUR OWN IMPLEMENTATION
+	GameView gameview;
 	
 	Round roundNum;
     PlayerID player;
@@ -28,7 +32,7 @@ struct dracView {
 	int vampires[NUM_MAP_LOCATIONS];
 };
      
-LocationID findID (char *pastPlays, int turnNum);
+static LocationID findID (char *pastPlays, int turnNum);
 
 // Creates a new DracView to summarise the current state of the game
 // newDracView() creates a new game view to summarise the current state of
@@ -49,16 +53,16 @@ DracView newDracView(char *pastPlays, PlayerMessage messages[])
     //REPLACE THIS WITH YOUR OWN IMPLEMENTATION
     DracView dracView = malloc(sizeof(struct dracView));
 	//copy everything=
-	dracView->game = newGameView(pastPlays,messages);
-	dracView->roundNum = getRound(dracView->game);
-	dracView->player = getCurrentPlayer(dracView->game);
+	dracView->gameview = newGameView(pastPlays,messages);
+	dracView->roundNum = getRound(dracView->gameview);
+	dracView->player = getCurrentPlayer(dracView->gameview);
 	
-	dracView->score = getScore(dracView->game);
+	dracView->score = getScore(dracView->gameview );
 	
 	int i = 0;
 	while(i<NUM_PLAYERS) {
-	dracView->health[i] = getHealth(dracView->game, i);
-	dracView->currLocation[i] = getLocation(dracView->game,dracView->currLocation[i]);
+	dracView->health[i] = getHealth(dracView->gameview, i);
+	dracView->currLocation[i] = getLocation(dracView->gameview,dracView->currLocation[i]);
 	i++;
 	}	
 	//traps
@@ -90,12 +94,12 @@ DracView newDracView(char *pastPlays, PlayerMessage messages[])
             }
             
             if (pastPlays[action+2] == 'M') {
-				//lose a trap
+				dracView->traps[findID(pastPlays,(turn+1-ROUND_SIZE*6))]--;
             }
             
             // If vampire matured (not placed)
             if (pastPlays[action+2]== 'V') {
-				//lose a vampire
+				dracView->vampires[findID(pastPlays,(turn+1-ROUND_SIZE*6))]--;
             }
         } else {
 			while(action % TURN_SIZE != 0) {
@@ -112,9 +116,11 @@ DracView newDracView(char *pastPlays, PlayerMessage messages[])
     
     return dracView;
 }
-//What does this function do?
-LocationID findID (char *pastPlays, int turnNum) {
-	return 0;
+
+static LocationID findID (char *pastPlays, int turnNum) {
+	char abbrev[3] = {pastPlays[turnNum],pastPlays[turnNum+1],'\0'};
+	
+	return abbrevToID(abbrev);
 }  
      
      
@@ -131,25 +137,31 @@ void disposeDracView(DracView toBeDeleted)
 // Get the current round
 Round giveMeTheRound(DracView currentView)
 {
-    return getRound(currentView->game);
+    //REPLACE THIS WITH YOUR OWN IMPLEMENTATION
+    return currentView->roundNum;
 }
 
 // Get the current score
 int giveMeTheScore(DracView currentView)
 {
-    return getScore(currentView->game);
+    //REPLACE THIS WITH YOUR OWN IMPLEMENTATION
+    return currentView->score;
 }
 
 // Get the current health points for a given player
 int howHealthyIs(DracView currentView, PlayerID player)
 {
-    return getHealth(currentView->game, player);
+    //REPLACE THIS WITH YOUR OWN IMPLEMENTATION
+	int x = getHealth(currentView->gameview, player);
+	printf("health is %d\n", x);
+    return getHealth(currentView->gameview, player);
 }
 
 // Get the current location id of a given player
 LocationID whereIs(DracView currentView, PlayerID player)
 {
-    return getLocation(currentView->game, player);
+    //REPLACE THIS WITH YOUR OWN IMPLEMENTATION
+    return getLocation(currentView->gameview, player);
 }
 
 // Get the most recent move of a given player
@@ -160,8 +172,9 @@ LocationID whereIs(DracView currentView, PlayerID player)
 void lastMove(DracView currentView, PlayerID player,
                  LocationID *start, LocationID *end)
 {
+    //REPLACE THIS WITH YOUR OWN IMPLEMENTATION
 	LocationID pastMoves[TRAIL_SIZE];
-	getHistory(currentView->game, player, pastMoves);
+	getHistory(currentView->gameview, player, pastMoves);
 	*start = pastMoves[1];
 	*end = pastMoves[0];
     return;	
@@ -172,6 +185,7 @@ void lastMove(DracView currentView, PlayerID player,
 void whatsThere(DracView currentView, LocationID where,
                          int *numTraps, int *numVamps)
 {
+    //REPLACE THIS WITH YOUR OWN IMPLEMENTATION
 	*numTraps = currentView->traps[where];
 	*numVamps = currentView->vampires[where];
     return;
@@ -183,7 +197,8 @@ void whatsThere(DracView currentView, LocationID where,
 void giveMeTheTrail(DracView currentView, PlayerID player,
                             LocationID trail[TRAIL_SIZE])
 {
-	getHistory(currentView->game, player, trail);
+    //REPLACE THIS WITH YOUR OWN IMPLEMENTATION
+	getHistory(currentView->gameview, player, trail);
 }
 
 //// Functions that query the map to find information about connectivity
@@ -191,15 +206,19 @@ void giveMeTheTrail(DracView currentView, PlayerID player,
 // What are my (Dracula's) possible next moves (locations)
 LocationID *whereCanIgo(DracView currentView, int *numLocations, int road, int sea)
 {
+    //REPLACE THIS WITH YOUR OWN IMPLEMENTATION
 	
-    int rail = 0;
-    LocationID from = getLocation(currentView->game, PLAYER_DRACULA);
-    return connectedLocations(currentView->game, numLocations, from, PLAYER_DRACULA, getRound(currentView->game), road, rail, sea);
+    return connectedLocations(currentView->gameview, numLocations,getLocation(currentView->gameview,PLAYER_DRACULA),PLAYER_DRACULA, getRound(currentView->gameview),road,0,sea);
 }
 
 // What are the specified player's next possible moves
 LocationID *whereCanTheyGo(DracView currentView, int *numLocations,
                            PlayerID player, int road, int rail, int sea)
 {
-    return connectedLocations(currentView->game, numLocations, getLocation(currentView->game,player),player,getRound(currentView->game),road,rail,sea);
+    //REPLACE THIS WITH YOUR OWN IMPLEMENTATION
+    return connectedLocations(currentView->gameview, numLocations,getLocation(currentView->gameview,player),player,getRound(currentView->gameview),road,rail,sea);
 }
+
+
+
+
