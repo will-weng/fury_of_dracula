@@ -45,7 +45,7 @@ struct gameView {
 GameView newGameView(char *pastPlays, PlayerMessage messages[])
 {
     GameView gameView = malloc(sizeof(struct gameView));
-    gameView->pastPlays = pastPlays;
+    gameView->pastPlays = strcpy(gameView->pastPlays, pastPlays);
     
     //Set number of rounds
     //**Using global variable instead of variable in struct
@@ -227,8 +227,7 @@ static void draculaPlays(char *play, GameView currentView) {
 
     // updates the latest location of dracula
     currentView->currLocation[PLAYER_DRACULA] = abbrevToID(abbrev);
-
-
+    printf("%s %d\n",abbrev, abbrevToID(abbrev));
     // updates health of dracula depending on the location
     if(idToType(currentView->currLocation[PLAYER_DRACULA]) == SEA) {
         draculaHealth =- LIFE_LOSS_SEA;
