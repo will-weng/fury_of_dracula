@@ -134,6 +134,7 @@ static LocationID findID (char *pastPlays, int turnNum) {
     } else {        
         return abbrevToID(abbrev);
 }  
+}
      
      
 // Frees all memory previously allocated for the DracView toBeDeleted
