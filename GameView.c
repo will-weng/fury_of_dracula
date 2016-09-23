@@ -43,18 +43,15 @@ struct gameView {
 GameView newGameView(char *pastPlays, PlayerMessage messages[])
 {
     GameView gameView = malloc(sizeof(struct gameView));
-    printf("=====   testing     =====\n");
     gameView->pastPlays = pastPlays;
     //strcpy(gameView->pastPlays, pastPlays);
-    
-
     //Set number of rounds
     //**Using global variable instead of variable in struct
-    gameView->roundNum = strlen(pastPlays)/STRING_OF_ROUND;
+    gameView->roundNum = (strlen(pastPlays) + 1)/STRING_OF_ROUND;
     rounds = gameView->roundNum;
 
     //Set the Player
-    gameView->player = (rounds % 5);
+    gameView->player = ((strlen(pastPlays) + 1)/STRING_OF_MOVE) % 5;
 
     // initialises all hunters health and location, dracs health is updated later
     int counter;
@@ -227,18 +224,18 @@ static void draculaPlays(char *play, GameView currentView) {
     }
     
     // updates the latest location of dracula
-    if(play[0] == 'C') {
+    if(abbrev[0] == 'C') {
         currentView->currLocation[PLAYER_DRACULA] = CITY_UNKNOWN;
-    } else if(play[0] == 'S') {
+    } else if(abbrev[0] == 'S') {
         currentView->currLocation[PLAYER_DRACULA] = SEA_UNKNOWN;
-    } else if(play[1] != '?' && play[0] != 'H' && play[0] != 'D' && play[0] != 'T') {
+    } else if(abbrev[1] != '?' && abbrev[0] != 'H' && abbrev[0] != 'D' && abbrev[0] != 'T') {
         currentView->currLocation[PLAYER_DRACULA] = abbrevToID(abbrev);
     }
 
     // updates health of dracula depending on the location
-    if(play[0] == 'S') {
+    if(abbrev[0] == 'S') {
         draculaHealth =  draculaHealth - LIFE_LOSS_SEA;
-    } else if(play[1] != '?' && play[0] != 'H' && play[0] != 'D' && play[0] != 'T') {
+    } else if(abbrev[1] != '?' && abbrev[0] != 'H' && abbrev[0] != 'D' && abbrev[0] != 'T') {
         draculaHealth =  draculaHealth - LIFE_LOSS_SEA;
     } else if(currentView->currLocation[PLAYER_DRACULA] == CASTLE_DRACULA ||
             (abbrev[0] == 'T' && abbrev[1] == 'P')) {
