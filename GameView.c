@@ -140,6 +140,12 @@ void getHistory(GameView currentView, PlayerID player,
         }
         
         
+            printf("%d\n", trail[0]);
+
+            printf("%c\n", playerChar);
+
+            printf("%c\n", play[2]);
+
         if(play[0] == playerChar) {
             
             char abbrev[3] = {0};
@@ -235,7 +241,7 @@ static void draculaPlays(char *play, GameView currentView) {
     // updates health of dracula depending on the location
     if(abbrev[0] == 'S') {
         draculaHealth =  draculaHealth - LIFE_LOSS_SEA;
-    } else if(abbrev[1] != '?' && abbrev[0] != 'H' && abbrev[0] != 'D' && abbrev[0] != 'T') {
+    } else if(abbrev[1] != '?' && abbrev[0] != 'H' && abbrev[0] != 'D' && abbrev[0] != 'T' && idToType(currentView->currLocation[PLAYER_DRACULA]) == SEA) {
         draculaHealth =  draculaHealth - LIFE_LOSS_SEA;
     } else if(currentView->currLocation[PLAYER_DRACULA] == CASTLE_DRACULA ||
             (abbrev[0] == 'T' && abbrev[1] == 'P')) {
@@ -270,7 +276,7 @@ static void hunterPlays(char *play, GameView currentView) {
         currentView->health[player] = currentView->health[player] - LIFE_LOSS_TRAP_ENCOUNTER;
     } else if(play[3] == 'D' || play[4] == 'D' || play[5] == 'D') {
         currentView->health[player] = currentView->health[player] - LIFE_LOSS_DRACULA_ENCOUNTER;
-        draculaHealth= draculaHealth - LIFE_LOSS_HUNTER_ENCOUNTER;      
+        draculaHealth = draculaHealth - LIFE_LOSS_HUNTER_ENCOUNTER;
     }
 }
 

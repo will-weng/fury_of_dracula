@@ -165,8 +165,6 @@ int giveMeTheScore(DracView currentView)
 int howHealthyIs(DracView currentView, PlayerID player)
 {
     //REPLACE THIS WITH YOUR OWN IMPLEMENTATION
-	int x = getHealth(currentView->gameview, player);
-	printf("health is %d\n", x);
     return getHealth(currentView->gameview, player);
 }
 
