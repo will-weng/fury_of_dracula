@@ -8,7 +8,7 @@
 #include "Map.h"
 #include "Places.h"
 #include "queue.h"
-#include "Set.h"
+#include "set.h"
 #include "GameView.h"
 
 typedef struct vNode *VList;
