@@ -113,6 +113,7 @@ int main()
     free(edges);
     printf("passed\n");
     disposeGameView(gv);
-    return 0;*/
+    */
+    return 0;
 }
 
