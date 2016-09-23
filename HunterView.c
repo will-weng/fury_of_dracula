@@ -20,7 +20,8 @@ HunterView newHunterView(char *pastPlays, PlayerMessage messages[])
     GameView newGame = newGameView(pastPlays, messages);
 
     //cast a GameView pointer to hunterView
-    HunterView newHunterView = (HunterView)&newGame;
+    HunterView newHunterView = malloc(sizeof(struct hunterView));
+    newHunterView->game = newGame;
     return newHunterView;
 }
      

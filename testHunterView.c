@@ -16,6 +16,9 @@ int main()
     hv = newHunterView("", messages1);
     assert(whoAmI(hv) == PLAYER_LORD_GODALMING);
     assert(giveMeTheRound(hv) == 0);
+    
+   printf("health points: %d\n",howHealthyIs(hv,PLAYER_DR_SEWARD));
+
     assert(howHealthyIs(hv,PLAYER_DR_SEWARD) == GAME_START_HUNTER_LIFE_POINTS);
     assert(howHealthyIs(hv,PLAYER_DRACULA) == GAME_START_BLOOD_POINTS);
     assert(giveMeTheScore(hv) == GAME_START_SCORE);
