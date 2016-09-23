@@ -117,26 +117,46 @@ LocationID getLocation(GameView currentView, PlayerID player)
 //// Functions that return information about the history of the game
 
 // Fills the trail array with the location ids of the last 6 turns
+
+
 void getHistory(GameView currentView, PlayerID player,
                             LocationID trail[TRAIL_SIZE])
 {
-  int counter = 0; 
-  int i, j;
-  
-  for(i = 0; i < TRAIL_SIZE; counter++, i++) {
-    while(currentView->pastPlays[counter] != 0) {
-      trail[i] = currentView->pastPlays[counter];
-      if(i==6){
-	for(j=0; j<6; j++){
-	  trail[j] = trail[j+1];
-	}
-	i=0;
-	trail[7] = 0;
-      }
-      
+    char play[STRING_OF_MOVE] = {0};
+    int string, counter = 0;
+    for(counter = 0; counter < TRAIL_SIZE; counter++) {
+        trail[counter] = NOWHERE;
     }
-  }
+    char playerChar = iDToChar(player);
+    
+    // while loop that reads until the end off the pastplay string
+    while(currentView->pastPlays[counter] != 0) {
+        // loop that reads every 8 char of the past plays
+        for(string = 0; string < STRING_OF_MOVE; counter++, string++) {
+            play[string] = currentView->pastPlays[counter];
+        }
+        
+        
+        if(play[0] == playerChar) {
+            
+            char abbrev[3] = {0};
+            abbrev[0] = play[1];
+            abbrev[1] = play[2];
+            abbrev[2] = 0;
+
+            int i = 0;
+            
+            for(i = 0; i < TRAIL_SIZE; i++) {
+                trail[i+1] = trail[i];
+            }
+            
+            trail[0] = abbrevToID(abbrev);
+            
+        }
+    }
 }
+
+
 
 //// Functions that query the map to find information about connectivity
 
