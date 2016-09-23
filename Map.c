@@ -391,5 +391,6 @@ LocationID *Locations(Map g, GameView currentView, int *numLocations, LocationID
             railCounter++;        
         }
     }
+
     return setToArray(seen);
 }

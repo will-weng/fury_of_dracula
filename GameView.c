@@ -1,5 +1,6 @@
 // GameView.c ... GameView ADT implementation
 
+#include <stdio.h>
 #include <stdlib.h>
 #include <assert.h>
 #include "Globals.h"
@@ -7,6 +8,7 @@
 #include "GameView.h"
 #include "Places.h"
 #include "Map.h"
+#include "String.h"
      
 static void readPlay(GameView currentView);
 static void draculaPlays(char *play, GameView currentView);
@@ -14,7 +16,7 @@ static void hunterPlays(char *play, GameView currentView);
 static void score(GameView currentView);
 static int charToID(char playerChar);
 static char iDToChar(int playerID);
-
+    
 // global variables that is useful for newGameView
 static int rounds;
 static int hospital;
@@ -42,8 +44,12 @@ GameView newGameView(char *pastPlays, PlayerMessage messages[])
 {
     GameView gameView = malloc(sizeof(struct gameView));
     gameView->pastPlays = pastPlays;
-    gameView->roundNum = (sizeof(pastPlays)/(STRING_OF_ROUND*sizeof(char)));
-    rounds = gameView->roundNum;
+    
+    //Set number of rounds
+    gameView->roundNum = strlen(pastPlays)/STRING_OF_ROUND;
+
+    //Set the Player
+    int rounds = gameView->roundNum;
     gameView->player = (rounds % 5);
 
     // initialises all hunters health and location, dracs health is updated later
@@ -69,45 +75,43 @@ GameView newGameView(char *pastPlays, PlayerMessage messages[])
 // Frees all memory previously allocated for the GameView toBeDeleted
 void disposeGameView(GameView toBeDeleted)
 {
-    //COMPLETE THIS IMPLEMENTATION
-    free( toBeDeleted );
+    free(toBeDeleted);
 }
-
 
 //// Functions to return simple information about the current state of the game
 
 // Get the current round
 Round getRound(GameView currentView)
 {
-    //REPLACE THIS WITH YOUR OWN IMPLEMENTATION
     return currentView->roundNum;
 }
 
 // Get the id of current player - ie whose turn is it?
 PlayerID getCurrentPlayer(GameView currentView)
 {
-    //REPLACE THIS WITH YOUR OWN IMPLEMENTATION
     return currentView->player;
 }
 
 // Get the current score
 int getScore(GameView currentView)
 {
-    //REPLACE THIS WITH YOUR OWN IMPLEMENTATION
     return currentView->score;
 }
 
 // Get the current health points for a given player
 int getHealth(GameView currentView, PlayerID player)
 {
-    //REPLACE THIS WITH YOUR OWN IMPLEMENTATION
     return currentView->health[player];
 }
 
 // Get the current location id of a given player
 LocationID getLocation(GameView currentView, PlayerID player)
 {
-    return currentView->currLocation[player];
+    if (player >= NUM_PLAYERS || player < 0) {
+        return UNKNOWN_LOCATION;
+    } else {
+    	return currentView->currLocation[player];
+    }
 }
 
 //// Functions that return information about the history of the game
@@ -259,18 +263,24 @@ static void score(GameView currentView) {
 // changes a character to an id number
 static int charToID(char playerChar) {
 
-    PlayerID player = 0;
+    PlayerID player = -1;
 
-    if(playerChar == 'G') {
-        player = PLAYER_LORD_GODALMING;
-    } else if(playerChar == 'S') {
-        player = PLAYER_DR_SEWARD;
-    } else if(playerChar == 'H') {
-        player = PLAYER_VAN_HELSING;
-    } else if(playerChar == 'M') {
-        player = PLAYER_MINA_HARKER;
-    } else if(playerChar == 'D') {
-        player = PLAYER_DRACULA;
+    switch (playerChar) {
+        case 'G':
+            player = PLAYER_LORD_GODALMING;
+            break;
+        case 'S':
+            player = PLAYER_DR_SEWARD;
+            break;
+        case 'H':
+            player = PLAYER_VAN_HELSING;
+            break;
+        case 'M':
+            player = PLAYER_MINA_HARKER;
+            break;
+        case 'D':
+            player = PLAYER_DRACULA;
+            break;
     }
     return player;
 }
@@ -279,17 +289,23 @@ static int charToID(char playerChar) {
 static char iDToChar(int playerID) {
 
     char playerChar = '\0';
-
-    if(playerID == PLAYER_LORD_GODALMING) {
-        playerChar = 'G';
-    } else if(playerID == PLAYER_DR_SEWARD) {
-        playerChar = 'S';
-    } else if(playerID == PLAYER_VAN_HELSING) {
-        playerChar = 'H';
-    } else if(playerID == PLAYER_MINA_HARKER) {
-        playerChar = 'M';
-    } else if(playerID == PLAYER_DRACULA) {
-        playerChar = 'D';
+    
+    switch (playerID) {
+        case PLAYER_LORD_GODALMING:
+            playerChar = 'G';
+            break;
+        case PLAYER_DR_SEWARD:
+            playerChar = 'S';
+            break;
+        case PLAYER_VAN_HELSING:
+            playerChar = 'H';
+            break;
+        case PLAYER_MINA_HARKER:
+            playerChar = 'M';
+            break;
+        case PLAYER_DRACULA:
+            playerChar = 'D';
+            break;
     }
     return playerChar;
 }
