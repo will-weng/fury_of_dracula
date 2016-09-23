@@ -68,7 +68,6 @@ LocationID whereIs(HunterView currentView, PlayerID player)
 void giveMeTheTrail(HunterView currentView, PlayerID player,
                             LocationID trail[TRAIL_SIZE])
 {
-    //Possible to show trail of dracula? Is it obscured?
     getHistory(currentView->game, player, trail);
 }
 
