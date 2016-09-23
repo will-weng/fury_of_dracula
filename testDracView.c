@@ -16,6 +16,7 @@ int main()
     PlayerMessage messages1[] = {"Hello","Rubbish","Stuff",""};
     dv = newDracView("GST.... SAO.... HZU.... MBB....", messages1);
     assert(giveMeTheRound(dv) == 0);
+    printf("Location is %d\n",whereIs(dv, PLAYER_LORD_GODALMING));
     assert(whereIs(dv,PLAYER_LORD_GODALMING) == STRASBOURG);
     assert(whereIs(dv,PLAYER_DR_SEWARD) == ATLANTIC_OCEAN);
     assert(whereIs(dv,PLAYER_VAN_HELSING) == ZURICH);
