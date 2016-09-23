@@ -231,7 +231,6 @@ static void draculaPlays(char *play, GameView currentView) {
 
     // updates the latest location of dracula
     currentView->currLocation[PLAYER_DRACULA] = abbrevToID(abbrev);
-    printf("%s %d\n",abbrev, abbrevToID(abbrev));
     // updates health of dracula depending on the location
     if(idToType(currentView->currLocation[PLAYER_DRACULA]) == SEA) {
         draculaHealth =  draculaHealth - LIFE_LOSS_SEA;
