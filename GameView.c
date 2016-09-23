@@ -40,7 +40,6 @@ struct gameView {
 // Creates a new GameView to summarise the current state of the game
 GameView newGameView(char *pastPlays, PlayerMessage messages[])
 {
-    //REPLACE THIS WITH YOUR OWN IMPLEMENTATION
     GameView gameView = malloc(sizeof(struct gameView));
     gameView->pastPlays = pastPlays;
     gameView->roundNum = (sizeof(pastPlays)/(STRING_OF_ROUND*sizeof(char)));
@@ -133,10 +132,6 @@ void getHistory(GameView currentView, PlayerID player,
       
     }
   }
-  
-  // for(i=0; i<TRAIL_SIZE; i++){
-  //  trail[i] = currentView->pastPos[player][i];
-  // }
 }
 
 //// Functions that query the map to find information about connectivity
