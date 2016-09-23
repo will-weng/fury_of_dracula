@@ -8,7 +8,7 @@
 #include "GameView.h"
 #include "Places.h"
 #include "Map.h"
-#include "String.h"
+#include <string.h>
      
 static void readPlay(GameView currentView);
 static void draculaPlays(char *play, GameView currentView);
@@ -16,6 +16,7 @@ static void hunterPlays(char *play, GameView currentView);
 static void score(GameView currentView);
 static int charToID(char playerChar);
 static char iDToChar(int playerID);
+
     
 // global variables that is useful for newGameView
 static int rounds;
@@ -36,6 +37,7 @@ struct gameView {
     int score; 
     int health[NUM_PLAYERS];  
     char *pastPlays;
+    int vampire;
 };
 
 
@@ -219,10 +221,13 @@ static void draculaPlays(char *play, GameView currentView) {
     // updates the global variable of how many vampires matured
     if(play[6] == 'V') {
         matured++;
+    } else if(play[4] == 'V') {
+        currentView->vampire = abbrevToID(abbrev);
     }
 
     // updates the latest location of dracula
     currentView->currLocation[PLAYER_DRACULA] = abbrevToID(abbrev);
+
 
     // updates health of dracula depending on the location
     if(idToType(currentView->currLocation[PLAYER_DRACULA]) == SEA) {
