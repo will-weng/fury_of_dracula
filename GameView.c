@@ -16,7 +16,6 @@ static void hunterPlays(char *play, GameView currentView);
 static void score(GameView currentView);
 static int charToID(char playerChar);
 static char iDToChar(int playerID);
-
     
 // global variables that is useful for newGameView
 static int rounds;
@@ -31,7 +30,7 @@ static int draculaHealth;
 
 struct gameView {
     Map map;
-    //Round roundNum;
+    Round roundNum;
     PlayerID player;
     int currLocation[NUM_PLAYERS];
     int score; 
@@ -51,8 +50,8 @@ GameView newGameView(char *pastPlays, PlayerMessage messages[])
 
     //Set number of rounds
     //**Using global variable instead of variable in struct
-    //gameView->roundNum = strlen(pastPlays)/STRING_OF_ROUND;
-    rounds = strlen(pastPlays)/STRING_OF_ROUND;
+    gameView->roundNum = strlen(pastPlays)/STRING_OF_ROUND;
+    rounds = gameView->roundNum;
 
     //Set the Player
     gameView->player = (rounds % 5);
@@ -137,7 +136,7 @@ void getHistory(GameView currentView, PlayerID player,
     char playerChar = iDToChar(player);
     
     // while loop that reads until the end off the pastplay string
-    while(currentView->pastPlays[counter] != 0) {
+    while(counter < strlen(currentView->pastPlays)) {
         // loop that reads every 8 char of the past plays
         for(string = 0; string < STRING_OF_MOVE; counter++, string++) {
             play[string] = currentView->pastPlays[counter];
@@ -162,8 +161,6 @@ void getHistory(GameView currentView, PlayerID player,
     }
 }
 
-
-
 //// Functions that query the map to find information about connectivity
 
 // Returns an array of LocationIDs for all directly connected locations
@@ -184,19 +181,19 @@ static void readPlay(GameView currentView) {
     matured = 0;
     char play[STRING_OF_MOVE] = {0};
     int string, counter = 0;
-    // while loop that reads until the end off the pastplay string
-    while(currentView->pastPlays[counter] != 0) {
-        // loop that reads every 8 char of the past plays
 
- //       printf("\n");
+    // while loop that reads until the end off the pastplay string
+    while(counter < strlen(currentView->pastPlays)) {
+
+        // loop that reads every 8 char of the past plays
+        //printf("\n");
         for(string = 0; string < STRING_OF_MOVE; counter++, string++) {
             play[string] = currentView->pastPlays[counter];
-//            printf("%c", play[string]);
+            //printf("%c", play[string]);
         }
-//        printf("\n");
+        //printf("\n");
 
         // pass the "play" string into functions depending on player
-
         if(play[0] == iDToChar(PLAYER_DRACULA)) {
             draculaPlays(play, currentView);
         } else {
