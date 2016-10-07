@@ -208,32 +208,34 @@ static void readPlay(GameView currentView) {
 
 // static function to read the dracula's move
 static void draculaPlays(char *play, GameView currentView) {
-
+/*
     // a terrible way to keep track of location
     char abbrev[3] = {0};
     abbrev[0] = play[1];
     abbrev[1] = play[2];
     abbrev[2] = 0;
 
+    // updates the latest location of dracula
+    currentView->currLocation[PLAYER_DRACULA] = abbrevToID(abbrev);
+*/
+    // a better way to keep track of location
+    LocationID trail[TRAIL_SIZE];
+    getHistory(currentView, PLAYER_DRACULA, trail);
+
     // updates the global variable of how many vampires matured
     if(play[6] == 'V') {
         matured++;
     }
-    
-    // updates the latest location of dracula
-    
-    currentView->currLocation[PLAYER_DRACULA] = abbrevToID(abbrev);
 
+    // updates the latest location of dracula
+    currentView->currLocation[PLAYER_DRACULA] = trail[0];
+    
     // updates health of dracula depending on the location
-    if(abbrev[0] == 'S') {
+    if(trail[0] == SEA_UNKNOWN || idToType(currentView->currLocation[PLAYER_DRACULA]) == SEA) {
         draculaHealth =  draculaHealth - LIFE_LOSS_SEA;
-    } else if(abbrev[1] != '?' && abbrev[0] != 'H' && abbrev[0] != 'D' && abbrev[0] != 'T' && idToType(currentView->currLocation[PLAYER_DRACULA]) == SEA) {
-        draculaHealth =  draculaHealth - LIFE_LOSS_SEA;
-    } else if(currentView->currLocation[PLAYER_DRACULA] == CASTLE_DRACULA ||
-            (abbrev[0] == 'T' && abbrev[1] == 'P')) {
+    } else if(currentView->currLocation[PLAYER_DRACULA] == CASTLE_DRACULA) {
         draculaHealth = draculaHealth + LIFE_GAIN_CASTLE_DRACULA;
     }
-
 }
 
 // static funciton that read the hunters move

@@ -101,8 +101,10 @@ char *idToName(LocationID p)
 // given a Place number, return its type
 int idToType(LocationID p)
 {
-   assert(validPlace(p));
-   return places[p].type;
+   if(validPlace(p)) {
+      return places[p].type;
+   }
+   return NOWHERE;
 }
 
 // given a Place name, return its ID number
@@ -145,4 +147,3 @@ int abbrevToID(char *abbrev)
    else if (strcmp(abbrev, "D5")  == 0) return DOUBLE_BACK_5;
    return NOWHERE;
 }
-
