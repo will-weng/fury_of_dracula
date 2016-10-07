@@ -12,7 +12,7 @@
 #include "GameView.h"
 
 typedef struct vNode *VList;
-LocationID *Locations(Map g, GameView currentView, int *numLocations, LocationID from, PlayerID player, Round round, int road, int rail, int sea);
+LocationID *Locations(GameView currentView, int *numLocations, LocationID from, PlayerID player, Round round, int road, int rail, int sea);
 int *setToArray (Set s);
 
 struct vNode {
@@ -350,19 +350,22 @@ static void addConnections(Map g)
    addLink(g, ROME, TYRRHENIAN_SEA, BOAT);
 }
 
-LocationID *Locations(Map g, GameView currentView, int *numLocations, LocationID from, PlayerID player, Round round, int road, int rail, int sea) {
+LocationID *Locations(GameView currentView, int *numLocations, LocationID from, PlayerID player, Round round, int road, int rail, int sea) {
     
+    Map g = newMap();
     Set seen = newSet();
     VList curr = g->connections[from];
 
     //Add stating location to the set
     insertInto(seen, curr->v);
+    numLocations[0] = 1;
 
     //Add road connection to the set
     if(road == 1) {
         while (curr != NULL) {
             if(curr->type == ROAD && !isElem(seen,curr->v)) insertInto(seen,curr->v);
             curr = curr->next;
+            numLocations[0]++;
         }
     }
     //Add boat connection to the set
@@ -370,6 +373,7 @@ LocationID *Locations(Map g, GameView currentView, int *numLocations, LocationID
         while(curr != NULL) {
             if(curr->type == BOAT && !isElem(seen,curr->v)) insertInto(seen,curr->v);
             curr = curr->next;
+            numLocations[0]++;
         }
     }
     //Add rail connection to the set
@@ -382,6 +386,7 @@ LocationID *Locations(Map g, GameView currentView, int *numLocations, LocationID
             LocationID id = leaveQueue(railQueue);
             curr = g->connections[id];
             insertInto(seen, curr->v);
+            numLocations[0]++;
             while (curr != NULL) {
                 if(curr->type == RAIL && !isElem(seen, curr->v)) {
                     enterQueue(railQueue, curr->v);
@@ -391,6 +396,6 @@ LocationID *Locations(Map g, GameView currentView, int *numLocations, LocationID
             railCounter++;        
         }
     }
-
+    disposeMap(g);
     return setToArray(seen);
 }

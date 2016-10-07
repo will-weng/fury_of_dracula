@@ -60,22 +60,21 @@ void disposeSet(Set s)
 // - ensure that Str is in Set
 void insertInto(Set s, LocationID id)
 {
-	assert(s != NULL);
-	Link curr = s->elems;
-	int found = findNode(s->elems,id);
-	if (found) return; // already in Set
-	Link new = newNode(id);
-	s->nelems++;
+    assert(s != NULL);
+    Link curr = s->elems;
 
     //If the list is empty
-    if(curr == NULL) {
-        curr = new; 
+    if(s->elems == NULL) {
+        s->elems = newNode(id);
     } else {
+        if (findNode(s->elems,id)) return; // already in Set
+        Link new = newNode(id);
         while (curr->next != NULL) {
             curr = curr->next; 
         }
         curr->next = new;
     }
+    s->nelems++;
 }
 /*
 // dropFrom(Set,Str)
@@ -149,9 +148,10 @@ static void disposeNode(Link curr)
 static int findNode(Link list, LocationID id)
 {
     int num  = id;
-    Link curr = list->next;
+    Link curr = list;
     while (curr->next != NULL) {
         if(curr->val == num) return TRUE;
+        curr = curr->next;
     }
     return FALSE;
 }

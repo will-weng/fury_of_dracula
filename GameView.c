@@ -9,7 +9,7 @@
 #include "Places.h"
 #include "Map.h"
 #include <string.h>
-     
+
 static void readPlay(GameView currentView);
 static void draculaPlays(char *play, GameView currentView);
 static void hunterPlays(char *play, GameView currentView);
@@ -30,7 +30,6 @@ static LocationID roundTrail[TRAIL_SIZE] = {UNKNOWN_LOCATION};
 #define PERIOD_OF_VAMPIRE_SPAWN 13
 
 struct gameView {
-    Map map;
     Round roundNum;
     PlayerID player;
     int currLocation[NUM_PLAYERS];
@@ -69,9 +68,6 @@ GameView newGameView(char *pastPlays, PlayerMessage messages[])
 
     // updates score of the game
     score(gameView);
-
-    //Initialise game map
-    gameView->map = newMap();
 
     return gameView;
 }
@@ -166,7 +162,7 @@ LocationID *connectedLocations(GameView currentView, int *numLocations,
                                LocationID from, PlayerID player, Round round,
                                int road, int rail, int sea)
 {
-    return Locations(currentView->map, currentView, numLocations, from, player, round, road, rail, sea);
+    return Locations(currentView, numLocations, from, player, round, road, rail, sea);
 }
 
 // static function that reads the pastplay string
