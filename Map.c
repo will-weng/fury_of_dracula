@@ -355,25 +355,29 @@ LocationID *Locations(GameView currentView, int *numLocations, LocationID from, 
     Map g = newMap();
     Set seen = newSet();
     VList curr = g->connections[from];
-
     //Add stating location to the set
-    insertInto(seen, curr->v);
+
+    insertInto(seen, from);
     numLocations[0] = 1;
 
     //Add road connection to the set
     if(road == 1) {
         while (curr != NULL) {
-            if(curr->type == ROAD && !isElem(seen,curr->v)) insertInto(seen,curr->v);
+            if(curr->type == ROAD && !isElem(seen,curr->v)) {
+                insertInto(seen,curr->v);
+                numLocations[0]++;
+            }
             curr = curr->next;
-            numLocations[0]++;
         }
     }
     //Add boat connection to the set
     if(sea == 1) {
         while(curr != NULL) {
-            if(curr->type == BOAT && !isElem(seen,curr->v)) insertInto(seen,curr->v);
+            if(curr->type == BOAT && !isElem(seen,curr->v)) {
+                insertInto(seen,curr->v);
+                numLocations[0]++;
+            }
             curr = curr->next;
-            numLocations[0]++;
         }
     }
     //Add rail connection to the set
@@ -385,8 +389,10 @@ LocationID *Locations(GameView currentView, int *numLocations, LocationID from, 
         while(!emptyQueue(railQueue) && railCounter < maxRail) {
             LocationID id = leaveQueue(railQueue);
             curr = g->connections[id];
-            insertInto(seen, curr->v);
-            numLocations[0]++;
+            if(curr->type == ROAD && !isElem(seen,curr->v)) {
+                insertInto(seen,curr->v);
+                numLocations[0]++;
+            }
             while (curr != NULL) {
                 if(curr->type == RAIL && !isElem(seen, curr->v)) {
                     enterQueue(railQueue, curr->v);
