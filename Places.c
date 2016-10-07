@@ -136,6 +136,7 @@ int abbrevToID(char *abbrev)
       char *c = p->abbrev;
       if (c[0] == abbrev[0] && c[1] == abbrev[1] && c[2] == '\0') return p->id;
    }
+   
    if (strcmp(abbrev, "C?")  == 0) return CITY_UNKNOWN;
    else if (strcmp(abbrev, "S?")  == 0) return SEA_UNKNOWN;
    else if (strcmp(abbrev, "TP")  == 0) return CASTLE_DRACULA;

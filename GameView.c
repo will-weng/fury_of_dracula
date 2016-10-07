@@ -22,6 +22,7 @@ static int rounds;
 static int hospital;
 static int matured;
 static int draculaHealth;
+static LocationID roundTrail[TRAIL_SIZE] = {UNKNOWN_LOCATION};
 
 // some #defines to use
 #define STRING_OF_ROUND 40
@@ -128,8 +129,9 @@ void getHistory(GameView currentView, PlayerID player,
     char play[STRING_OF_MOVE] = {0};
     int string, counter = 0;
     for(string = 0; string < TRAIL_SIZE; string++) {
-        trail[counter] = NOWHERE;
+        trail[string] = NOWHERE;
     }
+
     char playerChar = iDToChar(player);
     
     // while loop that reads until the end off the pastplay string
@@ -137,7 +139,6 @@ void getHistory(GameView currentView, PlayerID player,
         // loop that reads every 8 char of the past plays
         for(string = 0; string < STRING_OF_MOVE; counter++, string++) {
             play[string] = currentView->pastPlays[counter];
-        
         }
 
         if(play[0] == playerChar) {
@@ -152,7 +153,6 @@ void getHistory(GameView currentView, PlayerID player,
             for(i = TRAIL_SIZE; i > 0; i--) {
                 trail[i] = trail[i - 1];
             }
-
             trail[0] = abbrevToID(abbrev);
         }
     }
@@ -208,7 +208,7 @@ static void readPlay(GameView currentView) {
 
 // static function to read the dracula's move
 static void draculaPlays(char *play, GameView currentView) {
-/*
+
     // a terrible way to keep track of location
     char abbrev[3] = {0};
     abbrev[0] = play[1];
@@ -217,25 +217,29 @@ static void draculaPlays(char *play, GameView currentView) {
 
     // updates the latest location of dracula
     currentView->currLocation[PLAYER_DRACULA] = abbrevToID(abbrev);
-*/
-    // a better way to keep track of location
-    LocationID trail[TRAIL_SIZE];
-    getHistory(currentView, PLAYER_DRACULA, trail);
 
     // updates the global variable of how many vampires matured
     if(play[6] == 'V') {
         matured++;
     }
 
-    // updates the latest location of dracula
-    currentView->currLocation[PLAYER_DRACULA] = trail[0];
-    
+    int i;
+    for(i = TRAIL_SIZE; i > 0; i--) {
+        roundTrail[i] = roundTrail[i - 1];
+    }
+    roundTrail[0] = abbrevToID(abbrev);
+
     // updates health of dracula depending on the location
-    if(trail[0] == SEA_UNKNOWN || idToType(currentView->currLocation[PLAYER_DRACULA]) == SEA) {
+    if(roundTrail[0] == SEA_UNKNOWN || idToType(currentView->currLocation[PLAYER_DRACULA]) == SEA) {
         draculaHealth =  draculaHealth - LIFE_LOSS_SEA;
+    } else if((roundTrail[0] - HIDE) > 0 && (roundTrail[0] - HIDE) < 6) {
+        if(roundTrail[roundTrail[0] - HIDE] == SEA_UNKNOWN || idToType(roundTrail[roundTrail[0] - HIDE]) == SEA) {
+            draculaHealth =  draculaHealth - LIFE_LOSS_SEA;
+        }
     } else if(currentView->currLocation[PLAYER_DRACULA] == CASTLE_DRACULA) {
         draculaHealth = draculaHealth + LIFE_GAIN_CASTLE_DRACULA;
     }
+
 }
 
 // static funciton that read the hunters move
