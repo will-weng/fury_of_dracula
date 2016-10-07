@@ -136,9 +136,13 @@ int abbrevToID(char *abbrev)
    }
    if (strcmp(abbrev, "C?")  == 0) return CITY_UNKNOWN;
    else if (strcmp(abbrev, "S?")  == 0) return SEA_UNKNOWN;
-   else if(strcmp(abbrev, "C?")  == 0) return CITY_UNKNOWN;
-   else if (strcmp(abbrev, "C?")  == 0) return CITY_UNKNOWN;
-
+   else if (strcmp(abbrev, "TP")  == 0) return CASTLE_DRACULA;
+   else if (strcmp(abbrev, "HI")  == 0) return HIDE;
+   else if (strcmp(abbrev, "D1")  == 0) return DOUBLE_BACK_1;
+   else if (strcmp(abbrev, "D2")  == 0) return DOUBLE_BACK_2;
+   else if (strcmp(abbrev, "D3")  == 0) return DOUBLE_BACK_3;
+   else if (strcmp(abbrev, "D4")  == 0) return DOUBLE_BACK_4;
+   else if (strcmp(abbrev, "D5")  == 0) return DOUBLE_BACK_5;
    return NOWHERE;
 }
 

@@ -65,7 +65,7 @@ GameView newGameView(char *pastPlays, PlayerMessage messages[])
     readPlay(gameView);
 
     gameView->health[PLAYER_DRACULA] = draculaHealth;
-//    printf("dracula health is %d, player is %d\n",currentView->health[4], 4);
+
     // updates score of the game
     score(gameView);
 
@@ -127,7 +127,7 @@ void getHistory(GameView currentView, PlayerID player,
 {
     char play[STRING_OF_MOVE] = {0};
     int string, counter = 0;
-    for(counter = 0; counter < TRAIL_SIZE; counter++) {
+    for(string = 0; string < TRAIL_SIZE; string++) {
         trail[counter] = NOWHERE;
     }
     char playerChar = iDToChar(player);
@@ -137,28 +137,22 @@ void getHistory(GameView currentView, PlayerID player,
         // loop that reads every 8 char of the past plays
         for(string = 0; string < STRING_OF_MOVE; counter++, string++) {
             play[string] = currentView->pastPlays[counter];
+        
         }
-        
-        
-            printf("%d\n", trail[0]);
-
-            printf("%c\n", playerChar);
-
-            printf("%c\n", play[2]);
 
         if(play[0] == playerChar) {
-            
+
             char abbrev[3] = {0};
             abbrev[0] = play[1];
             abbrev[1] = play[2];
             abbrev[2] = 0;
 
-            int i = 0;
+            int i;
             
-            for(i = 0; i < TRAIL_SIZE; i++) {
-                trail[i+1] = trail[i];
+            for(i = TRAIL_SIZE; i > 0; i--) {
+                trail[i] = trail[i - 1];
             }
-            
+
             trail[0] = abbrevToID(abbrev);
         }
     }
@@ -189,12 +183,9 @@ static void readPlay(GameView currentView) {
     while(counter < strlen(currentView->pastPlays)) {
 
         // loop that reads every 8 char of the past plays
-        //printf("\n");
         for(string = 0; string < STRING_OF_MOVE; counter++, string++) {
             play[string] = currentView->pastPlays[counter];
-            //printf("%c", play[string]);
         }
-        //printf("\n");
 
         // pass the "play" string into functions depending on player
         if(play[0] == iDToChar(PLAYER_DRACULA)) {
@@ -230,13 +221,8 @@ static void draculaPlays(char *play, GameView currentView) {
     }
     
     // updates the latest location of dracula
-    if(abbrev[0] == 'C') {
-        currentView->currLocation[PLAYER_DRACULA] = CITY_UNKNOWN;
-    } else if(abbrev[0] == 'S') {
-        currentView->currLocation[PLAYER_DRACULA] = SEA_UNKNOWN;
-    } else if(abbrev[1] != '?' && abbrev[0] != 'H' && abbrev[0] != 'D' && abbrev[0] != 'T') {
-        currentView->currLocation[PLAYER_DRACULA] = abbrevToID(abbrev);
-    }
+    
+    currentView->currLocation[PLAYER_DRACULA] = abbrevToID(abbrev);
 
     // updates health of dracula depending on the location
     if(abbrev[0] == 'S') {
