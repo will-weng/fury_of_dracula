@@ -1,26 +1,3 @@
-TODO:
-GameView.c
-
-DracView.c
-
-
-HunterView.c
-
-DOING:
-Martin
--   LocationID *connectedLocations(GameView currentView, int *numLocations,
--   LocationID *whereCanTheyGo(HunterView currentView, int *numLocations,
-                           PlayerID player, int road, int rail, int sea);
--  LocationID *whereCanIgo(HunterView currentView, int *numLocations,
-
-Andy
--   DracView newDracView(char *pastPlays, PlayerMessage messages[]);
-
-
-Sophie
--   void getHistory(GameView currentView, PlayerID player,
-                    LocationID trail[TRAIL_SIZE]);
-
 DONE:
 pretty sure the default is already done
 -   void disposeHunterView(HunterView toBeDeleted);
@@ -42,10 +19,12 @@ William:
 -   PlayerID whoAmI(HunterView currentView);
 -   int giveMeTheScore(HunterView currentView);
 -   int howHealthyIs(HunterView currentView, PlayerID player);
-== MIGHT BE BUGGY ==
 -   GameView newGameView(char *pastPlays, PlayerMessage messages[]);
+-   void getHistory(GameView currentView, PlayerID player,
+                    LocationID trail[TRAIL_SIZE]);
 
 Andy
+-   DracView newDracView(char *pastPlays, PlayerMessage messages[]);
 -   void lastMove(DracView currentView, PlayerID player,
                  LocationID *start, LocationID *end);
 
@@ -60,6 +39,10 @@ Andy
 Sophie
 
 Martin
+-   LocationID *connectedLocations(GameView currentView, int *numLocations,
+-   LocationID *whereCanTheyGo(HunterView currentView, int *numLocations,
+                           PlayerID player, int road, int rail, int sea);
+-   LocationID *whereCanIgo(HunterView currentView, int *numLocations,
 -   LocationID whereIs(HunterView currentView, PlayerID player);
 -   HunterView newHunterView(char *pastPlays, PlayerMessage messages[]);
 -   void giveMeTheTrail(HunterView currentView, PlayerID player,
