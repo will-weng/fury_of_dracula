@@ -351,13 +351,14 @@ static void addConnections(Map g)
 
 LocationID *Locations(GameView currentView, int *numLocations, LocationID from, PlayerID player, Round round, int road, int rail, int sea) {
     
-    Map g = newMap();
-    Set seen = newSet();
-    VList curr = g->connections[from];
     //Add stating location to the set
-
+    Set seen = newSet();
     insertInto(seen, from);
     numLocations[0] = 1;
+    if(!validPlace(from)) return setToArray(seen);
+
+    Map g = newMap();
+    VList curr = g->connections[from];
 
     //Add road connection to the set
     if(road == 1) {
