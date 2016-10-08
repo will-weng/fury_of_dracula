@@ -52,10 +52,10 @@ void decideDraculaMove(DracView gameState)
         }
     }
     // move into castle after round 1;
-    if(giveMeTheRound(gameState) == 2) play = "CD";
+    if(giveMeTheRound(gameState) == 1) play = "CD";
 
     
-    if(giveMeTheRound(gameState) > 2)
+    if(giveMeTheRound(gameState) > 1)
     {
         // move randomly after initial rounds
         play = idToAbbrev(path[numLocations/2]);
