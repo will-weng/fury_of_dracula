@@ -251,21 +251,28 @@ static void hunterPlays(char *play, GameView currentView) {
     int player = charToID(play[0]);
     
     // if the hunters last location was resting or the hospital
-    if(currentView->currLocation[player] == abbrevToID(abbrev)) {
-        currentView->health[player] = currentView->health[player] + LIFE_GAIN_REST;
-    } else if(currentView->currLocation[player] == ST_JOSEPH_AND_ST_MARYS
+    if(currentView->currLocation[player] == ST_JOSEPH_AND_ST_MARYS
             && currentView->health[player] < 1) {
         currentView->health[player] = GAME_START_HUNTER_LIFE_POINTS;
     }
-
+    if(currentView->currLocation[player] == abbrevToID(abbrev)) {
+        currentView->health[player] = currentView->health[player] + LIFE_GAIN_REST;
+        if(currentView->health[player] > GAME_START_HUNTER_LIFE_POINTS) {
+            currentView->health[player] = GAME_START_HUNTER_LIFE_POINTS;
+        }
+    }
+    
     currentView->currLocation[player] = abbrevToID(abbrev);
     // loss of health from encounters
-    if(play[3] == 'T' || play[4] == 'T' || play[5] == 'T') {
-        currentView->health[player] = currentView->health[player] - LIFE_LOSS_TRAP_ENCOUNTER;
-    }
-    if(play[3] == 'D' || play[4] == 'D' || play[5] == 'D') {
-        currentView->health[player] = currentView->health[player] - LIFE_LOSS_DRACULA_ENCOUNTER;
-        draculaHealth = draculaHealth - LIFE_LOSS_HUNTER_ENCOUNTER;
+    int i;
+    for(i = 3; i < 6; i++) { 
+        if(play[i] == 'T') {
+            currentView->health[player] = currentView->health[player] - LIFE_LOSS_TRAP_ENCOUNTER;
+        }
+        if(play[i] == 'D') {
+            currentView->health[player] = currentView->health[player] - LIFE_LOSS_DRACULA_ENCOUNTER;
+            draculaHealth = draculaHealth - LIFE_LOSS_HUNTER_ENCOUNTER;
+        }
     }
 }
 
