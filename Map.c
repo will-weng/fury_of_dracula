@@ -363,7 +363,8 @@ LocationID *Locations(GameView currentView, int *numLocations, LocationID from, 
     //Add road connection to the set
     if(road == TRUE) {
         while (curr != NULL) {
-            if(curr->type == ROAD && !isElem(seen,curr->v)) {
+            if(curr->type == ROAD && !isElem(seen,curr->v) &&
+              !(player == PLAYER_DRACULA && curr->v == ST_JOSEPH_AND_ST_MARYS)) {
                 insertInto(seen,curr->v);
                 numLocations[0]++;
             }
