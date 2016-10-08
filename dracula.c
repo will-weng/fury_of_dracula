@@ -36,7 +36,6 @@ void decideDraculaMove(DracView gameState)
         player.lastLocation[counter] = start;
     }
 
-
     // remove places in trail from path
     for(counter = numLocations - 1; counter >= 0; counter--)
     {
@@ -78,7 +77,7 @@ void decideDraculaMove(DracView gameState)
         }
 
         // if there is no path then go back
-        if(numLocations == 0) play = "D1";
+        if(numLocations == 0 && player.currLocation[PLAYER_DRACULA] != HIDE) play = "D1";
         if(player.currLocation[PLAYER_DRACULA] == DOUBLE_BACK_1) play ="HIDE";
     }
 

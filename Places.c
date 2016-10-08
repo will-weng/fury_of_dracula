@@ -137,7 +137,7 @@ int abbrevToID(char *abbrev)
    
    if (strcmp(abbrev, "C?")  == 0) return CITY_UNKNOWN;
    else if (strcmp(abbrev, "S?")  == 0) return SEA_UNKNOWN;
-   else if (strcmp(abbrev, "TP")  == 0) return CASTLE_DRACULA;
+   else if (strcmp(abbrev, "TP")  == 0) return TELEPORT;
    else if (strcmp(abbrev, "HI")  == 0) return HIDE;
    else if (strcmp(abbrev, "D1")  == 0) return DOUBLE_BACK_1;
    else if (strcmp(abbrev, "D2")  == 0) return DOUBLE_BACK_2;
