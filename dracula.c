@@ -60,10 +60,6 @@ void decideDraculaMove(DracView gameState)
         // move randomly after initial rounds
         play = idToAbbrev(path[numLocations/2]);
 
-        // if reaches some far places hopefully would tp to castle
-        if(strcmp(play, "AT") == 0 || strcmp(play, "CA") == 0 ||
-            strcmp(play, "BI") == 0) play = "TP";
-
         // move to where the hunter last position was if possible
         for(counter = 0; counter < numLocations; counter++)
         {
