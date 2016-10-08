@@ -9,7 +9,7 @@
 #include <string.h>
 
 #define LENGTH_OF_PLAY 3
-#define NUM_OF_PLAYERS 4
+#define NUM_OF_PLAYERS 5
 
 static struct
 {
@@ -35,6 +35,7 @@ void decideDraculaMove(DracView gameState)
         player.currLocation[counter] = end;
         player.lastLocation[counter] = start;
     }
+
 
     // remove places in trail from path
     for(counter = numLocations - 1; counter >= 0; counter--)
@@ -78,9 +79,8 @@ void decideDraculaMove(DracView gameState)
 
         // if there is no path then go back
         if(numLocations == 0) play = "D1";
-        if(player.currLocation[PLAYER_DRACULA] == player.lastLocation[PLAYER_DRACULA]) play ="HIDE";
+        if(player.currLocation[PLAYER_DRACULA] == DOUBLE_BACK_1) play ="HIDE";
     }
 
     registerBestPlay(play, play);
 }
-
