@@ -21,7 +21,7 @@ void decideDraculaMove(DracView gameState)
 {
     // initializes all used vairables
     char *play = "KL";
-    char message[MESSAGE_SIZE] = "";
+//    char message[MESSAGE_SIZE] = "";
     int numLocations, counter, counter1, start, end;
     LocationID *path, trail[TRAIL_SIZE];
     
@@ -81,6 +81,6 @@ void decideDraculaMove(DracView gameState)
                 play = idToAbbrev(path[rand() % numLocations]);
         }
     }
-    registerBestPlay(play, message);
+    registerBestPlay(play, play);
 }
 
