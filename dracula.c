@@ -25,7 +25,7 @@ void decideDraculaMove(DracView gameState)
     int numLocations, counter, counter1, start, end;
     LocationID *path, trail[TRAIL_SIZE];
     
-    path = whereCanIgo(gameState, &numLocations, TRUE, FALSE);
+    path = whereCanIgo(gameState, &numLocations, TRUE, TRUE);
     giveMeTheTrail(gameState, PLAYER_DRACULA, trail);
 
     // initializes the hunter struct
