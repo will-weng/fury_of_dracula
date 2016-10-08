@@ -77,7 +77,8 @@ void decideDraculaMove(DracView gameState)
         }
 
         // if there is no path then go back
-        if(numLocations == 0) play = "D5";
+        if(numLocations == 0) play = "D1";
+        if(numLocations == 0 && strcmp(play,"D1") == 0) play ="HIDE";
     }
 
     registerBestPlay(play, play);
