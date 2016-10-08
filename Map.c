@@ -369,6 +369,7 @@ LocationID *Locations(GameView currentView, int *numLocations, LocationID from, 
             }
             curr = curr->next;
         }
+        curr = g->connections[from];
     }
 
     //Add boat connection to the set
@@ -380,6 +381,7 @@ LocationID *Locations(GameView currentView, int *numLocations, LocationID from, 
             }
             curr = curr->next;
         }
+        curr = g->connections[from];
     }
     //Add rail connection to the set
     int maxRail = (player + round)%4;

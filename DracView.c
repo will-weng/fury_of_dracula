@@ -219,7 +219,7 @@ LocationID *whereCanIgo(DracView currentView, int *numLocations, int road, int s
 {
     //REPLACE THIS WITH YOUR OWN IMPLEMENTATION
 	
-    return connectedLocations(currentView->gameview, numLocations,getLocation(currentView->gameview,PLAYER_DRACULA),PLAYER_DRACULA, getRound(currentView->gameview),road,0,sea);
+    return connectedLocations(currentView->gameview, numLocations,getLocation(currentView->gameview,PLAYER_DRACULA),PLAYER_DRACULA, getRound(currentView->gameview),road,FALSE,sea);
 }
 
 // What are the specified player's next possible moves

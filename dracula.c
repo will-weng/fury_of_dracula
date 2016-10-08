@@ -37,29 +37,28 @@ void decideDraculaMove(DracView gameState)
     }
 
     // remove places in trail from path
-    for(counter = 0, counter1 = numLocations; counter < counter1; counter++)
+    for(counter = numLocations - 1; counter >= 0; counter--)
     {
         for(start = 0; start < TRAIL_SIZE; start++)
         {
             if(trail[start] == path[counter])
             {
-                for(end = counter; end + 1 < counter1; end++)
+                for(counter1 = counter; counter1 < numLocations - 1; counter1++)
                 {
-                    path[end] = path[end + 1];
+                    path[counter1] = path[counter1 + 1];
                 }
                 numLocations--;
             }
         }
     }
+
     // move into castle after round 1;
     if(giveMeTheRound(gameState) == 1) play = "CD";
 
-    
     if(giveMeTheRound(gameState) > 1)
     {
         // move randomly after initial rounds
         play = idToAbbrev(path[numLocations/2]);
-
         // move to where the hunter last position was if possible
         for(counter = 0; counter < numLocations; counter++)
         {
@@ -76,7 +75,11 @@ void decideDraculaMove(DracView gameState)
             if(strcmp(play, idToAbbrev(hunter.currLocation[counter])) == 0)
                 play = idToAbbrev(path[rand() % numLocations]);
         }
+
+        // if there is no path then go back
+        if(numLocations == 0) play = "D5";
     }
+
     registerBestPlay(play, play);
 }
 
