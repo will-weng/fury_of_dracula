@@ -32,7 +32,7 @@ void decideHunterMove(HunterView gameState)
     {
         play = "SR";
     }
-
+    printf("%d\n", howHealthyIs(gameState, me));
     if(giveMeTheRound(gameState) > 0) play = idToAbbrev(places[numLocations/2]);
     if(howHealthyIs(gameState, me) < 5) play = idToAbbrev(whereIs(gameState, me));
 

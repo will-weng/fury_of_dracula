@@ -262,7 +262,8 @@ static void hunterPlays(char *play, GameView currentView) {
     // loss of health from encounters
     if(play[3] == 'T' || play[4] == 'T' || play[5] == 'T') {
         currentView->health[player] = currentView->health[player] - LIFE_LOSS_TRAP_ENCOUNTER;
-    } else if(play[3] == 'D' || play[4] == 'D' || play[5] == 'D') {
+    }
+    if(play[3] == 'D' || play[4] == 'D' || play[5] == 'D') {
         currentView->health[player] = currentView->health[player] - LIFE_LOSS_DRACULA_ENCOUNTER;
         draculaHealth = draculaHealth - LIFE_LOSS_HUNTER_ENCOUNTER;
     }
