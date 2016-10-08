@@ -361,7 +361,7 @@ LocationID *Locations(GameView currentView, int *numLocations, LocationID from, 
     VList curr = g->connections[from];
 
     //Add road connection to the set
-    if(road == 1) {
+    if(road == TRUE) {
         while (curr != NULL) {
             if(curr->type == ROAD && !isElem(seen,curr->v)) {
                 insertInto(seen,curr->v);
@@ -370,8 +370,9 @@ LocationID *Locations(GameView currentView, int *numLocations, LocationID from, 
             curr = curr->next;
         }
     }
+
     //Add boat connection to the set
-    if(sea == 1) {
+    if(sea == TRUE) {
         while(curr != NULL) {
             if(curr->type == BOAT && !isElem(seen,curr->v)) {
                 insertInto(seen,curr->v);
@@ -383,7 +384,7 @@ LocationID *Locations(GameView currentView, int *numLocations, LocationID from, 
     //Add rail connection to the set
     int maxRail = (player + round)%4;
     int railCounter = 0;
-    if(rail == 1) {
+    if(rail == TRUE) {
         Queue railQueue = newQueue();
         enterQueue(railQueue, from);
         while(!emptyQueue(railQueue) && railCounter < maxRail) {
@@ -396,8 +397,8 @@ LocationID *Locations(GameView currentView, int *numLocations, LocationID from, 
             while (curr != NULL) {
                 if(curr->type == RAIL && !isElem(seen, curr->v)) {
                     enterQueue(railQueue, curr->v);
-                    curr = curr->next;
                 }
+                curr = curr->next;
             }
             railCounter++;        
         }

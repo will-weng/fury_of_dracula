@@ -13,11 +13,12 @@ void decideHunterMove(HunterView gameState)
     char *play = "CD";
     char message[MESSAGE_SIZE] = "I'M GONNA GET YOU";
     int numLocations;
-    
     if(whoAmI(gameState) == PLAYER_LORD_GODALMING) {
+
         if(giveMeTheRound(gameState) > 0) {
             LocationID *places = whereCanIgo(gameState, &numLocations, TRUE, TRUE, TRUE);
             play = idToAbbrev(places[rand() % numLocations]);
+
         }
     } else if(whoAmI(gameState) == PLAYER_DR_SEWARD) {
         play = "FR";
