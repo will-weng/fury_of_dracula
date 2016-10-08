@@ -13,7 +13,6 @@
 
 typedef struct vNode *VList;
 LocationID *Locations(GameView currentView, int *numLocations, LocationID from, PlayerID player, Round round, int road, int rail, int sea);
-int *setToArray (Set s);
 
 struct vNode {
    LocationID  v;    // ALICANTE, etc

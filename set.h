@@ -17,5 +17,6 @@ void dropFrom(Set s, LocationID id);
 int  isElem(Set s, LocationID id);
 int  nElems(Set s);
 void showSet(Set s);
+int *setToArray (Set s);
 
 #endif
