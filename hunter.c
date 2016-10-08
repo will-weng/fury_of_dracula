@@ -12,37 +12,29 @@ void decideHunterMove(HunterView gameState)
 {
     char *play = "CD";
     char message[MESSAGE_SIZE] = "";
-    int numLocations;
-    if(whoAmI(gameState) == PLAYER_LORD_GODALMING)
+    int numLocations, me;
+    LocationID *places = whereCanIgo(gameState, &numLocations, TRUE, TRUE, TRUE);
+
+    me = whoAmI(gameState);
+    
+    if(me == PLAYER_LORD_GODALMING)
     {
-        if(giveMeTheRound(gameState) > 0) {
-            LocationID *places = whereCanIgo(gameState, &numLocations, TRUE, TRUE, TRUE);
-            play = idToAbbrev(places[numLocations/2]);
-        }
     }
-    else if(whoAmI(gameState) == PLAYER_DR_SEWARD)
+    else if(me == PLAYER_DR_SEWARD)
     {
         play = "FR";
-       if(giveMeTheRound(gameState) > 0) {
-            LocationID *places = whereCanIgo(gameState, &numLocations, TRUE, TRUE, TRUE);
-            play = idToAbbrev(places[numLocations/2]);
-        }
     }
-    else if(whoAmI(gameState) == PLAYER_VAN_HELSING)
+    else if(me == PLAYER_VAN_HELSING)
     {
         play = "MN";
-        if(giveMeTheRound(gameState) > 0) {
-            LocationID *places = whereCanIgo(gameState, &numLocations, TRUE, TRUE, TRUE);
-            play = idToAbbrev(places[numLocations/2]);
-        }
     }
-    else if(whoAmI(gameState) == PLAYER_MINA_HARKER)
+    else if(me == PLAYER_MINA_HARKER)
     {
         play = "SR";
-        if(giveMeTheRound(gameState) > 0) {
-            LocationID *places = whereCanIgo(gameState, &numLocations, TRUE, TRUE, TRUE);
-            play = idToAbbrev(places[numLocations/2]);
-        }
     }
+
+    if(giveMeTheRound(gameState) > 0) play = idToAbbrev(places[numLocations/2]);
+    if(howHealthyIs(gameState, me) < 5) play = idToAbbrev(whereIs(gameState, me));
+
     registerBestPlay(play, message);
 }
