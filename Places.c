@@ -101,9 +101,7 @@ char *idToName(LocationID p)
 // given a Place number, return its type
 int idToType(LocationID p)
 {
-   if(validPlace(p)) {
-      return places[p].type;
-   }
+   if(validPlace(p)) return places[p].type;
    return NOWHERE;
 }
 
@@ -147,4 +145,23 @@ int abbrevToID(char *abbrev)
    else if (strcmp(abbrev, "D4")  == 0) return DOUBLE_BACK_4;
    else if (strcmp(abbrev, "D5")  == 0) return DOUBLE_BACK_5;
    return NOWHERE;
+}
+
+// given a ID number, return its Place abbreviation (2 char)
+char *idToAbbrev(LocationID p)
+{
+   // an attempt to optimise a linear search
+   char *abbrev;
+   if(validPlace(p)) return places[p].abbrev;
+
+   if (p == CITY_UNKNOWN) abbrev ="C?";
+   else if (p == SEA_UNKNOWN)   abbrev ="S?";
+   else if (p == CASTLE_DRACULA)   abbrev ="TP";
+   else if (p == HIDE) abbrev ="HI";
+   else if (p == DOUBLE_BACK_1) abbrev ="D1";
+   else if (p == DOUBLE_BACK_2) abbrev ="D2";
+   else if (p == DOUBLE_BACK_3) abbrev ="D3";
+   else if (p == DOUBLE_BACK_4) abbrev ="D4";
+   else if (p == DOUBLE_BACK_5) abbrev ="D5";
+   return abbrev;
 }
