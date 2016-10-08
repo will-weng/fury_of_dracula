@@ -265,7 +265,7 @@ static void hunterPlays(char *play, GameView currentView) {
     currentView->currLocation[player] = abbrevToID(abbrev);
     // loss of health from encounters
     int i;
-    for(i = 3; i < 6; i++) { 
+    for(i = 3; i < 7; i++) { 
         if(play[i] == 'T') {
             currentView->health[player] = currentView->health[player] - LIFE_LOSS_TRAP_ENCOUNTER;
         }
