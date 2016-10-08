@@ -33,7 +33,7 @@ void decideHunterMove(HunterView gameState)
         play = "SR";
     }
 
-    if(giveMeTheRound(gameState) > 0) play = idToAbbrev(places[numLocations/2]);
+    if(giveMeTheRound(gameState) > 0) play = idToAbbrev(places[numLocations-1]);
     if(howHealthyIs(gameState, me) < 5) play = idToAbbrev(whereIs(gameState, me));
 
     registerBestPlay(play, message);
