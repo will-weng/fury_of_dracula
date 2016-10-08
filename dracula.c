@@ -9,13 +9,13 @@
 #include <string.h>
 
 #define LENGTH_OF_PLAY 3
-#define NUM_OF_HUNTERS 4
+#define NUM_OF_PLAYERS 4
 
 static struct
 {
-    LocationID currLocation[NUM_OF_HUNTERS];
-    LocationID lastLocation[NUM_OF_HUNTERS];
-} hunter;
+    LocationID currLocation[NUM_OF_PLAYERS];
+    LocationID lastLocation[NUM_OF_PLAYERS];
+} player;
 
 void decideDraculaMove(DracView gameState)
 {
@@ -28,12 +28,12 @@ void decideDraculaMove(DracView gameState)
     path = whereCanIgo(gameState, &numLocations, TRUE, TRUE);
     giveMeTheTrail(gameState, PLAYER_DRACULA, trail);
 
-    // initializes the hunter struct
-    for(counter = 0; counter < NUM_OF_HUNTERS; counter++) 
+    // initializes the player struct
+    for(counter = 0; counter < NUM_OF_PLAYERS; counter++) 
     {
         lastMove(gameState, counter, &start, &end);
-        hunter.currLocation[counter] = end;
-        hunter.lastLocation[counter] = start;
+        player.currLocation[counter] = end;
+        player.lastLocation[counter] = start;
     }
 
     // remove places in trail from path
@@ -62,23 +62,23 @@ void decideDraculaMove(DracView gameState)
         // move to where the hunter last position was if possible
         for(counter = 0; counter < numLocations; counter++)
         {
-            for(counter1 = 0; counter1 < NUM_OF_HUNTERS; counter1++)
+            for(counter1 = 0; counter1 + 1< NUM_OF_PLAYERS; counter1++)
             {
-                if(path[counter] == hunter.lastLocation[counter1])
+                if(path[counter] == player.lastLocation[counter1])
                     play = idToAbbrev(path[counter]);
             }
         }
 
         // move to different place if chosen one has a hunter on it
-        for(counter = 0; counter < NUM_OF_HUNTERS; counter++)
+        for(counter = 0; counter + 1 < NUM_OF_PLAYERS; counter++)
         {
-            if(strcmp(play, idToAbbrev(hunter.currLocation[counter])) == 0)
+            if(strcmp(play, idToAbbrev(player.currLocation[counter])) == 0)
                 play = idToAbbrev(path[rand() % numLocations]);
         }
 
         // if there is no path then go back
         if(numLocations == 0) play = "D1";
-        if(numLocations == 0 && strcmp(play,"D1") == 0) play ="HIDE";
+        if(player.currLocation[PLAYER_DRACULA] == player.lastLocation[PLAYER_DRACULA]) play ="HIDE";
     }
 
     registerBestPlay(play, play);
