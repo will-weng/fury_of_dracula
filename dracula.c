@@ -21,7 +21,7 @@ void decideDraculaMove(DracView gameState)
 {
     // initializes all used vairables
     char *play = "KL";
-    char message[MESSAGE_SIZE] = "YOU CAN'T CATCH ME";
+    char message[MESSAGE_SIZE] = "";
     int numLocations, counter, counter1, start, end;
     LocationID *path;
 

@@ -11,7 +11,7 @@
 void decideHunterMove(HunterView gameState)
 {
     char *play = "CD";
-    char message[MESSAGE_SIZE] = "I'M GONNA GET YOU";
+    char message[MESSAGE_SIZE] = "";
     int numLocations;
     if(whoAmI(gameState) == PLAYER_LORD_GODALMING) {
 
