@@ -8,36 +8,38 @@
 #include "Places.h"
 #include <string.h>
 
-
 #define LENGTH_OF_PLAY 3
 #define NUM_OF_HUNTERS 4
 
-
 void decideDraculaMove(DracView gameState)
 {
-	// TODO ...
-	// Replace the line below by something better
-    char *play = "CD";
+    // initializes all used vairables
+    char *play = "KL";
     char message[MESSAGE_SIZE] = "YOU CAN'T CATCH ME";
-    int numLocations, hunters[NUM_OF_HUNTERS], counter = 0;
+    int numLocations, hunters[NUM_OF_HUNTERS], counter;
     LocationID *places;
 
-    while(counter < NUM_OF_HUNTERS) {
+    // stores where hunteres are for easy access
+    for(counter = 0; counter < NUM_OF_HUNTERS; counter++)
         hunters[counter] = whereIs(gameState, counter);
-        counter++;
-    }
 
-    if(giveMeTheRound(gameState) > 0) {
+    // move into castle after round 1;
+    if(giveMeTheRound(gameState) == 2) play = "CD";
+
+    // move randomly after initial rounds
+    if(giveMeTheRound(gameState) > 2) {
         places = whereCanIgo(gameState, &numLocations, TRUE, FALSE);
         play = idToAbbrev(places[numLocations/2]);
     }
 
+    // if reaches some far places hopefully would tp to castle
     if(strcmp(play, "AT") == 0 || strcmp(play, "CA") == 0 ||
         strcmp(play, "BI") == 0) play = "TP";
 
-    if(play == idToAbbrev(hunters[0]) || play == idToAbbrev(hunters[1]) 
-        || play == idToAbbrev(hunters[2]) || play == idToAbbrev(hunters[3])) {
-        play = idToAbbrev(places[rand() % numLocations]);
+    // move to different place if chosen one has a hunter on it
+    for(counter = 0; counter < NUM_OF_HUNTERS; counter++) {
+        if(strcmp(play, idToAbbrev(hunters[counter])) == 0)
+            play = idToAbbrev(places[rand() % numLocations]);
     }
 
     registerBestPlay(play, message);
