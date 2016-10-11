@@ -17,6 +17,8 @@ static struct
     LocationID lastLocation[NUM_OF_PLAYERS];
 } player;
 
+static int *legalMoves(DracView gameState, int *path, int *numLocations, LocationID trail[TRAIL_SIZE], LocationID start);
+
 void decideDraculaMove(DracView gameState)
 {
     // initializes all used vairables
@@ -36,21 +38,7 @@ void decideDraculaMove(DracView gameState)
         player.lastLocation[counter] = start;
     }
 
-    // remove places in trail from path
-    for(counter = numLocations - 1; counter >= 0; counter--)
-    {
-        for(start = 0; start < TRAIL_SIZE; start++)
-        {
-            if(trail[start] == path[counter])
-            {
-                for(counter1 = counter; counter1 < numLocations - 1; counter1++)
-                {
-                    path[counter1] = path[counter1 + 1];
-                }
-                numLocations--;
-            }
-        }
-    }
+    path = legalMoves(gameState, path, &numLocations, trail, start);
 
     // move into castle after round 1;
     if(giveMeTheRound(gameState) == 1) play = "CD";
@@ -82,4 +70,24 @@ void decideDraculaMove(DracView gameState)
     }
 
     registerBestPlay(play, play);
+}
+
+static int *legalMoves(DracView gameState, int *path, int *numLocations, LocationID trail[TRAIL_SIZE], LocationID start) {
+    // remove places in trail from path
+    int counter, counter1;
+    for(counter = numLocations[0] - 1; counter >= 0; counter--)
+    {
+        for(start = 0; start < TRAIL_SIZE; start++)
+        {
+            if(trail[start] == path[counter])
+            {
+                for(counter1 = counter; counter1 < numLocations[0] - 1; counter1++)
+                {
+                    path[counter1] = path[counter1 + 1];
+                }
+                numLocations[0]--;
+            }
+        }
+    }
+    return path;
 }
