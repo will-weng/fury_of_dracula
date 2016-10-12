@@ -1,0 +1,3399 @@
+
+Checking your files...
+=== Modified Makefile
+LDLIBS = -lSegFault -rdynamic
+# Makefile for "Fury of Dracula": The Hunt
+
+# change these to suit your local C environment
+CC = gcc
+CFLAGS = -gdwarf-2 -Wall 
+# do not change the following line
+BINS = dracula hunter 
+# add any other *.o files that your system requires
+# (and add their dependencies below after DracView.o)
+# if you're not using Map.o or Places.o, you can remove them
+OBJS = GameView.o Map.o Places.o set.o queue.o
+# add whatever system libraries you need here (e.g. -lm)
+LIBS = -ljansson 
+
+all : $(BINS)
+
+dracula : dracPlayer.o dracula.o DracView.o $(OBJS) $(LIBS) -ljansson 
+hunter : hunterPlayer.o hunter.o HunterView.o $(OBJS) $(LIBS) -ljansson 
+
+dracPlayer.o : player.c Game.h DracView.h dracula.h
+	$(CC)  -gdwarf-2  -DI_AM_DRACULA -c player.c -o dracPlayer.o
+
+hunterPlayer.o : player.c Game.h HunterView.h hunter.h
+	$(CC)  -gdwarf-2  -c player.c -o hunterPlayer.o
+
+dracula.o : dracula.c Game.h DracView.h
+hunter.o : hunter.c Game.h HunterView.h
+Places.o : Places.c Places.h
+Map.o : Map.c Map.h Places.h
+GameView.o : GameView.c Globals.h GameView.h
+HunterView.o : HunterView.c Globals.h HunterView.h
+DracView.o : DracView.c Globals.h DracView.h
+queue.o : queue.c queue.h
+set.o : set.c set.h
+# if you use other ADTs, add dependencies for them here
+
+clean :
+	rm -f $(BINS) *.o core
+
+
+=== Compiling Dracula ...
+gcc -gdwarf-2 -Wall    -c -o dracula.o dracula.c
+gcc  -gdwarf-2  -DI_AM_DRACULA -c player.c -o dracPlayer.o
+gcc -gdwarf-2 -Wall    -c -o DracView.o DracView.c
+gcc -gdwarf-2 -Wall    -c -o GameView.o GameView.c
+gcc -gdwarf-2 -Wall    -c -o Map.o Map.c
+gcc -gdwarf-2 -Wall    -c -o Places.o Places.c
+gcc -gdwarf-2 -Wall    -c -o set.o set.c
+gcc -gdwarf-2 -Wall    -c -o queue.o queue.c
+gcc   dracula.o dracPlayer.o DracView.o GameView.o Map.o Places.o set.o queue.o /usr/lib/i386-linux-gnu/libjansson.so  -lSegFault -rdynamic -o dracula
+Dracula AI compiled OK
+=== Compiling Hunter ...
+gcc -gdwarf-2 -Wall    -c -o hunter.o hunter.c
+gcc  -gdwarf-2  -c player.c -o hunterPlayer.o
+gcc -gdwarf-2 -Wall    -c -o HunterView.o HunterView.c
+gcc   hunter.o hunterPlayer.o HunterView.o GameView.o Map.o Places.o set.o queue.o /usr/lib/i386-linux-gnu/libjansson.so  -lSegFault -rdynamic -o hunter
+Hunter AI compiled OK
+
+=== Playing your Hunter against your Dracula ...
+
+   The FURY of DRACULA   
+          _..._          
+        .'     '.        
+       ; __   __ ;       
+       |/  \ /  \|       
+     |\| -- ' -- |/|     
+     |(| \o| |o/ |)|     
+     _\|    U    |/_     
+  .-'  | ,.___., |  '-.  
+  \    ;  V'-'V  ;    /  
+   `\   \       /   /`   
+     `\  '-...-'  /`     
+       `\  / \  /`       
+         `\\_//`         
+...........................
+--------------------------------------------------------------------------
+> Running player 0... 
+Running with input: "pastPlays": ""
+==============================================================
+Program Output(2): 9
+
+==============================================================
+Move:  {
+  "move": "CD",
+  "message": "",
+  "timer": 30
+}
+> Moving from: undefined
+> Life Points: 9
+> Player 0 made move:
+> +++
+  move: CD
+  message: 
+  timer: 30
+> ---
+--------------------------------------------------------------------------
+> Running player 1... 
+Running with input: "pastPlays": "GCD...."
+==============================================================
+Program Output(2): 9
+
+==============================================================
+Move:  {
+  "move": "FR",
+  "message": "",
+  "timer": 25
+}
+> Moving from: undefined
+> Life Points: 9
+> Player 1 made move:
+> +++
+  move: FR
+  message: 
+  timer: 25
+> ---
+--------------------------------------------------------------------------
+> Running player 2... 
+Running with input: "pastPlays": "GCD.... SFR...."
+==============================================================
+Program Output(2): 9
+
+==============================================================
+Move:  {
+  "move": "MN",
+  "message": "",
+  "timer": 25
+}
+> Moving from: undefined
+> Life Points: 9
+> Player 2 made move:
+> +++
+  move: MN
+  message: 
+  timer: 25
+> ---
+--------------------------------------------------------------------------
+> Running player 3... 
+Running with input: "pastPlays": "GCD.... SFR.... HMN...."
+==============================================================
+Program Output(2): 9
+
+==============================================================
+Move:  {
+  "move": "SR",
+  "message": "",
+  "timer": 25
+}
+> Moving from: undefined
+> Life Points: 9
+> Player 3 made move:
+> +++
+  move: SR
+  message: 
+  timer: 25
+> ---
+--------------------------------------------------------------------------
+> Running player 4... 
+Running with input: "pastPlays": "GCD.... SFR.... HMN.... MSR...."
+==============================================================
+Program Output(0): 
+==============================================================
+Move:  {
+  "move": "KL",
+  "message": "KL",
+  "timer": 21
+}
+> Moving from: undefined
+> Blood Points: 40
+> Player 4 made move:
+> +++
+  move: KL
+  message: KL
+  timer: 21
+> ---
+> End of Round:  0
+> Starting Round:  1
+--------------------------------------------------------------------------
+> Running player 0... 
+Running with input: "pastPlays": "GCD.... SFR.... HMN.... MSR.... DC?.V.."
+==============================================================
+Program Output(2): 9
+
+==============================================================
+Move:  {
+  "move": "KL",
+  "message": "",
+  "timer": 83
+}
+> Moving from: CD
+> Life Points: 9
+> Player 0 made move:
+> +++
+  move: KL
+  message: 
+  timer: 83
+> ---
+--------------------------------------------------------------------------
+> Running player 1... 
+Running with input: "pastPlays": "GCD.... SFR.... HMN.... MSR.... DKL.V.. GKLVD.."
+==============================================================
+Program Output(2): 9
+
+==============================================================
+Move:  {
+  "move": "NU",
+  "message": "",
+  "timer": 81
+}
+> Moving from: FR
+> Life Points: 9
+> Player 1 made move:
+> +++
+  move: NU
+  message: 
+  timer: 81
+> ---
+--------------------------------------------------------------------------
+> Running player 2... 
+Running with input: "pastPlays": "GCD.... SFR.... HMN.... MSR.... DKL.V.. GKLVD.. SNU...."
+==============================================================
+Program Output(2): 9
+
+==============================================================
+Move:  {
+  "move": "LV",
+  "message": "",
+  "timer": 83
+}
+> Moving from: MN
+> Life Points: 9
+> Player 2 made move:
+> +++
+  move: LV
+  message: 
+  timer: 83
+> ---
+--------------------------------------------------------------------------
+> Running player 3... 
+Running with input: "pastPlays": "GCD.... SFR.... HMN.... MSR.... DKL.V.. GKLVD.. SNU.... HLV...."
+==============================================================
+Program Output(2): 9
+
+==============================================================
+Move:  {
+  "move": "MA",
+  "message": "",
+  "timer": 84
+}
+> Moving from: SR
+> Life Points: 9
+> Player 3 made move:
+> +++
+  move: MA
+  message: 
+  timer: 84
+> ---
+--------------------------------------------------------------------------
+> Running player 4... 
+Running with input: "pastPlays": "GCD.... SFR.... HMN.... MSR.... DKL.V.. GKLVD.. SNU.... HLV.... MMA...."
+==============================================================
+Program Output(0): 
+==============================================================
+Move:  {
+  "move": "CD",
+  "message": "CD",
+  "timer": 87
+}
+> Moving from: KL
+> Blood Points: 30
+> Legal Drac moves: BE BC BD CD GA SZ D1 HI
+> Player 4 made move:
+> +++
+  move: CD
+  message: CD
+  timer: 87
+> ---
+> End of Round:  1
+> Starting Round:  2
+--------------------------------------------------------------------------
+> Running player 0... 
+Running with input: "pastPlays": "GCD.... SFR.... HMN.... MSR.... DKL.V.. GKLVD.. SNU.... HLV.... MMA.... DCDT..."
+==============================================================
+Program Output(2): 5
+
+==============================================================
+Move:  {
+  "move": "CD",
+  "message": "",
+  "timer": 87
+}
+> Moving from: KL
+> Life Points: 5
+> Player 0 made move:
+> +++
+  move: CD
+  message: 
+  timer: 87
+> ---
+--------------------------------------------------------------------------
+> Running player 1... 
+Running with input: "pastPlays": "GCD.... SFR.... HMN.... MSR.... DKL.V.. GKLVD.. SNU.... HLV.... MMA.... DCDT... GCDTD.."
+==============================================================
+Program Output(2): 9
+
+==============================================================
+Move:  {
+  "move": "MU",
+  "message": "",
+  "timer": 87
+}
+> Moving from: NU
+> Life Points: 9
+> Player 1 made move:
+> +++
+  move: MU
+  message: 
+  timer: 87
+> ---
+--------------------------------------------------------------------------
+> Running player 2... 
+Running with input: "pastPlays": "GCD.... SFR.... HMN.... MSR.... DKL.V.. GKLVD.. SNU.... HLV.... MMA.... DCDT... GCDTD.. SMU...."
+==============================================================
+Program Output(2): 9
+
+==============================================================
+Move:  {
+  "move": "MN",
+  "message": "",
+  "timer": 85
+}
+> Moving from: LV
+> Life Points: 9
+> Player 2 made move:
+> +++
+  move: MN
+  message: 
+  timer: 85
+> ---
+--------------------------------------------------------------------------
+> Running player 3... 
+Running with input: "pastPlays": "GCD.... SFR.... HMN.... MSR.... DKL.V.. GKLVD.. SNU.... HLV.... MMA.... DCDT... GCDTD.. SMU.... HMN...."
+==============================================================
+Program Output(2): 9
+
+==============================================================
+Move:  {
+  "move": "LS",
+  "message": "",
+  "timer": 92
+}
+> Moving from: MA
+> Life Points: 9
+> Player 3 made move:
+> +++
+  move: LS
+  message: 
+  timer: 92
+> ---
+--------------------------------------------------------------------------
+> Running player 4... 
+Running with input: "pastPlays": "GCD.... SFR.... HMN.... MSR.... DKL.V.. GKLVD.. SNU.... HLV.... MMA.... DCDT... GCDTD.. SMU.... HMN.... MLS...."
+==============================================================
+Program Output(0): 
+==============================================================
+Move:  {
+  "move": "GA",
+  "message": "GA",
+  "timer": 99
+}
+> Moving from: CD
+> Blood Points: 30
+> Legal Drac moves: GA D1 D2 HI
+> Player 4 made move:
+> +++
+  move: GA
+  message: GA
+  timer: 99
+> ---
+> End of Round:  2
+> Starting Round:  3
+--------------------------------------------------------------------------
+> Running player 0... 
+Running with input: "pastPlays": "GCD.... SFR.... HMN.... MSR.... DKL.V.. GKLVD.. SNU.... HLV.... MMA.... DCDT... GCDTD.. SMU.... HMN.... MLS.... DC?T..."
+==============================================================
+Program Output(2): 0
+
+==============================================================
+Move:  {
+  "move": "JM",
+  "message": "",
+  "timer": 92
+}
+> Moving from: JM
+> Life Points: 9
+> Player 0 made move:
+> +++
+  move: JM
+  message: 
+  timer: 92
+> ---
+--------------------------------------------------------------------------
+> Running player 1... 
+Running with input: "pastPlays": "GCD.... SFR.... HMN.... MSR.... DKL.V.. GKLVD.. SNU.... HLV.... MMA.... DCDT... GCDTD.. SMU.... HMN.... MLS.... DC?T... GJM...."
+==============================================================
+Program Output(2): 9
+
+==============================================================
+Move:  {
+  "move": "VE",
+  "message": "",
+  "timer": 91
+}
+> Moving from: MU
+> Life Points: 9
+> Player 1 made move:
+> +++
+  move: VE
+  message: 
+  timer: 91
+> ---
+--------------------------------------------------------------------------
+> Running player 2... 
+Running with input: "pastPlays": "GCD.... SFR.... HMN.... MSR.... DKL.V.. GKLVD.. SNU.... HLV.... MMA.... DCDT... GCDTD.. SMU.... HMN.... MLS.... DC?T... GJM.... SVE...."
+==============================================================
+Program Output(2): 9
+
+==============================================================
+Move:  {
+  "move": "LV",
+  "message": "",
+  "timer": 91
+}
+> Moving from: MN
+> Life Points: 9
+> Player 2 made move:
+> +++
+  move: LV
+  message: 
+  timer: 91
+> ---
+--------------------------------------------------------------------------
+> Running player 3... 
+Running with input: "pastPlays": "GCD.... SFR.... HMN.... MSR.... DKL.V.. GKLVD.. SNU.... HLV.... MMA.... DCDT... GCDTD.. SMU.... HMN.... MLS.... DC?T... GJM.... SVE.... HLV...."
+==============================================================
+Program Output(2): 9
+
+==============================================================
+Move:  {
+  "move": "MA",
+  "message": "",
+  "timer": 95
+}
+> Moving from: LS
+> Life Points: 9
+> Player 3 made move:
+> +++
+  move: MA
+  message: 
+  timer: 95
+> ---
+--------------------------------------------------------------------------
+> Running player 4... 
+Running with input: "pastPlays": "GCD.... SFR.... HMN.... MSR.... DKL.V.. GKLVD.. SNU.... HLV.... MMA.... DCDT... GCDTD.. SMU.... HMN.... MLS.... DGAT... GJM.... SVE.... HLV.... MMA...."
+==============================================================
+Program Output(0): 
+==============================================================
+Move:  {
+  "move": "BC",
+  "message": "BC",
+  "timer": 105
+}
+> Moving from: GA
+> Blood Points: 30
+> Legal Drac moves: BC CN D1 D2 D3 HI
+> Player 4 made move:
+> +++
+  move: BC
+  message: BC
+  timer: 105
+> ---
+> End of Round:  3
+> Starting Round:  4
+--------------------------------------------------------------------------
+> Running player 0... 
+Running with input: "pastPlays": "GCD.... SFR.... HMN.... MSR.... DKL.V.. GKLVD.. SNU.... HLV.... MMA.... DCDT... GCDTD.. SMU.... HMN.... MLS.... DC?T... GJM.... SVE.... HLV.... MMA.... DC?T..."
+==============================================================
+Program Output(2): 9
+
+==============================================================
+Move:  {
+  "move": "SZ",
+  "message": "",
+  "timer": 96
+}
+> Moving from: JM
+> Life Points: 9
+> Player 0 made move:
+> +++
+  move: SZ
+  message: 
+  timer: 96
+> ---
+--------------------------------------------------------------------------
+> Running player 1... 
+Running with input: "pastPlays": "GCD.... SFR.... HMN.... MSR.... DKL.V.. GKLVD.. SNU.... HLV.... MMA.... DCDT... GCDTD.. SMU.... HMN.... MLS.... DC?T... GJM.... SVE.... HLV.... MMA.... DC?T... GSZ...."
+==============================================================
+Program Output(2): 9
+
+==============================================================
+Move:  {
+  "move": "GO",
+  "message": "",
+  "timer": 96
+}
+> Moving from: VE
+> Life Points: 9
+> Player 1 made move:
+> +++
+  move: GO
+  message: 
+  timer: 96
+> ---
+--------------------------------------------------------------------------
+> Running player 2... 
+Running with input: "pastPlays": "GCD.... SFR.... HMN.... MSR.... DKL.V.. GKLVD.. SNU.... HLV.... MMA.... DCDT... GCDTD.. SMU.... HMN.... MLS.... DC?T... GJM.... SVE.... HLV.... MMA.... DC?T... GSZ.... SGO...."
+==============================================================
+Program Output(2): 9
+
+==============================================================
+Move:  {
+  "move": "MN",
+  "message": "",
+  "timer": 96
+}
+> Moving from: LV
+> Life Points: 9
+> Player 2 made move:
+> +++
+  move: MN
+  message: 
+  timer: 96
+> ---
+--------------------------------------------------------------------------
+> Running player 3... 
+Running with input: "pastPlays": "GCD.... SFR.... HMN.... MSR.... DKL.V.. GKLVD.. SNU.... HLV.... MMA.... DCDT... GCDTD.. SMU.... HMN.... MLS.... DC?T... GJM.... SVE.... HLV.... MMA.... DC?T... GSZ.... SGO.... HMN...."
+==============================================================
+Program Output(2): 9
+
+==============================================================
+Move:  {
+  "move": "LS",
+  "message": "",
+  "timer": 99
+}
+> Moving from: MA
+> Life Points: 9
+> Player 3 made move:
+> +++
+  move: LS
+  message: 
+  timer: 99
+> ---
+--------------------------------------------------------------------------
+> Running player 4... 
+Running with input: "pastPlays": "GCD.... SFR.... HMN.... MSR.... DKL.V.. GKLVD.. SNU.... HLV.... MMA.... DCDT... GCDTD.. SMU.... HMN.... MLS.... DGAT... GJM.... SVE.... HLV.... MMA.... DBCT... GSZ.... SGO.... HMN.... MLS...."
+==============================================================
+Program Output(0): 
+==============================================================
+Move:  {
+  "move": "CN",
+  "message": "CN",
+  "timer": 117
+}
+> Moving from: BC
+> Blood Points: 30
+> Legal Drac moves: BE CN SO D1 D2 D4 HI
+> Player 4 made move:
+> +++
+  move: CN
+  message: CN
+  timer: 117
+> ---
+> End of Round:  4
+> Starting Round:  5
+--------------------------------------------------------------------------
+> Running player 0... 
+Running with input: "pastPlays": "GCD.... SFR.... HMN.... MSR.... DKL.V.. GKLVD.. SNU.... HLV.... MMA.... DCDT... GCDTD.. SMU.... HMN.... MLS.... DC?T... GJM.... SVE.... HLV.... MMA.... DC?T... GSZ.... SGO.... HMN.... MLS.... DC?T..."
+==============================================================
+Program Output(2): 9
+
+==============================================================
+Move:  {
+  "move": "KL",
+  "message": "",
+  "timer": 101
+}
+> Moving from: SZ
+> Life Points: 9
+> Player 0 made move:
+> +++
+  move: KL
+  message: 
+  timer: 101
+> ---
+--------------------------------------------------------------------------
+> Running player 1... 
+Running with input: "pastPlays": "GCD.... SFR.... HMN.... MSR.... DKL.V.. GKLVD.. SNU.... HLV.... MMA.... DCDT... GCDTD.. SMU.... HMN.... MLS.... DC?T... GJM.... SVE.... HLV.... MMA.... DC?T... GSZ.... SGO.... HMN.... MLS.... DC?T... GKL...."
+==============================================================
+Program Output(2): 9
+
+==============================================================
+Move:  {
+  "move": "MR",
+  "message": "",
+  "timer": 103
+}
+> Moving from: GO
+> Life Points: 9
+> Player 1 made move:
+> +++
+  move: MR
+  message: 
+  timer: 103
+> ---
+--------------------------------------------------------------------------
+> Running player 2... 
+Running with input: "pastPlays": "GCD.... SFR.... HMN.... MSR.... DKL.V.. GKLVD.. SNU.... HLV.... MMA.... DCDT... GCDTD.. SMU.... HMN.... MLS.... DC?T... GJM.... SVE.... HLV.... MMA.... DC?T... GSZ.... SGO.... HMN.... MLS.... DC?T... GKL.... SMR...."
+==============================================================
+Program Output(2): 9
+
+==============================================================
+Move:  {
+  "move": "LV",
+  "message": "",
+  "timer": 101
+}
+> Moving from: MN
+> Life Points: 9
+> Player 2 made move:
+> +++
+  move: LV
+  message: 
+  timer: 101
+> ---
+--------------------------------------------------------------------------
+> Running player 3... 
+Running with input: "pastPlays": "GCD.... SFR.... HMN.... MSR.... DKL.V.. GKLVD.. SNU.... HLV.... MMA.... DCDT... GCDTD.. SMU.... HMN.... MLS.... DC?T... GJM.... SVE.... HLV.... MMA.... DC?T... GSZ.... SGO.... HMN.... MLS.... DC?T... GKL.... SMR.... HLV...."
+==============================================================
+Program Output(2): 9
+
+==============================================================
+Move:  {
+  "move": "MA",
+  "message": "",
+  "timer": 101
+}
+> Moving from: LS
+> Life Points: 9
+> Player 3 made move:
+> +++
+  move: MA
+  message: 
+  timer: 101
+> ---
+--------------------------------------------------------------------------
+> Running player 4... 
+Running with input: "pastPlays": "GCD.... SFR.... HMN.... MSR.... DKL.V.. GKLVD.. SNU.... HLV.... MMA.... DCDT... GCDTD.. SMU.... HMN.... MLS.... DGAT... GJM.... SVE.... HLV.... MMA.... DBCT... GSZ.... SGO.... HMN.... MLS.... DCNT... GKL.... SMR.... HLV.... MMA...."
+==============================================================
+Program Output(0): 
+==============================================================
+Move:  {
+  "move": "BS",
+  "message": "BS",
+  "timer": 124
+}
+> Moving from: CN
+> Blood Points: 30
+> Legal Drac moves: VR BS D1 D2 D3 HI
+> Player 4 made move:
+> +++
+  move: BS
+  message: BS
+  timer: 124
+> ---
+> End of Round:  5
+> Starting Round:  6
+--------------------------------------------------------------------------
+> Running player 0... 
+Running with input: "pastPlays": "GCD.... SFR.... HMN.... MSR.... DKL.V.. GKLVD.. SNU.... HLV.... MMA.... DCDT... GCDTD.. SMU.... HMN.... MLS.... DC?T... GJM.... SVE.... HLV.... MMA.... DC?T... GSZ.... SGO.... HMN.... MLS.... DC?T... GKL.... SMR.... HLV.... MMA.... DS?...."
+==============================================================
+Program Output(2): 9
+
+==============================================================
+Move:  {
+  "move": "CD",
+  "message": "",
+  "timer": 101
+}
+> Moving from: KL
+> Life Points: 9
+> Player 0 made move:
+> +++
+  move: CD
+  message: 
+  timer: 101
+> ---
+--------------------------------------------------------------------------
+> Running player 1... 
+Running with input: "pastPlays": "GCD.... SFR.... HMN.... MSR.... DKL.V.. GKLVD.. SNU.... HLV.... MMA.... DCDT... GCDTD.. SMU.... HMN.... MLS.... DC?T... GJM.... SVE.... HLV.... MMA.... DC?T... GSZ.... SGO.... HMN.... MLS.... DC?T... GKL.... SMR.... HLV.... MMA.... DS?.... GCD...."
+==============================================================
+Program Output(2): 9
+
+==============================================================
+Move:  {
+  "move": "GO",
+  "message": "",
+  "timer": 103
+}
+> Moving from: MR
+> Life Points: 9
+> Player 1 made move:
+> +++
+  move: GO
+  message: 
+  timer: 103
+> ---
+--------------------------------------------------------------------------
+> Running player 2... 
+Running with input: "pastPlays": "GCD.... SFR.... HMN.... MSR.... DKL.V.. GKLVD.. SNU.... HLV.... MMA.... DCDT... GCDTD.. SMU.... HMN.... MLS.... DC?T... GJM.... SVE.... HLV.... MMA.... DC?T... GSZ.... SGO.... HMN.... MLS.... DC?T... GKL.... SMR.... HLV.... MMA.... DS?.... GCD.... SGO...."
+==============================================================
+Program Output(2): 9
+
+==============================================================
+Move:  {
+  "move": "MN",
+  "message": "",
+  "timer": 101
+}
+> Moving from: LV
+> Life Points: 9
+> Player 2 made move:
+> +++
+  move: MN
+  message: 
+  timer: 101
+> ---
+--------------------------------------------------------------------------
+> Running player 3... 
+Running with input: "pastPlays": "GCD.... SFR.... HMN.... MSR.... DKL.V.. GKLVD.. SNU.... HLV.... MMA.... DCDT... GCDTD.. SMU.... HMN.... MLS.... DC?T... GJM.... SVE.... HLV.... MMA.... DC?T... GSZ.... SGO.... HMN.... MLS.... DC?T... GKL.... SMR.... HLV.... MMA.... DS?.... GCD.... SGO.... HMN...."
+==============================================================
+Program Output(2): 9
+
+==============================================================
+Move:  {
+  "move": "LS",
+  "message": "",
+  "timer": 105
+}
+> Moving from: MA
+> Life Points: 9
+> Player 3 made move:
+> +++
+  move: LS
+  message: 
+  timer: 105
+> ---
+--------------------------------------------------------------------------
+> Running player 4... 
+Running with input: "pastPlays": "GCD.... SFR.... HMN.... MSR.... DKL.V.. GKLVD.. SNU.... HLV.... MMA.... DCDT... GCDTD.. SMU.... HMN.... MLS.... DGAT... GJM.... SVE.... HLV.... MMA.... DBCT... GSZ.... SGO.... HMN.... MLS.... DCNT... GKL.... SMR.... HLV.... MMA.... DBS.... GCD.... SGO.... HMN.... MLS...."
+==============================================================
+Program Output(0): 
+==============================================================
+Move:  {
+  "move": "IO",
+  "message": "IO",
+  "timer": 131
+}
+> Moving from: BS
+> Blood Points: 28
+> Legal Drac moves: VR IO D1 D2
+> Player 4 made move:
+> +++
+  move: IO
+  message: IO
+  timer: 131
+> ---
+> End of Round:  6
+> Starting Round:  7
+--------------------------------------------------------------------------
+> Running player 0... 
+Running with input: "pastPlays": "GCD.... SFR.... HMN.... MSR.... DKL.V.. GKLVD.. SNU.... HLV.... MMA.... DCDT... GCDTD.. SMU.... HMN.... MLS.... DC?T... GJM.... SVE.... HLV.... MMA.... DC?T... GSZ.... SGO.... HMN.... MLS.... DC?T... GKL.... SMR.... HLV.... MMA.... DS?.... GCD.... SGO.... HMN.... MLS.... DS?...."
+==============================================================
+Program Output(2): 9
+
+==============================================================
+Move:  {
+  "move": "KL",
+  "message": "",
+  "timer": 108
+}
+> Moving from: CD
+> Life Points: 9
+> Player 0 made move:
+> +++
+  move: KL
+  message: 
+  timer: 108
+> ---
+--------------------------------------------------------------------------
+> Running player 1... 
+Running with input: "pastPlays": "GCD.... SFR.... HMN.... MSR.... DKL.V.. GKLVD.. SNU.... HLV.... MMA.... DCDT... GCDTD.. SMU.... HMN.... MLS.... DC?T... GJM.... SVE.... HLV.... MMA.... DC?T... GSZ.... SGO.... HMN.... MLS.... DC?T... GKL.... SMR.... HLV.... MMA.... DS?.... GCD.... SGO.... HMN.... MLS.... DS?.... GKL...."
+==============================================================
+Program Output(2): 9
+
+==============================================================
+Move:  {
+  "move": "MR",
+  "message": "",
+  "timer": 105
+}
+> Moving from: GO
+> Life Points: 9
+> Player 1 made move:
+> +++
+  move: MR
+  message: 
+  timer: 105
+> ---
+--------------------------------------------------------------------------
+> Running player 2... 
+Running with input: "pastPlays": "GCD.... SFR.... HMN.... MSR.... DKL.V.. GKLVD.. SNU.... HLV.... MMA.... DCDT... GCDTD.. SMU.... HMN.... MLS.... DC?T... GJM.... SVE.... HLV.... MMA.... DC?T... GSZ.... SGO.... HMN.... MLS.... DC?T... GKL.... SMR.... HLV.... MMA.... DS?.... GCD.... SGO.... HMN.... MLS.... DS?.... GKL.... SMR...."
+==============================================================
+Program Output(2): 9
+
+==============================================================
+Move:  {
+  "move": "LV",
+  "message": "",
+  "timer": 107
+}
+> Moving from: MN
+> Life Points: 9
+> Player 2 made move:
+> +++
+  move: LV
+  message: 
+  timer: 107
+> ---
+--------------------------------------------------------------------------
+> Running player 3... 
+Running with input: "pastPlays": "GCD.... SFR.... HMN.... MSR.... DKL.V.. GKLVD.. SNU.... HLV.... MMA.... DCDT... GCDTD.. SMU.... HMN.... MLS.... DC?T... GJM.... SVE.... HLV.... MMA.... DC?T... GSZ.... SGO.... HMN.... MLS.... DC?T... GKL.... SMR.... HLV.... MMA.... DS?.... GCD.... SGO.... HMN.... MLS.... DS?.... GKL.... SMR.... HLV...."
+==============================================================
+Program Output(2): 9
+
+==============================================================
+Move:  {
+  "move": "MA",
+  "message": "",
+  "timer": 108
+}
+> Moving from: LS
+> Life Points: 9
+> Player 3 made move:
+> +++
+  move: MA
+  message: 
+  timer: 108
+> ---
+--------------------------------------------------------------------------
+> Running player 4... 
+Running with input: "pastPlays": "GCD.... SFR.... HMN.... MSR.... DKL.V.. GKLVD.. SNU.... HLV.... MMA.... DCDT... GCDTD.. SMU.... HMN.... MLS.... DGAT... GJM.... SVE.... HLV.... MMA.... DBCT... GSZ.... SGO.... HMN.... MLS.... DCNT... GKL.... SMR.... HLV.... MMA.... DBS.... GCD.... SGO.... HMN.... MLS.... DIO.... GKL.... SMR.... HLV.... MMA...."
+==============================================================
+Program Output(0): 
+==============================================================
+Move:  {
+  "move": "SA",
+  "message": "SA",
+  "timer": 123
+}
+> Moving from: IO
+> Blood Points: 26
+> Legal Drac moves: AT SA VA TS AS D1 D2
+> Player 4 made move:
+> +++
+  move: SA
+  message: SA
+  timer: 123
+> ---
+> End of Round:  7
+> Starting Round:  8
+--------------------------------------------------------------------------
+> Running player 0... 
+Running with input: "pastPlays": "GCD.... SFR.... HMN.... MSR.... DKL.V.. GKLVD.. SNU.... HLV.... MMA.... DCDT... GCDTD.. SMU.... HMN.... MLS.... DC?T... GJM.... SVE.... HLV.... MMA.... DC?T... GSZ.... SGO.... HMN.... MLS.... DC?T... GKL.... SMR.... HLV.... MMA.... DS?.... GCD.... SGO.... HMN.... MLS.... DS?.... GKL.... SMR.... HLV.... MMA.... DC?T..."
+==============================================================
+Program Output(2): 9
+
+==============================================================
+Move:  {
+  "move": "CD",
+  "message": "",
+  "timer": 148
+}
+> Moving from: KL
+> Life Points: 9
+> Player 0 made move:
+> +++
+  move: CD
+  message: 
+  timer: 148
+> ---
+--------------------------------------------------------------------------
+> Running player 1... 
+Running with input: "pastPlays": "GCD.... SFR.... HMN.... MSR.... DKL.V.. GKLVD.. SNU.... HLV.... MMA.... DCDT... GCDTD.. SMU.... HMN.... MLS.... DC?T... GJM.... SVE.... HLV.... MMA.... DC?T... GSZ.... SGO.... HMN.... MLS.... DC?T... GKL.... SMR.... HLV.... MMA.... DS?.... GCD.... SGO.... HMN.... MLS.... DS?.... GKL.... SMR.... HLV.... MMA.... DC?T... GCD...."
+==============================================================
+Program Output(2): 9
+
+==============================================================
+Move:  {
+  "move": "GO",
+  "message": "",
+  "timer": 109
+}
+> Moving from: MR
+> Life Points: 9
+> Player 1 made move:
+> +++
+  move: GO
+  message: 
+  timer: 109
+> ---
+--------------------------------------------------------------------------
+> Running player 2... 
+Running with input: "pastPlays": "GCD.... SFR.... HMN.... MSR.... DKL.V.. GKLVD.. SNU.... HLV.... MMA.... DCDT... GCDTD.. SMU.... HMN.... MLS.... DC?T... GJM.... SVE.... HLV.... MMA.... DC?T... GSZ.... SGO.... HMN.... MLS.... DC?T... GKL.... SMR.... HLV.... MMA.... DS?.... GCD.... SGO.... HMN.... MLS.... DS?.... GKL.... SMR.... HLV.... MMA.... DC?T... GCD.... SGO...."
+==============================================================
+Program Output(2): 9
+
+==============================================================
+Move:  {
+  "move": "MN",
+  "message": "",
+  "timer": 108
+}
+> Moving from: LV
+> Life Points: 9
+> Player 2 made move:
+> +++
+  move: MN
+  message: 
+  timer: 108
+> ---
+--------------------------------------------------------------------------
+> Running player 3... 
+Running with input: "pastPlays": "GCD.... SFR.... HMN.... MSR.... DKL.V.. GKLVD.. SNU.... HLV.... MMA.... DCDT... GCDTD.. SMU.... HMN.... MLS.... DC?T... GJM.... SVE.... HLV.... MMA.... DC?T... GSZ.... SGO.... HMN.... MLS.... DC?T... GKL.... SMR.... HLV.... MMA.... DS?.... GCD.... SGO.... HMN.... MLS.... DS?.... GKL.... SMR.... HLV.... MMA.... DC?T... GCD.... SGO.... HMN...."
+==============================================================
+Program Output(2): 9
+
+==============================================================
+Move:  {
+  "move": "LS",
+  "message": "",
+  "timer": 111
+}
+> Moving from: MA
+> Life Points: 9
+> Player 3 made move:
+> +++
+  move: LS
+  message: 
+  timer: 111
+> ---
+--------------------------------------------------------------------------
+> Running player 4... 
+Running with input: "pastPlays": "GCD.... SFR.... HMN.... MSR.... DKL.V.. GKLVD.. SNU.... HLV.... MMA.... DCDT... GCDTD.. SMU.... HMN.... MLS.... DGAT... GJM.... SVE.... HLV.... MMA.... DBCT... GSZ.... SGO.... HMN.... MLS.... DCNT... GKL.... SMR.... HLV.... MMA.... DBS.... GCD.... SGO.... HMN.... MLS.... DIO.... GKL.... SMR.... HLV.... MMA.... DSAT... GCD.... SGO.... HMN.... MLS...."
+==============================================================
+Program Output(0): 
+==============================================================
+Move:  {
+  "move": "SO",
+  "message": "SO",
+  "timer": 150
+}
+> Moving from: SA
+> Blood Points: 26
+> Legal Drac moves: SO VA D1 D2 HI
+> Player 4 made move:
+> +++
+  move: SO
+  message: SO
+  timer: 150
+> ---
+> End of Round:  8
+> Starting Round:  9
+--------------------------------------------------------------------------
+> Running player 0... 
+Running with input: "pastPlays": "GCD.... SFR.... HMN.... MSR.... DKL.V.. GKLVD.. SNU.... HLV.... MMA.... DCDT... GCDTD.. SMU.... HMN.... MLS.... DC?T... GJM.... SVE.... HLV.... MMA.... DC?T... GSZ.... SGO.... HMN.... MLS.... DC?T... GKL.... SMR.... HLV.... MMA.... DS?.... GCD.... SGO.... HMN.... MLS.... DS?.... GKL.... SMR.... HLV.... MMA.... DC?T... GCD.... SGO.... HMN.... MLS.... DC?T.M."
+==============================================================
+Program Output(2): 9
+
+==============================================================
+Move:  {
+  "move": "KL",
+  "message": "",
+  "timer": 112
+}
+> Moving from: CD
+> Life Points: 9
+> Player 0 made move:
+> +++
+  move: KL
+  message: 
+  timer: 112
+> ---
+--------------------------------------------------------------------------
+> Running player 1... 
+Running with input: "pastPlays": "GCD.... SFR.... HMN.... MSR.... DKL.V.. GKLVD.. SNU.... HLV.... MMA.... DCDT... GCDTD.. SMU.... HMN.... MLS.... DC?T... GJM.... SVE.... HLV.... MMA.... DC?T... GSZ.... SGO.... HMN.... MLS.... DC?T... GKL.... SMR.... HLV.... MMA.... DS?.... GCD.... SGO.... HMN.... MLS.... DS?.... GKL.... SMR.... HLV.... MMA.... DC?T... GCD.... SGO.... HMN.... MLS.... DC?T.M. GKL...."
+==============================================================
+Program Output(2): 9
+
+==============================================================
+Move:  {
+  "move": "MR",
+  "message": "",
+  "timer": 112
+}
+> Moving from: GO
+> Life Points: 9
+> Player 1 made move:
+> +++
+  move: MR
+  message: 
+  timer: 112
+> ---
+--------------------------------------------------------------------------
+> Running player 2... 
+Running with input: "pastPlays": "GCD.... SFR.... HMN.... MSR.... DKL.V.. GKLVD.. SNU.... HLV.... MMA.... DCDT... GCDTD.. SMU.... HMN.... MLS.... DC?T... GJM.... SVE.... HLV.... MMA.... DC?T... GSZ.... SGO.... HMN.... MLS.... DC?T... GKL.... SMR.... HLV.... MMA.... DS?.... GCD.... SGO.... HMN.... MLS.... DS?.... GKL.... SMR.... HLV.... MMA.... DC?T... GCD.... SGO.... HMN.... MLS.... DC?T.M. GKL.... SMR...."
+==============================================================
+Program Output(2): 9
+
+==============================================================
+Move:  {
+  "move": "LV",
+  "message": "",
+  "timer": 112
+}
+> Moving from: MN
+> Life Points: 9
+> Player 2 made move:
+> +++
+  move: LV
+  message: 
+  timer: 112
+> ---
+--------------------------------------------------------------------------
+> Running player 3... 
+Running with input: "pastPlays": "GCD.... SFR.... HMN.... MSR.... DKL.V.. GKLVD.. SNU.... HLV.... MMA.... DCDT... GCDTD.. SMU.... HMN.... MLS.... DC?T... GJM.... SVE.... HLV.... MMA.... DC?T... GSZ.... SGO.... HMN.... MLS.... DC?T... GKL.... SMR.... HLV.... MMA.... DS?.... GCD.... SGO.... HMN.... MLS.... DS?.... GKL.... SMR.... HLV.... MMA.... DC?T... GCD.... SGO.... HMN.... MLS.... DC?T.M. GKL.... SMR.... HLV...."
+==============================================================
+Program Output(2): 9
+
+==============================================================
+Move:  {
+  "move": "MA",
+  "message": "",
+  "timer": 112
+}
+> Moving from: LS
+> Life Points: 9
+> Player 3 made move:
+> +++
+  move: MA
+  message: 
+  timer: 112
+> ---
+--------------------------------------------------------------------------
+> Running player 4... 
+Running with input: "pastPlays": "GCD.... SFR.... HMN.... MSR.... DKL.V.. GKLVD.. SNU.... HLV.... MMA.... DCDT... GCDTD.. SMU.... HMN.... MLS.... DGAT... GJM.... SVE.... HLV.... MMA.... DBCT... GSZ.... SGO.... HMN.... MLS.... DCNT... GKL.... SMR.... HLV.... MMA.... DBS.... GCD.... SGO.... HMN.... MLS.... DIO.... GKL.... SMR.... HLV.... MMA.... DSAT... GCD.... SGO.... HMN.... MLS.... DSOT.M. GKL.... SMR.... HLV.... MMA...."
+==============================================================
+Program Output(0): 
+==============================================================
+Move:  {
+  "move": "SJ",
+  "message": "SJ",
+  "timer": 160
+}
+> Moving from: SO
+> Blood Points: 26
+> Legal Drac moves: BE BC SJ VR VA D1 D2 HI
+> Player 4 made move:
+> +++
+  move: SJ
+  message: SJ
+  timer: 160
+> ---
+> End of Round:  9
+> Starting Round:  10
+--------------------------------------------------------------------------
+> Running player 0... 
+Running with input: "pastPlays": "GCD.... SFR.... HMN.... MSR.... DKL.V.. GKLVD.. SNU.... HLV.... MMA.... DCDT... GCDTD.. SMU.... HMN.... MLS.... DC?T... GJM.... SVE.... HLV.... MMA.... DC?T... GSZ.... SGO.... HMN.... MLS.... DC?T... GKL.... SMR.... HLV.... MMA.... DS?.... GCD.... SGO.... HMN.... MLS.... DS?.... GKL.... SMR.... HLV.... MMA.... DC?T... GCD.... SGO.... HMN.... MLS.... DC?T.M. GKL.... SMR.... HLV.... MMA.... DC?T.M."
+==============================================================
+Program Output(2): 9
+
+==============================================================
+Move:  {
+  "move": "CD",
+  "message": "",
+  "timer": 115
+}
+> Moving from: KL
+> Life Points: 9
+> Player 0 made move:
+> +++
+  move: CD
+  message: 
+  timer: 115
+> ---
+--------------------------------------------------------------------------
+> Running player 1... 
+Running with input: "pastPlays": "GCD.... SFR.... HMN.... MSR.... DKL.V.. GKLVD.. SNU.... HLV.... MMA.... DCDT... GCDTD.. SMU.... HMN.... MLS.... DC?T... GJM.... SVE.... HLV.... MMA.... DC?T... GSZ.... SGO.... HMN.... MLS.... DC?T... GKL.... SMR.... HLV.... MMA.... DS?.... GCD.... SGO.... HMN.... MLS.... DS?.... GKL.... SMR.... HLV.... MMA.... DC?T... GCD.... SGO.... HMN.... MLS.... DC?T.M. GKL.... SMR.... HLV.... MMA.... DC?T.M. GCD...."
+==============================================================
+Program Output(2): 9
+
+==============================================================
+Move:  {
+  "move": "GO",
+  "message": "",
+  "timer": 116
+}
+> Moving from: MR
+> Life Points: 9
+> Player 1 made move:
+> +++
+  move: GO
+  message: 
+  timer: 116
+> ---
+--------------------------------------------------------------------------
+> Running player 2... 
+Running with input: "pastPlays": "GCD.... SFR.... HMN.... MSR.... DKL.V.. GKLVD.. SNU.... HLV.... MMA.... DCDT... GCDTD.. SMU.... HMN.... MLS.... DC?T... GJM.... SVE.... HLV.... MMA.... DC?T... GSZ.... SGO.... HMN.... MLS.... DC?T... GKL.... SMR.... HLV.... MMA.... DS?.... GCD.... SGO.... HMN.... MLS.... DS?.... GKL.... SMR.... HLV.... MMA.... DC?T... GCD.... SGO.... HMN.... MLS.... DC?T.M. GKL.... SMR.... HLV.... MMA.... DC?T.M. GCD.... SGO...."
+==============================================================
+Program Output(2): 9
+
+==============================================================
+Move:  {
+  "move": "MN",
+  "message": "",
+  "timer": 114
+}
+> Moving from: LV
+> Life Points: 9
+> Player 2 made move:
+> +++
+  move: MN
+  message: 
+  timer: 114
+> ---
+--------------------------------------------------------------------------
+> Running player 3... 
+Running with input: "pastPlays": "GCD.... SFR.... HMN.... MSR.... DKL.V.. GKLVD.. SNU.... HLV.... MMA.... DCDT... GCDTD.. SMU.... HMN.... MLS.... DC?T... GJM.... SVE.... HLV.... MMA.... DC?T... GSZ.... SGO.... HMN.... MLS.... DC?T... GKL.... SMR.... HLV.... MMA.... DS?.... GCD.... SGO.... HMN.... MLS.... DS?.... GKL.... SMR.... HLV.... MMA.... DC?T... GCD.... SGO.... HMN.... MLS.... DC?T.M. GKL.... SMR.... HLV.... MMA.... DC?T.M. GCD.... SGO.... HMN...."
+==============================================================
+Program Output(2): 9
+
+==============================================================
+Move:  {
+  "move": "LS",
+  "message": "",
+  "timer": 115
+}
+> Moving from: MA
+> Life Points: 9
+> Player 3 made move:
+> +++
+  move: LS
+  message: 
+  timer: 115
+> ---
+--------------------------------------------------------------------------
+> Running player 4... 
+Running with input: "pastPlays": "GCD.... SFR.... HMN.... MSR.... DKL.V.. GKLVD.. SNU.... HLV.... MMA.... DCDT... GCDTD.. SMU.... HMN.... MLS.... DGAT... GJM.... SVE.... HLV.... MMA.... DBCT... GSZ.... SGO.... HMN.... MLS.... DCNT... GKL.... SMR.... HLV.... MMA.... DBS.... GCD.... SGO.... HMN.... MLS.... DIO.... GKL.... SMR.... HLV.... MMA.... DSAT... GCD.... SGO.... HMN.... MLS.... DSOT.M. GKL.... SMR.... HLV.... MMA.... DSJT.M. GCD.... SGO.... HMN.... MLS...."
+==============================================================
+Program Output(0): 
+==============================================================
+Move:  {
+  "move": "VA",
+  "message": "VA",
+  "timer": 166
+}
+> Moving from: SJ
+> Blood Points: 26
+> Legal Drac moves: BE VA ZA D1 D2 HI
+> Player 4 made move:
+> +++
+  move: VA
+  message: VA
+  timer: 166
+> ---
+> End of Round:  10
+> Starting Round:  11
+--------------------------------------------------------------------------
+> Running player 0... 
+Running with input: "pastPlays": "GCD.... SFR.... HMN.... MSR.... DKL.V.. GKLVD.. SNU.... HLV.... MMA.... DCDT... GCDTD.. SMU.... HMN.... MLS.... DC?T... GJM.... SVE.... HLV.... MMA.... DC?T... GSZ.... SGO.... HMN.... MLS.... DC?T... GKL.... SMR.... HLV.... MMA.... DS?.... GCD.... SGO.... HMN.... MLS.... DS?.... GKL.... SMR.... HLV.... MMA.... DC?T... GCD.... SGO.... HMN.... MLS.... DC?T.M. GKL.... SMR.... HLV.... MMA.... DC?T.M. GCD.... SGO.... HMN.... MLS.... DC?T.M."
+==============================================================
+Program Output(2): 9
+
+==============================================================
+Move:  {
+  "move": "KL",
+  "message": "",
+  "timer": 116
+}
+> Moving from: CD
+> Life Points: 9
+> Player 0 made move:
+> +++
+  move: KL
+  message: 
+  timer: 116
+> ---
+--------------------------------------------------------------------------
+> Running player 1... 
+Running with input: "pastPlays": "GCD.... SFR.... HMN.... MSR.... DKL.V.. GKLVD.. SNU.... HLV.... MMA.... DCDT... GCDTD.. SMU.... HMN.... MLS.... DC?T... GJM.... SVE.... HLV.... MMA.... DC?T... GSZ.... SGO.... HMN.... MLS.... DC?T... GKL.... SMR.... HLV.... MMA.... DS?.... GCD.... SGO.... HMN.... MLS.... DS?.... GKL.... SMR.... HLV.... MMA.... DC?T... GCD.... SGO.... HMN.... MLS.... DC?T.M. GKL.... SMR.... HLV.... MMA.... DC?T.M. GCD.... SGO.... HMN.... MLS.... DC?T.M. GKL...."
+==============================================================
+Program Output(2): 9
+
+==============================================================
+Move:  {
+  "move": "MR",
+  "message": "",
+  "timer": 118
+}
+> Moving from: GO
+> Life Points: 9
+> Player 1 made move:
+> +++
+  move: MR
+  message: 
+  timer: 118
+> ---
+--------------------------------------------------------------------------
+> Running player 2... 
+Running with input: "pastPlays": "GCD.... SFR.... HMN.... MSR.... DKL.V.. GKLVD.. SNU.... HLV.... MMA.... DCDT... GCDTD.. SMU.... HMN.... MLS.... DC?T... GJM.... SVE.... HLV.... MMA.... DC?T... GSZ.... SGO.... HMN.... MLS.... DC?T... GKL.... SMR.... HLV.... MMA.... DS?.... GCD.... SGO.... HMN.... MLS.... DS?.... GKL.... SMR.... HLV.... MMA.... DC?T... GCD.... SGO.... HMN.... MLS.... DC?T.M. GKL.... SMR.... HLV.... MMA.... DC?T.M. GCD.... SGO.... HMN.... MLS.... DC?T.M. GKL.... SMR...."
+==============================================================
+Program Output(2): 9
+
+==============================================================
+Move:  {
+  "move": "LV",
+  "message": "",
+  "timer": 118
+}
+> Moving from: MN
+> Life Points: 9
+> Player 2 made move:
+> +++
+  move: LV
+  message: 
+  timer: 118
+> ---
+--------------------------------------------------------------------------
+> Running player 3... 
+Running with input: "pastPlays": "GCD.... SFR.... HMN.... MSR.... DKL.V.. GKLVD.. SNU.... HLV.... MMA.... DCDT... GCDTD.. SMU.... HMN.... MLS.... DC?T... GJM.... SVE.... HLV.... MMA.... DC?T... GSZ.... SGO.... HMN.... MLS.... DC?T... GKL.... SMR.... HLV.... MMA.... DS?.... GCD.... SGO.... HMN.... MLS.... DS?.... GKL.... SMR.... HLV.... MMA.... DC?T... GCD.... SGO.... HMN.... MLS.... DC?T.M. GKL.... SMR.... HLV.... MMA.... DC?T.M. GCD.... SGO.... HMN.... MLS.... DC?T.M. GKL.... SMR.... HLV...."
+==============================================================
+Program Output(2): 9
+
+==============================================================
+Move:  {
+  "move": "MA",
+  "message": "",
+  "timer": 119
+}
+> Moving from: LS
+> Life Points: 9
+> Player 3 made move:
+> +++
+  move: MA
+  message: 
+  timer: 119
+> ---
+--------------------------------------------------------------------------
+> Running player 4... 
+Running with input: "pastPlays": "GCD.... SFR.... HMN.... MSR.... DKL.V.. GKLVD.. SNU.... HLV.... MMA.... DCDT... GCDTD.. SMU.... HMN.... MLS.... DGAT... GJM.... SVE.... HLV.... MMA.... DBCT... GSZ.... SGO.... HMN.... MLS.... DCNT... GKL.... SMR.... HLV.... MMA.... DBS.... GCD.... SGO.... HMN.... MLS.... DIO.... GKL.... SMR.... HLV.... MMA.... DSAT... GCD.... SGO.... HMN.... MLS.... DSOT.M. GKL.... SMR.... HLV.... MMA.... DSJT.M. GCD.... SGO.... HMN.... MLS.... DVAT.M. GKL.... SMR.... HLV.... MMA...."
+==============================================================
+Program Output(0): 
+==============================================================
+Move:  {
+  "move": "AT",
+  "message": "AT",
+  "timer": 179
+}
+> Moving from: VA
+> Blood Points: 26
+> Legal Drac moves: AT D1 D2 D3 D4 D5 HI
+> Player 4 made move:
+> +++
+  move: AT
+  message: AT
+  timer: 179
+> ---
+> End of Round:  11
+> Starting Round:  12
+--------------------------------------------------------------------------
+> Running player 0... 
+Running with input: "pastPlays": "GCD.... SFR.... HMN.... MSR.... DKL.V.. GKLVD.. SNU.... HLV.... MMA.... DCDT... GCDTD.. SMU.... HMN.... MLS.... DC?T... GJM.... SVE.... HLV.... MMA.... DC?T... GSZ.... SGO.... HMN.... MLS.... DC?T... GKL.... SMR.... HLV.... MMA.... DS?.... GCD.... SGO.... HMN.... MLS.... DS?.... GKL.... SMR.... HLV.... MMA.... DC?T... GCD.... SGO.... HMN.... MLS.... DC?T.M. GKL.... SMR.... HLV.... MMA.... DC?T.M. GCD.... SGO.... HMN.... MLS.... DC?T.M. GKL.... SMR.... HLV.... MMA.... DC?T..."
+==============================================================
+Program Output(2): 9
+
+==============================================================
+Move:  {
+  "move": "CD",
+  "message": "",
+  "timer": 132
+}
+> Moving from: KL
+> Life Points: 9
+> Player 0 made move:
+> +++
+  move: CD
+  message: 
+  timer: 132
+> ---
+--------------------------------------------------------------------------
+> Running player 1... 
+Running with input: "pastPlays": "GCD.... SFR.... HMN.... MSR.... DKL.V.. GKLVD.. SNU.... HLV.... MMA.... DCDT... GCDTD.. SMU.... HMN.... MLS.... DC?T... GJM.... SVE.... HLV.... MMA.... DC?T... GSZ.... SGO.... HMN.... MLS.... DC?T... GKL.... SMR.... HLV.... MMA.... DS?.... GCD.... SGO.... HMN.... MLS.... DS?.... GKL.... SMR.... HLV.... MMA.... DC?T... GCD.... SGO.... HMN.... MLS.... DC?T.M. GKL.... SMR.... HLV.... MMA.... DC?T.M. GCD.... SGO.... HMN.... MLS.... DC?T.M. GKL.... SMR.... HLV.... MMA.... DC?T... GCD...."
+==============================================================
+Program Output(2): 9
+
+==============================================================
+Move:  {
+  "move": "GO",
+  "message": "",
+  "timer": 122
+}
+> Moving from: MR
+> Life Points: 9
+> Player 1 made move:
+> +++
+  move: GO
+  message: 
+  timer: 122
+> ---
+--------------------------------------------------------------------------
+> Running player 2... 
+Running with input: "pastPlays": "GCD.... SFR.... HMN.... MSR.... DKL.V.. GKLVD.. SNU.... HLV.... MMA.... DCDT... GCDTD.. SMU.... HMN.... MLS.... DC?T... GJM.... SVE.... HLV.... MMA.... DC?T... GSZ.... SGO.... HMN.... MLS.... DC?T... GKL.... SMR.... HLV.... MMA.... DS?.... GCD.... SGO.... HMN.... MLS.... DS?.... GKL.... SMR.... HLV.... MMA.... DC?T... GCD.... SGO.... HMN.... MLS.... DC?T.M. GKL.... SMR.... HLV.... MMA.... DC?T.M. GCD.... SGO.... HMN.... MLS.... DC?T.M. GKL.... SMR.... HLV.... MMA.... DC?T... GCD.... SGO...."
+==============================================================
+Program Output(2): 9
+
+==============================================================
+Move:  {
+  "move": "MN",
+  "message": "",
+  "timer": 123
+}
+> Moving from: LV
+> Life Points: 9
+> Player 2 made move:
+> +++
+  move: MN
+  message: 
+  timer: 123
+> ---
+--------------------------------------------------------------------------
+> Running player 3... 
+Running with input: "pastPlays": "GCD.... SFR.... HMN.... MSR.... DKL.V.. GKLVD.. SNU.... HLV.... MMA.... DCDT... GCDTD.. SMU.... HMN.... MLS.... DC?T... GJM.... SVE.... HLV.... MMA.... DC?T... GSZ.... SGO.... HMN.... MLS.... DC?T... GKL.... SMR.... HLV.... MMA.... DS?.... GCD.... SGO.... HMN.... MLS.... DS?.... GKL.... SMR.... HLV.... MMA.... DC?T... GCD.... SGO.... HMN.... MLS.... DC?T.M. GKL.... SMR.... HLV.... MMA.... DC?T.M. GCD.... SGO.... HMN.... MLS.... DC?T.M. GKL.... SMR.... HLV.... MMA.... DC?T... GCD.... SGO.... HMN...."
+==============================================================
+Program Output(2): 9
+
+==============================================================
+Move:  {
+  "move": "LS",
+  "message": "",
+  "timer": 122
+}
+> Moving from: MA
+> Life Points: 9
+> Player 3 made move:
+> +++
+  move: LS
+  message: 
+  timer: 122
+> ---
+--------------------------------------------------------------------------
+> Running player 4... 
+Running with input: "pastPlays": "GCD.... SFR.... HMN.... MSR.... DKL.V.. GKLVD.. SNU.... HLV.... MMA.... DCDT... GCDTD.. SMU.... HMN.... MLS.... DGAT... GJM.... SVE.... HLV.... MMA.... DBCT... GSZ.... SGO.... HMN.... MLS.... DCNT... GKL.... SMR.... HLV.... MMA.... DBS.... GCD.... SGO.... HMN.... MLS.... DIO.... GKL.... SMR.... HLV.... MMA.... DSAT... GCD.... SGO.... HMN.... MLS.... DSOT.M. GKL.... SMR.... HLV.... MMA.... DSJT.M. GCD.... SGO.... HMN.... MLS.... DVAT.M. GKL.... SMR.... HLV.... MMA.... DATT... GCD.... SGO.... HMN.... MLS...."
+==============================================================
+Program Output(0): 
+==============================================================
+Move:  {
+  "move": "D1",
+  "message": "D1",
+  "timer": 188
+}
+> Moving from: AT
+> Blood Points: 26
+> Legal Drac moves: IO D1 D2 HI
+> Player 4 made move:
+> +++
+  move: D1
+  message: D1
+  timer: 188
+> ---
+> End of Round:  12
+> Starting Round:  13
+--------------------------------------------------------------------------
+> Running player 0... 
+Running with input: "pastPlays": "GCD.... SFR.... HMN.... MSR.... DKL.V.. GKLVD.. SNU.... HLV.... MMA.... DCDT... GCDTD.. SMU.... HMN.... MLS.... DC?T... GJM.... SVE.... HLV.... MMA.... DC?T... GSZ.... SGO.... HMN.... MLS.... DC?T... GKL.... SMR.... HLV.... MMA.... DS?.... GCD.... SGO.... HMN.... MLS.... DS?.... GKL.... SMR.... HLV.... MMA.... DC?T... GCD.... SGO.... HMN.... MLS.... DC?T.M. GKL.... SMR.... HLV.... MMA.... DC?T.M. GCD.... SGO.... HMN.... MLS.... DC?T.M. GKL.... SMR.... HLV.... MMA.... DC?T... GCD.... SGO.... HMN.... MLS.... DD1T..."
+==============================================================
+Program Output(2): 9
+
+==============================================================
+Move:  {
+  "move": "KL",
+  "message": "",
+  "timer": 127
+}
+> Moving from: CD
+> Life Points: 9
+> Player 0 made move:
+> +++
+  move: KL
+  message: 
+  timer: 127
+> ---
+--------------------------------------------------------------------------
+> Running player 1... 
+Running with input: "pastPlays": "GCD.... SFR.... HMN.... MSR.... DKL.V.. GKLVD.. SNU.... HLV.... MMA.... DCDT... GCDTD.. SMU.... HMN.... MLS.... DC?T... GJM.... SVE.... HLV.... MMA.... DC?T... GSZ.... SGO.... HMN.... MLS.... DC?T... GKL.... SMR.... HLV.... MMA.... DS?.... GCD.... SGO.... HMN.... MLS.... DS?.... GKL.... SMR.... HLV.... MMA.... DC?T... GCD.... SGO.... HMN.... MLS.... DC?T.M. GKL.... SMR.... HLV.... MMA.... DC?T.M. GCD.... SGO.... HMN.... MLS.... DC?T.M. GKL.... SMR.... HLV.... MMA.... DC?T... GCD.... SGO.... HMN.... MLS.... DD1T... GKL...."
+==============================================================
+Program Output(2): 9
+
+==============================================================
+Move:  {
+  "move": "MR",
+  "message": "",
+  "timer": 128
+}
+> Moving from: GO
+> Life Points: 9
+> Player 1 made move:
+> +++
+  move: MR
+  message: 
+  timer: 128
+> ---
+--------------------------------------------------------------------------
+> Running player 2... 
+Running with input: "pastPlays": "GCD.... SFR.... HMN.... MSR.... DKL.V.. GKLVD.. SNU.... HLV.... MMA.... DCDT... GCDTD.. SMU.... HMN.... MLS.... DC?T... GJM.... SVE.... HLV.... MMA.... DC?T... GSZ.... SGO.... HMN.... MLS.... DC?T... GKL.... SMR.... HLV.... MMA.... DS?.... GCD.... SGO.... HMN.... MLS.... DS?.... GKL.... SMR.... HLV.... MMA.... DC?T... GCD.... SGO.... HMN.... MLS.... DC?T.M. GKL.... SMR.... HLV.... MMA.... DC?T.M. GCD.... SGO.... HMN.... MLS.... DC?T.M. GKL.... SMR.... HLV.... MMA.... DC?T... GCD.... SGO.... HMN.... MLS.... DD1T... GKL.... SMR...."
+==============================================================
+Program Output(2): 9
+
+==============================================================
+Move:  {
+  "move": "LV",
+  "message": "",
+  "timer": 125
+}
+> Moving from: MN
+> Life Points: 9
+> Player 2 made move:
+> +++
+  move: LV
+  message: 
+  timer: 125
+> ---
+--------------------------------------------------------------------------
+> Running player 3... 
+Running with input: "pastPlays": "GCD.... SFR.... HMN.... MSR.... DKL.V.. GKLVD.. SNU.... HLV.... MMA.... DCDT... GCDTD.. SMU.... HMN.... MLS.... DC?T... GJM.... SVE.... HLV.... MMA.... DC?T... GSZ.... SGO.... HMN.... MLS.... DC?T... GKL.... SMR.... HLV.... MMA.... DS?.... GCD.... SGO.... HMN.... MLS.... DS?.... GKL.... SMR.... HLV.... MMA.... DC?T... GCD.... SGO.... HMN.... MLS.... DC?T.M. GKL.... SMR.... HLV.... MMA.... DC?T.M. GCD.... SGO.... HMN.... MLS.... DC?T.M. GKL.... SMR.... HLV.... MMA.... DC?T... GCD.... SGO.... HMN.... MLS.... DD1T... GKL.... SMR.... HLV...."
+==============================================================
+Program Output(2): 9
+
+==============================================================
+Move:  {
+  "move": "MA",
+  "message": "",
+  "timer": 127
+}
+> Moving from: LS
+> Life Points: 9
+> Player 3 made move:
+> +++
+  move: MA
+  message: 
+  timer: 127
+> ---
+--------------------------------------------------------------------------
+> Running player 4... 
+Running with input: "pastPlays": "GCD.... SFR.... HMN.... MSR.... DKL.V.. GKLVD.. SNU.... HLV.... MMA.... DCDT... GCDTD.. SMU.... HMN.... MLS.... DGAT... GJM.... SVE.... HLV.... MMA.... DBCT... GSZ.... SGO.... HMN.... MLS.... DCNT... GKL.... SMR.... HLV.... MMA.... DBS.... GCD.... SGO.... HMN.... MLS.... DIO.... GKL.... SMR.... HLV.... MMA.... DSAT... GCD.... SGO.... HMN.... MLS.... DSOT.M. GKL.... SMR.... HLV.... MMA.... DSJT.M. GCD.... SGO.... HMN.... MLS.... DVAT.M. GKL.... SMR.... HLV.... MMA.... DATT... GCD.... SGO.... HMN.... MLS.... DD1T... GKL.... SMR.... HLV.... MMA...."
+==============================================================
+Program Output(0): 
+==============================================================
+Move:  {
+  "move": "HI",
+  "message": "HIDE",
+  "timer": 149
+}
+> Moving from: AT
+> Blood Points: 26
+> Legal Drac moves: IO HI
+> Player 4 made move:
+> +++
+  move: HI
+  message: HIDE
+  timer: 149
+> ---
+> End of Round:  13
+> Starting Round:  14
+--------------------------------------------------------------------------
+> Running player 0... 
+Running with input: "pastPlays": "GCD.... SFR.... HMN.... MSR.... DKL.V.. GKLVD.. SNU.... HLV.... MMA.... DCDT... GCDTD.. SMU.... HMN.... MLS.... DC?T... GJM.... SVE.... HLV.... MMA.... DC?T... GSZ.... SGO.... HMN.... MLS.... DC?T... GKL.... SMR.... HLV.... MMA.... DS?.... GCD.... SGO.... HMN.... MLS.... DS?.... GKL.... SMR.... HLV.... MMA.... DC?T... GCD.... SGO.... HMN.... MLS.... DC?T.M. GKL.... SMR.... HLV.... MMA.... DC?T.M. GCD.... SGO.... HMN.... MLS.... DC?T.M. GKL.... SMR.... HLV.... MMA.... DC?T... GCD.... SGO.... HMN.... MLS.... DD1T... GKL.... SMR.... HLV.... MMA.... DC?.VM."
+==============================================================
+Program Output(2): 9
+
+==============================================================
+Move:  {
+  "move": "CD",
+  "message": "",
+  "timer": 130
+}
+> Moving from: KL
+> Life Points: 9
+> Player 0 made move:
+> +++
+  move: CD
+  message: 
+  timer: 130
+> ---
+--------------------------------------------------------------------------
+> Running player 1... 
+Running with input: "pastPlays": "GCD.... SFR.... HMN.... MSR.... DKL.V.. GKLVD.. SNU.... HLV.... MMA.... DCDT... GCDTD.. SMU.... HMN.... MLS.... DC?T... GJM.... SVE.... HLV.... MMA.... DC?T... GSZ.... SGO.... HMN.... MLS.... DC?T... GKL.... SMR.... HLV.... MMA.... DS?.... GCD.... SGO.... HMN.... MLS.... DS?.... GKL.... SMR.... HLV.... MMA.... DC?T... GCD.... SGO.... HMN.... MLS.... DC?T.M. GKL.... SMR.... HLV.... MMA.... DC?T.M. GCD.... SGO.... HMN.... MLS.... DC?T.M. GKL.... SMR.... HLV.... MMA.... DC?T... GCD.... SGO.... HMN.... MLS.... DD1T... GKL.... SMR.... HLV.... MMA.... DC?.VM. GCD...."
+==============================================================
+Program Output(2): 9
+
+==============================================================
+Move:  {
+  "move": "GO",
+  "message": "",
+  "timer": 130
+}
+> Moving from: MR
+> Life Points: 9
+> Player 1 made move:
+> +++
+  move: GO
+  message: 
+  timer: 130
+> ---
+--------------------------------------------------------------------------
+> Running player 2... 
+Running with input: "pastPlays": "GCD.... SFR.... HMN.... MSR.... DKL.V.. GKLVD.. SNU.... HLV.... MMA.... DCDT... GCDTD.. SMU.... HMN.... MLS.... DC?T... GJM.... SVE.... HLV.... MMA.... DC?T... GSZ.... SGO.... HMN.... MLS.... DC?T... GKL.... SMR.... HLV.... MMA.... DS?.... GCD.... SGO.... HMN.... MLS.... DS?.... GKL.... SMR.... HLV.... MMA.... DC?T... GCD.... SGO.... HMN.... MLS.... DC?T.M. GKL.... SMR.... HLV.... MMA.... DC?T.M. GCD.... SGO.... HMN.... MLS.... DC?T.M. GKL.... SMR.... HLV.... MMA.... DC?T... GCD.... SGO.... HMN.... MLS.... DD1T... GKL.... SMR.... HLV.... MMA.... DC?.VM. GCD.... SGO...."
+==============================================================
+Program Output(2): 9
+
+==============================================================
+Move:  {
+  "move": "MN",
+  "message": "",
+  "timer": 127
+}
+> Moving from: LV
+> Life Points: 9
+> Player 2 made move:
+> +++
+  move: MN
+  message: 
+  timer: 127
+> ---
+--------------------------------------------------------------------------
+> Running player 3... 
+Running with input: "pastPlays": "GCD.... SFR.... HMN.... MSR.... DKL.V.. GKLVD.. SNU.... HLV.... MMA.... DCDT... GCDTD.. SMU.... HMN.... MLS.... DC?T... GJM.... SVE.... HLV.... MMA.... DC?T... GSZ.... SGO.... HMN.... MLS.... DC?T... GKL.... SMR.... HLV.... MMA.... DS?.... GCD.... SGO.... HMN.... MLS.... DS?.... GKL.... SMR.... HLV.... MMA.... DC?T... GCD.... SGO.... HMN.... MLS.... DC?T.M. GKL.... SMR.... HLV.... MMA.... DC?T.M. GCD.... SGO.... HMN.... MLS.... DC?T.M. GKL.... SMR.... HLV.... MMA.... DC?T... GCD.... SGO.... HMN.... MLS.... DD1T... GKL.... SMR.... HLV.... MMA.... DC?.VM. GCD.... SGO.... HMN...."
+==============================================================
+Program Output(2): 9
+
+==============================================================
+Move:  {
+  "move": "LS",
+  "message": "",
+  "timer": 130
+}
+> Moving from: MA
+> Life Points: 9
+> Player 3 made move:
+> +++
+  move: LS
+  message: 
+  timer: 130
+> ---
+--------------------------------------------------------------------------
+> Running player 4... 
+Running with input: "pastPlays": "GCD.... SFR.... HMN.... MSR.... DKL.V.. GKLVD.. SNU.... HLV.... MMA.... DCDT... GCDTD.. SMU.... HMN.... MLS.... DGAT... GJM.... SVE.... HLV.... MMA.... DBCT... GSZ.... SGO.... HMN.... MLS.... DCNT... GKL.... SMR.... HLV.... MMA.... DBS.... GCD.... SGO.... HMN.... MLS.... DIO.... GKL.... SMR.... HLV.... MMA.... DSAT... GCD.... SGO.... HMN.... MLS.... DSOT.M. GKL.... SMR.... HLV.... MMA.... DSJT.M. GCD.... SGO.... HMN.... MLS.... DVAT.M. GKL.... SMR.... HLV.... MMA.... DATT... GCD.... SGO.... HMN.... MLS.... DD1T... GKL.... SMR.... HLV.... MMA.... DHI.VM. GCD.... SGO.... HMN.... MLS...."
+==============================================================
+Program Output(0): 
+==============================================================
+Move:  {
+  "move": "HI",
+  "message": "HI",
+  "timer": 159
+}
+> Legal Drac moves: IO
+> Player 4 disqualified for illegal move.
+> +++ 
+  move: HI
+  message: HI
+  timer: 159
+> --- 
+Default Dracula Move: "IO"
+> End of Round:  14
+> Starting Round:  15
+--------------------------------------------------------------------------
+> Running player 0... 
+Running with input: "pastPlays": "GCD.... SFR.... HMN.... MSR.... DKL.V.. GKLVD.. SNU.... HLV.... MMA.... DCDT... GCDTD.. SMU.... HMN.... MLS.... DC?T... GJM.... SVE.... HLV.... MMA.... DC?T... GSZ.... SGO.... HMN.... MLS.... DC?T... GKL.... SMR.... HLV.... MMA.... DS?.... GCD.... SGO.... HMN.... MLS.... DS?.... GKL.... SMR.... HLV.... MMA.... DC?T... GCD.... SGO.... HMN.... MLS.... DC?T.M. GKL.... SMR.... HLV.... MMA.... DC?T.M. GCD.... SGO.... HMN.... MLS.... DC?T.M. GKL.... SMR.... HLV.... MMA.... DC?T... GCD.... SGO.... HMN.... MLS.... DD1T... GKL.... SMR.... HLV.... MMA.... DC?.VM. GCD.... SGO.... HMN.... MLS.... DS?..M."
+==============================================================
+Program Output(2): 9
+
+==============================================================
+Move:  {
+  "move": "KL",
+  "message": "",
+  "timer": 129
+}
+> Moving from: CD
+> Life Points: 9
+> Player 0 made move:
+> +++
+  move: KL
+  message: 
+  timer: 129
+> ---
+--------------------------------------------------------------------------
+> Running player 1... 
+Running with input: "pastPlays": "GCD.... SFR.... HMN.... MSR.... DKL.V.. GKLVD.. SNU.... HLV.... MMA.... DCDT... GCDTD.. SMU.... HMN.... MLS.... DC?T... GJM.... SVE.... HLV.... MMA.... DC?T... GSZ.... SGO.... HMN.... MLS.... DC?T... GKL.... SMR.... HLV.... MMA.... DS?.... GCD.... SGO.... HMN.... MLS.... DS?.... GKL.... SMR.... HLV.... MMA.... DC?T... GCD.... SGO.... HMN.... MLS.... DC?T.M. GKL.... SMR.... HLV.... MMA.... DC?T.M. GCD.... SGO.... HMN.... MLS.... DC?T.M. GKL.... SMR.... HLV.... MMA.... DC?T... GCD.... SGO.... HMN.... MLS.... DD1T... GKL.... SMR.... HLV.... MMA.... DC?.VM. GCD.... SGO.... HMN.... MLS.... DS?..M. GKL...."
+==============================================================
+Program Output(2): 9
+
+==============================================================
+Move:  {
+  "move": "MR",
+  "message": "",
+  "timer": 128
+}
+> Moving from: GO
+> Life Points: 9
+> Player 1 made move:
+> +++
+  move: MR
+  message: 
+  timer: 128
+> ---
+--------------------------------------------------------------------------
+> Running player 2... 
+Running with input: "pastPlays": "GCD.... SFR.... HMN.... MSR.... DKL.V.. GKLVD.. SNU.... HLV.... MMA.... DCDT... GCDTD.. SMU.... HMN.... MLS.... DC?T... GJM.... SVE.... HLV.... MMA.... DC?T... GSZ.... SGO.... HMN.... MLS.... DC?T... GKL.... SMR.... HLV.... MMA.... DS?.... GCD.... SGO.... HMN.... MLS.... DS?.... GKL.... SMR.... HLV.... MMA.... DC?T... GCD.... SGO.... HMN.... MLS.... DC?T.M. GKL.... SMR.... HLV.... MMA.... DC?T.M. GCD.... SGO.... HMN.... MLS.... DC?T.M. GKL.... SMR.... HLV.... MMA.... DC?T... GCD.... SGO.... HMN.... MLS.... DD1T... GKL.... SMR.... HLV.... MMA.... DC?.VM. GCD.... SGO.... HMN.... MLS.... DS?..M. GKL.... SMR...."
+==============================================================
+Program Output(2): 9
+
+==============================================================
+Move:  {
+  "move": "LV",
+  "message": "",
+  "timer": 130
+}
+> Moving from: MN
+> Life Points: 9
+> Player 2 made move:
+> +++
+  move: LV
+  message: 
+  timer: 130
+> ---
+--------------------------------------------------------------------------
+> Running player 3... 
+Running with input: "pastPlays": "GCD.... SFR.... HMN.... MSR.... DKL.V.. GKLVD.. SNU.... HLV.... MMA.... DCDT... GCDTD.. SMU.... HMN.... MLS.... DC?T... GJM.... SVE.... HLV.... MMA.... DC?T... GSZ.... SGO.... HMN.... MLS.... DC?T... GKL.... SMR.... HLV.... MMA.... DS?.... GCD.... SGO.... HMN.... MLS.... DS?.... GKL.... SMR.... HLV.... MMA.... DC?T... GCD.... SGO.... HMN.... MLS.... DC?T.M. GKL.... SMR.... HLV.... MMA.... DC?T.M. GCD.... SGO.... HMN.... MLS.... DC?T.M. GKL.... SMR.... HLV.... MMA.... DC?T... GCD.... SGO.... HMN.... MLS.... DD1T... GKL.... SMR.... HLV.... MMA.... DC?.VM. GCD.... SGO.... HMN.... MLS.... DS?..M. GKL.... SMR.... HLV...."
+==============================================================
+Program Output(2): 9
+
+==============================================================
+Move:  {
+  "move": "MA",
+  "message": "",
+  "timer": 131
+}
+> Moving from: LS
+> Life Points: 9
+> Player 3 made move:
+> +++
+  move: MA
+  message: 
+  timer: 131
+> ---
+--------------------------------------------------------------------------
+Player is currently disqualified. Making a move on their behalf.4
+Default Dracula Move: "AS"
+> End of Round:  15
+> Starting Round:  16
+--------------------------------------------------------------------------
+> Running player 0... 
+Running with input: "pastPlays": "GCD.... SFR.... HMN.... MSR.... DKL.V.. GKLVD.. SNU.... HLV.... MMA.... DCDT... GCDTD.. SMU.... HMN.... MLS.... DC?T... GJM.... SVE.... HLV.... MMA.... DC?T... GSZ.... SGO.... HMN.... MLS.... DC?T... GKL.... SMR.... HLV.... MMA.... DS?.... GCD.... SGO.... HMN.... MLS.... DS?.... GKL.... SMR.... HLV.... MMA.... DC?T... GCD.... SGO.... HMN.... MLS.... DC?T.M. GKL.... SMR.... HLV.... MMA.... DC?T.M. GCD.... SGO.... HMN.... MLS.... DC?T.M. GKL.... SMR.... HLV.... MMA.... DC?T... GCD.... SGO.... HMN.... MLS.... DD1T... GKL.... SMR.... HLV.... MMA.... DC?.VM. GCD.... SGO.... HMN.... MLS.... DS?..M. GKL.... SMR.... HLV.... MMA.... DS?..M."
+==============================================================
+Program Output(2): 9
+
+==============================================================
+Move:  {
+  "move": "CD",
+  "message": "",
+  "timer": 136
+}
+> Moving from: KL
+> Life Points: 9
+> Player 0 made move:
+> +++
+  move: CD
+  message: 
+  timer: 136
+> ---
+--------------------------------------------------------------------------
+> Running player 1... 
+Running with input: "pastPlays": "GCD.... SFR.... HMN.... MSR.... DKL.V.. GKLVD.. SNU.... HLV.... MMA.... DCDT... GCDTD.. SMU.... HMN.... MLS.... DC?T... GJM.... SVE.... HLV.... MMA.... DC?T... GSZ.... SGO.... HMN.... MLS.... DC?T... GKL.... SMR.... HLV.... MMA.... DS?.... GCD.... SGO.... HMN.... MLS.... DS?.... GKL.... SMR.... HLV.... MMA.... DC?T... GCD.... SGO.... HMN.... MLS.... DC?T.M. GKL.... SMR.... HLV.... MMA.... DC?T.M. GCD.... SGO.... HMN.... MLS.... DC?T.M. GKL.... SMR.... HLV.... MMA.... DC?T... GCD.... SGO.... HMN.... MLS.... DD1T... GKL.... SMR.... HLV.... MMA.... DC?.VM. GCD.... SGO.... HMN.... MLS.... DS?..M. GKL.... SMR.... HLV.... MMA.... DS?..M. GCD...."
+==============================================================
+Program Output(2): 9
+
+==============================================================
+Move:  {
+  "move": "GO",
+  "message": "",
+  "timer": 135
+}
+> Moving from: MR
+> Life Points: 9
+> Player 1 made move:
+> +++
+  move: GO
+  message: 
+  timer: 135
+> ---
+--------------------------------------------------------------------------
+> Running player 2... 
+Running with input: "pastPlays": "GCD.... SFR.... HMN.... MSR.... DKL.V.. GKLVD.. SNU.... HLV.... MMA.... DCDT... GCDTD.. SMU.... HMN.... MLS.... DC?T... GJM.... SVE.... HLV.... MMA.... DC?T... GSZ.... SGO.... HMN.... MLS.... DC?T... GKL.... SMR.... HLV.... MMA.... DS?.... GCD.... SGO.... HMN.... MLS.... DS?.... GKL.... SMR.... HLV.... MMA.... DC?T... GCD.... SGO.... HMN.... MLS.... DC?T.M. GKL.... SMR.... HLV.... MMA.... DC?T.M. GCD.... SGO.... HMN.... MLS.... DC?T.M. GKL.... SMR.... HLV.... MMA.... DC?T... GCD.... SGO.... HMN.... MLS.... DD1T... GKL.... SMR.... HLV.... MMA.... DC?.VM. GCD.... SGO.... HMN.... MLS.... DS?..M. GKL.... SMR.... HLV.... MMA.... DS?..M. GCD.... SGO...."
+==============================================================
+Program Output(2): 9
+
+==============================================================
+Move:  {
+  "move": "MN",
+  "message": "",
+  "timer": 135
+}
+> Moving from: LV
+> Life Points: 9
+> Player 2 made move:
+> +++
+  move: MN
+  message: 
+  timer: 135
+> ---
+--------------------------------------------------------------------------
+> Running player 3... 
+Running with input: "pastPlays": "GCD.... SFR.... HMN.... MSR.... DKL.V.. GKLVD.. SNU.... HLV.... MMA.... DCDT... GCDTD.. SMU.... HMN.... MLS.... DC?T... GJM.... SVE.... HLV.... MMA.... DC?T... GSZ.... SGO.... HMN.... MLS.... DC?T... GKL.... SMR.... HLV.... MMA.... DS?.... GCD.... SGO.... HMN.... MLS.... DS?.... GKL.... SMR.... HLV.... MMA.... DC?T... GCD.... SGO.... HMN.... MLS.... DC?T.M. GKL.... SMR.... HLV.... MMA.... DC?T.M. GCD.... SGO.... HMN.... MLS.... DC?T.M. GKL.... SMR.... HLV.... MMA.... DC?T... GCD.... SGO.... HMN.... MLS.... DD1T... GKL.... SMR.... HLV.... MMA.... DC?.VM. GCD.... SGO.... HMN.... MLS.... DS?..M. GKL.... SMR.... HLV.... MMA.... DS?..M. GCD.... SGO.... HMN...."
+==============================================================
+Program Output(2): 9
+
+==============================================================
+Move:  {
+  "move": "LS",
+  "message": "",
+  "timer": 137
+}
+> Moving from: MA
+> Life Points: 9
+> Player 3 made move:
+> +++
+  move: LS
+  message: 
+  timer: 137
+> ---
+--------------------------------------------------------------------------
+Player is currently disqualified. Making a move on their behalf.4
+Default Dracula Move: "VE"
+> End of Round:  16
+> Starting Round:  17
+--------------------------------------------------------------------------
+> Running player 0... 
+Running with input: "pastPlays": "GCD.... SFR.... HMN.... MSR.... DKL.V.. GKLVD.. SNU.... HLV.... MMA.... DCDT... GCDTD.. SMU.... HMN.... MLS.... DC?T... GJM.... SVE.... HLV.... MMA.... DC?T... GSZ.... SGO.... HMN.... MLS.... DC?T... GKL.... SMR.... HLV.... MMA.... DS?.... GCD.... SGO.... HMN.... MLS.... DS?.... GKL.... SMR.... HLV.... MMA.... DC?T... GCD.... SGO.... HMN.... MLS.... DC?T.M. GKL.... SMR.... HLV.... MMA.... DC?T.M. GCD.... SGO.... HMN.... MLS.... DC?T.M. GKL.... SMR.... HLV.... MMA.... DC?T... GCD.... SGO.... HMN.... MLS.... DD1T... GKL.... SMR.... HLV.... MMA.... DC?.VM. GCD.... SGO.... HMN.... MLS.... DS?..M. GKL.... SMR.... HLV.... MMA.... DS?..M. GCD.... SGO.... HMN.... MLS.... DC?T.M."
+==============================================================
+Program Output(2): 9
+
+==============================================================
+Move:  {
+  "move": "KL",
+  "message": "",
+  "timer": 138
+}
+> Moving from: CD
+> Life Points: 9
+> Player 0 made move:
+> +++
+  move: KL
+  message: 
+  timer: 138
+> ---
+--------------------------------------------------------------------------
+> Running player 1... 
+Running with input: "pastPlays": "GCD.... SFR.... HMN.... MSR.... DKL.V.. GKLVD.. SNU.... HLV.... MMA.... DCDT... GCDTD.. SMU.... HMN.... MLS.... DC?T... GJM.... SVE.... HLV.... MMA.... DC?T... GSZ.... SGO.... HMN.... MLS.... DC?T... GKL.... SMR.... HLV.... MMA.... DS?.... GCD.... SGO.... HMN.... MLS.... DS?.... GKL.... SMR.... HLV.... MMA.... DC?T... GCD.... SGO.... HMN.... MLS.... DC?T.M. GKL.... SMR.... HLV.... MMA.... DC?T.M. GCD.... SGO.... HMN.... MLS.... DC?T.M. GKL.... SMR.... HLV.... MMA.... DC?T... GCD.... SGO.... HMN.... MLS.... DD1T... GKL.... SMR.... HLV.... MMA.... DC?.VM. GCD.... SGO.... HMN.... MLS.... DS?..M. GKL.... SMR.... HLV.... MMA.... DS?..M. GCD.... SGO.... HMN.... MLS.... DC?T.M. GKL...."
+==============================================================
+Program Output(2): 9
+
+==============================================================
+Move:  {
+  "move": "MR",
+  "message": "",
+  "timer": 140
+}
+> Moving from: GO
+> Life Points: 9
+> Player 1 made move:
+> +++
+  move: MR
+  message: 
+  timer: 140
+> ---
+--------------------------------------------------------------------------
+> Running player 2... 
+Running with input: "pastPlays": "GCD.... SFR.... HMN.... MSR.... DKL.V.. GKLVD.. SNU.... HLV.... MMA.... DCDT... GCDTD.. SMU.... HMN.... MLS.... DC?T... GJM.... SVE.... HLV.... MMA.... DC?T... GSZ.... SGO.... HMN.... MLS.... DC?T... GKL.... SMR.... HLV.... MMA.... DS?.... GCD.... SGO.... HMN.... MLS.... DS?.... GKL.... SMR.... HLV.... MMA.... DC?T... GCD.... SGO.... HMN.... MLS.... DC?T.M. GKL.... SMR.... HLV.... MMA.... DC?T.M. GCD.... SGO.... HMN.... MLS.... DC?T.M. GKL.... SMR.... HLV.... MMA.... DC?T... GCD.... SGO.... HMN.... MLS.... DD1T... GKL.... SMR.... HLV.... MMA.... DC?.VM. GCD.... SGO.... HMN.... MLS.... DS?..M. GKL.... SMR.... HLV.... MMA.... DS?..M. GCD.... SGO.... HMN.... MLS.... DC?T.M. GKL.... SMR...."
+==============================================================
+Program Output(2): 9
+
+==============================================================
+Move:  {
+  "move": "LV",
+  "message": "",
+  "timer": 138
+}
+> Moving from: MN
+> Life Points: 9
+> Player 2 made move:
+> +++
+  move: LV
+  message: 
+  timer: 138
+> ---
+--------------------------------------------------------------------------
+> Running player 3... 
+Running with input: "pastPlays": "GCD.... SFR.... HMN.... MSR.... DKL.V.. GKLVD.. SNU.... HLV.... MMA.... DCDT... GCDTD.. SMU.... HMN.... MLS.... DC?T... GJM.... SVE.... HLV.... MMA.... DC?T... GSZ.... SGO.... HMN.... MLS.... DC?T... GKL.... SMR.... HLV.... MMA.... DS?.... GCD.... SGO.... HMN.... MLS.... DS?.... GKL.... SMR.... HLV.... MMA.... DC?T... GCD.... SGO.... HMN.... MLS.... DC?T.M. GKL.... SMR.... HLV.... MMA.... DC?T.M. GCD.... SGO.... HMN.... MLS.... DC?T.M. GKL.... SMR.... HLV.... MMA.... DC?T... GCD.... SGO.... HMN.... MLS.... DD1T... GKL.... SMR.... HLV.... MMA.... DC?.VM. GCD.... SGO.... HMN.... MLS.... DS?..M. GKL.... SMR.... HLV.... MMA.... DS?..M. GCD.... SGO.... HMN.... MLS.... DC?T.M. GKL.... SMR.... HLV...."
+==============================================================
+Program Output(2): 9
+
+==============================================================
+Move:  {
+  "move": "MA",
+  "message": "",
+  "timer": 141
+}
+> Moving from: LS
+> Life Points: 9
+> Player 3 made move:
+> +++
+  move: MA
+  message: 
+  timer: 141
+> ---
+--------------------------------------------------------------------------
+Player is currently disqualified. Making a move on their behalf.4
+Default Dracula Move: "FL"
+> End of Round:  17
+> Starting Round:  18
+--------------------------------------------------------------------------
+> Running player 0... 
+Running with input: "pastPlays": "GCD.... SFR.... HMN.... MSR.... DKL.V.. GKLVD.. SNU.... HLV.... MMA.... DCDT... GCDTD.. SMU.... HMN.... MLS.... DC?T... GJM.... SVE.... HLV.... MMA.... DC?T... GSZ.... SGO.... HMN.... MLS.... DC?T... GKL.... SMR.... HLV.... MMA.... DS?.... GCD.... SGO.... HMN.... MLS.... DS?.... GKL.... SMR.... HLV.... MMA.... DC?T... GCD.... SGO.... HMN.... MLS.... DC?T.M. GKL.... SMR.... HLV.... MMA.... DC?T.M. GCD.... SGO.... HMN.... MLS.... DC?T.M. GKL.... SMR.... HLV.... MMA.... DC?T... GCD.... SGO.... HMN.... MLS.... DD1T... GKL.... SMR.... HLV.... MMA.... DC?.VM. GCD.... SGO.... HMN.... MLS.... DS?..M. GKL.... SMR.... HLV.... MMA.... DS?..M. GCD.... SGO.... HMN.... MLS.... DC?T.M. GKL.... SMR.... HLV.... MMA.... DC?T.M."
+==============================================================
+Program Output(2): 9
+
+==============================================================
+Move:  {
+  "move": "CD",
+  "message": "",
+  "timer": 143
+}
+> Moving from: KL
+> Life Points: 9
+> Player 0 made move:
+> +++
+  move: CD
+  message: 
+  timer: 143
+> ---
+--------------------------------------------------------------------------
+> Running player 1... 
+Running with input: "pastPlays": "GCD.... SFR.... HMN.... MSR.... DKL.V.. GKLVD.. SNU.... HLV.... MMA.... DCDT... GCDTD.. SMU.... HMN.... MLS.... DC?T... GJM.... SVE.... HLV.... MMA.... DC?T... GSZ.... SGO.... HMN.... MLS.... DC?T... GKL.... SMR.... HLV.... MMA.... DS?.... GCD.... SGO.... HMN.... MLS.... DS?.... GKL.... SMR.... HLV.... MMA.... DC?T... GCD.... SGO.... HMN.... MLS.... DC?T.M. GKL.... SMR.... HLV.... MMA.... DC?T.M. GCD.... SGO.... HMN.... MLS.... DC?T.M. GKL.... SMR.... HLV.... MMA.... DC?T... GCD.... SGO.... HMN.... MLS.... DD1T... GKL.... SMR.... HLV.... MMA.... DC?.VM. GCD.... SGO.... HMN.... MLS.... DS?..M. GKL.... SMR.... HLV.... MMA.... DS?..M. GCD.... SGO.... HMN.... MLS.... DC?T.M. GKL.... SMR.... HLV.... MMA.... DC?T.M. GCD...."
+==============================================================
+Program Output(2): 9
+
+==============================================================
+Move:  {
+  "move": "GO",
+  "message": "",
+  "timer": 144
+}
+> Moving from: MR
+> Life Points: 9
+> Player 1 made move:
+> +++
+  move: GO
+  message: 
+  timer: 144
+> ---
+--------------------------------------------------------------------------
+> Running player 2... 
+Running with input: "pastPlays": "GCD.... SFR.... HMN.... MSR.... DKL.V.. GKLVD.. SNU.... HLV.... MMA.... DCDT... GCDTD.. SMU.... HMN.... MLS.... DC?T... GJM.... SVE.... HLV.... MMA.... DC?T... GSZ.... SGO.... HMN.... MLS.... DC?T... GKL.... SMR.... HLV.... MMA.... DS?.... GCD.... SGO.... HMN.... MLS.... DS?.... GKL.... SMR.... HLV.... MMA.... DC?T... GCD.... SGO.... HMN.... MLS.... DC?T.M. GKL.... SMR.... HLV.... MMA.... DC?T.M. GCD.... SGO.... HMN.... MLS.... DC?T.M. GKL.... SMR.... HLV.... MMA.... DC?T... GCD.... SGO.... HMN.... MLS.... DD1T... GKL.... SMR.... HLV.... MMA.... DC?.VM. GCD.... SGO.... HMN.... MLS.... DS?..M. GKL.... SMR.... HLV.... MMA.... DS?..M. GCD.... SGO.... HMN.... MLS.... DC?T.M. GKL.... SMR.... HLV.... MMA.... DC?T.M. GCD.... SGO...."
+==============================================================
+Program Output(2): 9
+
+==============================================================
+Move:  {
+  "move": "MN",
+  "message": "",
+  "timer": 142
+}
+> Moving from: LV
+> Life Points: 9
+> Player 2 made move:
+> +++
+  move: MN
+  message: 
+  timer: 142
+> ---
+--------------------------------------------------------------------------
+> Running player 3... 
+Running with input: "pastPlays": "GCD.... SFR.... HMN.... MSR.... DKL.V.. GKLVD.. SNU.... HLV.... MMA.... DCDT... GCDTD.. SMU.... HMN.... MLS.... DC?T... GJM.... SVE.... HLV.... MMA.... DC?T... GSZ.... SGO.... HMN.... MLS.... DC?T... GKL.... SMR.... HLV.... MMA.... DS?.... GCD.... SGO.... HMN.... MLS.... DS?.... GKL.... SMR.... HLV.... MMA.... DC?T... GCD.... SGO.... HMN.... MLS.... DC?T.M. GKL.... SMR.... HLV.... MMA.... DC?T.M. GCD.... SGO.... HMN.... MLS.... DC?T.M. GKL.... SMR.... HLV.... MMA.... DC?T... GCD.... SGO.... HMN.... MLS.... DD1T... GKL.... SMR.... HLV.... MMA.... DC?.VM. GCD.... SGO.... HMN.... MLS.... DS?..M. GKL.... SMR.... HLV.... MMA.... DS?..M. GCD.... SGO.... HMN.... MLS.... DC?T.M. GKL.... SMR.... HLV.... MMA.... DC?T.M. GCD.... SGO.... HMN...."
+==============================================================
+Program Output(2): 9
+
+==============================================================
+Move:  {
+  "move": "LS",
+  "message": "",
+  "timer": 144
+}
+> Moving from: MA
+> Life Points: 9
+> Player 3 made move:
+> +++
+  move: LS
+  message: 
+  timer: 144
+> ---
+--------------------------------------------------------------------------
+Player is currently disqualified. Making a move on their behalf.4
+Default Dracula Move: "RO"
+> End of Round:  18
+> Starting Round:  19
+--------------------------------------------------------------------------
+> Running player 0... 
+Running with input: "pastPlays": "GCD.... SFR.... HMN.... MSR.... DKL.V.. GKLVD.. SNU.... HLV.... MMA.... DCDT... GCDTD.. SMU.... HMN.... MLS.... DC?T... GJM.... SVE.... HLV.... MMA.... DC?T... GSZ.... SGO.... HMN.... MLS.... DC?T... GKL.... SMR.... HLV.... MMA.... DS?.... GCD.... SGO.... HMN.... MLS.... DS?.... GKL.... SMR.... HLV.... MMA.... DC?T... GCD.... SGO.... HMN.... MLS.... DC?T.M. GKL.... SMR.... HLV.... MMA.... DC?T.M. GCD.... SGO.... HMN.... MLS.... DC?T.M. GKL.... SMR.... HLV.... MMA.... DC?T... GCD.... SGO.... HMN.... MLS.... DD1T... GKL.... SMR.... HLV.... MMA.... DHI.VM. GCD.... SGO.... HMN.... MLS.... DS?..M. GKL.... SMR.... HLV.... MMA.... DS?..M. GCD.... SGO.... HMN.... MLS.... DC?T.M. GKL.... SMR.... HLV.... MMA.... DC?T.M. GCD.... SGO.... HMN.... MLS.... DC?T.M."
+==============================================================
+Program Output(2): 9
+
+==============================================================
+Move:  {
+  "move": "KL",
+  "message": "",
+  "timer": 145
+}
+> Moving from: CD
+> Life Points: 9
+> Player 0 made move:
+> +++
+  move: KL
+  message: 
+  timer: 145
+> ---
+--------------------------------------------------------------------------
+> Running player 1... 
+Running with input: "pastPlays": "GCD.... SFR.... HMN.... MSR.... DKL.V.. GKLVD.. SNU.... HLV.... MMA.... DCDT... GCDTD.. SMU.... HMN.... MLS.... DC?T... GJM.... SVE.... HLV.... MMA.... DC?T... GSZ.... SGO.... HMN.... MLS.... DC?T... GKL.... SMR.... HLV.... MMA.... DS?.... GCD.... SGO.... HMN.... MLS.... DS?.... GKL.... SMR.... HLV.... MMA.... DC?T... GCD.... SGO.... HMN.... MLS.... DC?T.M. GKL.... SMR.... HLV.... MMA.... DC?T.M. GCD.... SGO.... HMN.... MLS.... DC?T.M. GKL.... SMR.... HLV.... MMA.... DC?T... GCD.... SGO.... HMN.... MLS.... DD1T... GKL.... SMR.... HLV.... MMA.... DHI.VM. GCD.... SGO.... HMN.... MLS.... DS?..M. GKL.... SMR.... HLV.... MMA.... DS?..M. GCD.... SGO.... HMN.... MLS.... DC?T.M. GKL.... SMR.... HLV.... MMA.... DC?T.M. GCD.... SGO.... HMN.... MLS.... DC?T.M. GKL...."
+==============================================================
+Program Output(2): 9
+
+==============================================================
+Move:  {
+  "move": "MR",
+  "message": "",
+  "timer": 146
+}
+> Moving from: GO
+> Life Points: 9
+> Player 1 made move:
+> +++
+  move: MR
+  message: 
+  timer: 146
+> ---
+--------------------------------------------------------------------------
+> Running player 2... 
+Running with input: "pastPlays": "GCD.... SFR.... HMN.... MSR.... DKL.V.. GKLVD.. SNU.... HLV.... MMA.... DCDT... GCDTD.. SMU.... HMN.... MLS.... DC?T... GJM.... SVE.... HLV.... MMA.... DC?T... GSZ.... SGO.... HMN.... MLS.... DC?T... GKL.... SMR.... HLV.... MMA.... DS?.... GCD.... SGO.... HMN.... MLS.... DS?.... GKL.... SMR.... HLV.... MMA.... DC?T... GCD.... SGO.... HMN.... MLS.... DC?T.M. GKL.... SMR.... HLV.... MMA.... DC?T.M. GCD.... SGO.... HMN.... MLS.... DC?T.M. GKL.... SMR.... HLV.... MMA.... DC?T... GCD.... SGO.... HMN.... MLS.... DD1T... GKL.... SMR.... HLV.... MMA.... DHI.VM. GCD.... SGO.... HMN.... MLS.... DS?..M. GKL.... SMR.... HLV.... MMA.... DS?..M. GCD.... SGO.... HMN.... MLS.... DC?T.M. GKL.... SMR.... HLV.... MMA.... DC?T.M. GCD.... SGO.... HMN.... MLS.... DC?T.M. GKL.... SMR...."
+==============================================================
+Program Output(2): 9
+
+==============================================================
+Move:  {
+  "move": "LV",
+  "message": "",
+  "timer": 148
+}
+> Moving from: MN
+> Life Points: 9
+> Player 2 made move:
+> +++
+  move: LV
+  message: 
+  timer: 148
+> ---
+--------------------------------------------------------------------------
+> Running player 3... 
+Running with input: "pastPlays": "GCD.... SFR.... HMN.... MSR.... DKL.V.. GKLVD.. SNU.... HLV.... MMA.... DCDT... GCDTD.. SMU.... HMN.... MLS.... DC?T... GJM.... SVE.... HLV.... MMA.... DC?T... GSZ.... SGO.... HMN.... MLS.... DC?T... GKL.... SMR.... HLV.... MMA.... DS?.... GCD.... SGO.... HMN.... MLS.... DS?.... GKL.... SMR.... HLV.... MMA.... DC?T... GCD.... SGO.... HMN.... MLS.... DC?T.M. GKL.... SMR.... HLV.... MMA.... DC?T.M. GCD.... SGO.... HMN.... MLS.... DC?T.M. GKL.... SMR.... HLV.... MMA.... DC?T... GCD.... SGO.... HMN.... MLS.... DD1T... GKL.... SMR.... HLV.... MMA.... DHI.VM. GCD.... SGO.... HMN.... MLS.... DS?..M. GKL.... SMR.... HLV.... MMA.... DS?..M. GCD.... SGO.... HMN.... MLS.... DC?T.M. GKL.... SMR.... HLV.... MMA.... DC?T.M. GCD.... SGO.... HMN.... MLS.... DC?T.M. GKL.... SMR.... HLV...."
+==============================================================
+Program Output(2): 9
+
+==============================================================
+Move:  {
+  "move": "MA",
+  "message": "",
+  "timer": 149
+}
+> Moving from: LS
+> Life Points: 9
+> Player 3 made move:
+> +++
+  move: MA
+  message: 
+  timer: 149
+> ---
+--------------------------------------------------------------------------
+Player is currently disqualified. Making a move on their behalf.4
+Default Dracula Move: "NP"
+> End of Round:  19
+> Starting Round:  20
+--------------------------------------------------------------------------
+> Running player 0... 
+Running with input: "pastPlays": "GCD.... SFR.... HMN.... MSR.... DKL.V.. GKLVD.. SNU.... HLV.... MMA.... DCDT... GCDTD.. SMU.... HMN.... MLS.... DC?T... GJM.... SVE.... HLV.... MMA.... DC?T... GSZ.... SGO.... HMN.... MLS.... DC?T... GKL.... SMR.... HLV.... MMA.... DS?.... GCD.... SGO.... HMN.... MLS.... DS?.... GKL.... SMR.... HLV.... MMA.... DC?T... GCD.... SGO.... HMN.... MLS.... DC?T.M. GKL.... SMR.... HLV.... MMA.... DC?T.M. GCD.... SGO.... HMN.... MLS.... DC?T.M. GKL.... SMR.... HLV.... MMA.... DC?T... GCD.... SGO.... HMN.... MLS.... DD1T... GKL.... SMR.... HLV.... MMA.... DHI.VM. GCD.... SGO.... HMN.... MLS.... DS?..M. GKL.... SMR.... HLV.... MMA.... DS?..M. GCD.... SGO.... HMN.... MLS.... DC?T.M. GKL.... SMR.... HLV.... MMA.... DC?T.M. GCD.... SGO.... HMN.... MLS.... DC?T.M. GKL.... SMR.... HLV.... MMA.... DC?T.V."
+==============================================================
+Program Output(2): 9
+
+==============================================================
+Move:  {
+  "move": "CD",
+  "message": "",
+  "timer": 159
+}
+> Moving from: KL
+> Life Points: 9
+> Player 0 made move:
+> +++
+  move: CD
+  message: 
+  timer: 159
+> ---
+--------------------------------------------------------------------------
+> Running player 1... 
+Running with input: "pastPlays": "GCD.... SFR.... HMN.... MSR.... DKL.V.. GKLVD.. SNU.... HLV.... MMA.... DCDT... GCDTD.. SMU.... HMN.... MLS.... DC?T... GJM.... SVE.... HLV.... MMA.... DC?T... GSZ.... SGO.... HMN.... MLS.... DC?T... GKL.... SMR.... HLV.... MMA.... DS?.... GCD.... SGO.... HMN.... MLS.... DS?.... GKL.... SMR.... HLV.... MMA.... DC?T... GCD.... SGO.... HMN.... MLS.... DC?T.M. GKL.... SMR.... HLV.... MMA.... DC?T.M. GCD.... SGO.... HMN.... MLS.... DC?T.M. GKL.... SMR.... HLV.... MMA.... DC?T... GCD.... SGO.... HMN.... MLS.... DD1T... GKL.... SMR.... HLV.... MMA.... DHI.VM. GCD.... SGO.... HMN.... MLS.... DS?..M. GKL.... SMR.... HLV.... MMA.... DS?..M. GCD.... SGO.... HMN.... MLS.... DC?T.M. GKL.... SMR.... HLV.... MMA.... DC?T.M. GCD.... SGO.... HMN.... MLS.... DC?T.M. GKL.... SMR.... HLV.... MMA.... DC?T.V. GCD...."
+==============================================================
+Program Output(2): 9
+
+==============================================================
+Move:  {
+  "move": "GO",
+  "message": "",
+  "timer": 149
+}
+> Moving from: MR
+> Life Points: 9
+> Player 1 made move:
+> +++
+  move: GO
+  message: 
+  timer: 149
+> ---
+--------------------------------------------------------------------------
+> Running player 2... 
+Running with input: "pastPlays": "GCD.... SFR.... HMN.... MSR.... DKL.V.. GKLVD.. SNU.... HLV.... MMA.... DCDT... GCDTD.. SMU.... HMN.... MLS.... DC?T... GJM.... SVE.... HLV.... MMA.... DC?T... GSZ.... SGO.... HMN.... MLS.... DC?T... GKL.... SMR.... HLV.... MMA.... DS?.... GCD.... SGO.... HMN.... MLS.... DS?.... GKL.... SMR.... HLV.... MMA.... DC?T... GCD.... SGO.... HMN.... MLS.... DC?T.M. GKL.... SMR.... HLV.... MMA.... DC?T.M. GCD.... SGO.... HMN.... MLS.... DC?T.M. GKL.... SMR.... HLV.... MMA.... DC?T... GCD.... SGO.... HMN.... MLS.... DD1T... GKL.... SMR.... HLV.... MMA.... DHI.VM. GCD.... SGO.... HMN.... MLS.... DS?..M. GKL.... SMR.... HLV.... MMA.... DS?..M. GCD.... SGO.... HMN.... MLS.... DC?T.M. GKL.... SMR.... HLV.... MMA.... DC?T.M. GCD.... SGO.... HMN.... MLS.... DC?T.M. GKL.... SMR.... HLV.... MMA.... DC?T.V. GCD.... SGO...."
+==============================================================
+Program Output(2): 9
+
+==============================================================
+Move:  {
+  "move": "MN",
+  "message": "",
+  "timer": 149
+}
+> Moving from: LV
+> Life Points: 9
+> Player 2 made move:
+> +++
+  move: MN
+  message: 
+  timer: 149
+> ---
+--------------------------------------------------------------------------
+> Running player 3... 
+Running with input: "pastPlays": "GCD.... SFR.... HMN.... MSR.... DKL.V.. GKLVD.. SNU.... HLV.... MMA.... DCDT... GCDTD.. SMU.... HMN.... MLS.... DC?T... GJM.... SVE.... HLV.... MMA.... DC?T... GSZ.... SGO.... HMN.... MLS.... DC?T... GKL.... SMR.... HLV.... MMA.... DS?.... GCD.... SGO.... HMN.... MLS.... DS?.... GKL.... SMR.... HLV.... MMA.... DC?T... GCD.... SGO.... HMN.... MLS.... DC?T.M. GKL.... SMR.... HLV.... MMA.... DC?T.M. GCD.... SGO.... HMN.... MLS.... DC?T.M. GKL.... SMR.... HLV.... MMA.... DC?T... GCD.... SGO.... HMN.... MLS.... DD1T... GKL.... SMR.... HLV.... MMA.... DHI.VM. GCD.... SGO.... HMN.... MLS.... DS?..M. GKL.... SMR.... HLV.... MMA.... DS?..M. GCD.... SGO.... HMN.... MLS.... DC?T.M. GKL.... SMR.... HLV.... MMA.... DC?T.M. GCD.... SGO.... HMN.... MLS.... DC?T.M. GKL.... SMR.... HLV.... MMA.... DC?T.V. GCD.... SGO.... HMN...."
+==============================================================
+Program Output(2): 9
+
+==============================================================
+Move:  {
+  "move": "LS",
+  "message": "",
+  "timer": 68
+}
+> Moving from: MA
+> Life Points: 9
+> Player 3 made move:
+> +++
+  move: LS
+  message: 
+  timer: 68
+> ---
+--------------------------------------------------------------------------
+Player is currently disqualified. Making a move on their behalf.4
+Default Dracula Move: "HI"
+> End of Round:  20
+> Starting Round:  21
+--------------------------------------------------------------------------
+> Running player 0... 
+Running with input: "pastPlays": "GCD.... SFR.... HMN.... MSR.... DKL.V.. GKLVD.. SNU.... HLV.... MMA.... DCDT... GCDTD.. SMU.... HMN.... MLS.... DC?T... GJM.... SVE.... HLV.... MMA.... DC?T... GSZ.... SGO.... HMN.... MLS.... DC?T... GKL.... SMR.... HLV.... MMA.... DS?.... GCD.... SGO.... HMN.... MLS.... DS?.... GKL.... SMR.... HLV.... MMA.... DC?T... GCD.... SGO.... HMN.... MLS.... DC?T.M. GKL.... SMR.... HLV.... MMA.... DC?T.M. GCD.... SGO.... HMN.... MLS.... DC?T.M. GKL.... SMR.... HLV.... MMA.... DC?T... GCD.... SGO.... HMN.... MLS.... DD1T... GKL.... SMR.... HLV.... MMA.... DHI.VM. GCD.... SGO.... HMN.... MLS.... DS?..M. GKL.... SMR.... HLV.... MMA.... DS?..M. GCD.... SGO.... HMN.... MLS.... DC?T.M. GKL.... SMR.... HLV.... MMA.... DC?T.M. GCD.... SGO.... HMN.... MLS.... DC?T.M. GKL.... SMR.... HLV.... MMA.... DC?T.V. GCD.... SGO.... HMN.... MLS.... DC?T..."
+==============================================================
+Program Output(2): 9
+
+==============================================================
+Move:  {
+  "move": "KL",
+  "message": "",
+  "timer": 78
+}
+> Moving from: CD
+> Life Points: 9
+> Player 0 made move:
+> +++
+  move: KL
+  message: 
+  timer: 78
+> ---
+--------------------------------------------------------------------------
+> Running player 1... 
+Running with input: "pastPlays": "GCD.... SFR.... HMN.... MSR.... DKL.V.. GKLVD.. SNU.... HLV.... MMA.... DCDT... GCDTD.. SMU.... HMN.... MLS.... DC?T... GJM.... SVE.... HLV.... MMA.... DC?T... GSZ.... SGO.... HMN.... MLS.... DC?T... GKL.... SMR.... HLV.... MMA.... DS?.... GCD.... SGO.... HMN.... MLS.... DS?.... GKL.... SMR.... HLV.... MMA.... DC?T... GCD.... SGO.... HMN.... MLS.... DC?T.M. GKL.... SMR.... HLV.... MMA.... DC?T.M. GCD.... SGO.... HMN.... MLS.... DC?T.M. GKL.... SMR.... HLV.... MMA.... DC?T... GCD.... SGO.... HMN.... MLS.... DD1T... GKL.... SMR.... HLV.... MMA.... DHI.VM. GCD.... SGO.... HMN.... MLS.... DS?..M. GKL.... SMR.... HLV.... MMA.... DS?..M. GCD.... SGO.... HMN.... MLS.... DC?T.M. GKL.... SMR.... HLV.... MMA.... DC?T.M. GCD.... SGO.... HMN.... MLS.... DC?T.M. GKL.... SMR.... HLV.... MMA.... DC?T.V. GCD.... SGO.... HMN.... MLS.... DC?T... GKL...."
+==============================================================
+Program Output(2): 9
+
+==============================================================
+Move:  {
+  "move": "MR",
+  "message": "",
+  "timer": 80
+}
+> Moving from: GO
+> Life Points: 9
+> Player 1 made move:
+> +++
+  move: MR
+  message: 
+  timer: 80
+> ---
+--------------------------------------------------------------------------
+> Running player 2... 
+Running with input: "pastPlays": "GCD.... SFR.... HMN.... MSR.... DKL.V.. GKLVD.. SNU.... HLV.... MMA.... DCDT... GCDTD.. SMU.... HMN.... MLS.... DC?T... GJM.... SVE.... HLV.... MMA.... DC?T... GSZ.... SGO.... HMN.... MLS.... DC?T... GKL.... SMR.... HLV.... MMA.... DS?.... GCD.... SGO.... HMN.... MLS.... DS?.... GKL.... SMR.... HLV.... MMA.... DC?T... GCD.... SGO.... HMN.... MLS.... DC?T.M. GKL.... SMR.... HLV.... MMA.... DC?T.M. GCD.... SGO.... HMN.... MLS.... DC?T.M. GKL.... SMR.... HLV.... MMA.... DC?T... GCD.... SGO.... HMN.... MLS.... DD1T... GKL.... SMR.... HLV.... MMA.... DHI.VM. GCD.... SGO.... HMN.... MLS.... DS?..M. GKL.... SMR.... HLV.... MMA.... DS?..M. GCD.... SGO.... HMN.... MLS.... DC?T.M. GKL.... SMR.... HLV.... MMA.... DC?T.M. GCD.... SGO.... HMN.... MLS.... DC?T.M. GKL.... SMR.... HLV.... MMA.... DC?T.V. GCD.... SGO.... HMN.... MLS.... DC?T... GKL.... SMR...."
+==============================================================
+Program Output(2): 9
+
+==============================================================
+Move:  {
+  "move": "LV",
+  "message": "",
+  "timer": 80
+}
+> Moving from: MN
+> Life Points: 9
+> Player 2 made move:
+> +++
+  move: LV
+  message: 
+  timer: 80
+> ---
+--------------------------------------------------------------------------
+> Running player 3... 
+Running with input: "pastPlays": "GCD.... SFR.... HMN.... MSR.... DKL.V.. GKLVD.. SNU.... HLV.... MMA.... DCDT... GCDTD.. SMU.... HMN.... MLS.... DC?T... GJM.... SVE.... HLV.... MMA.... DC?T... GSZ.... SGO.... HMN.... MLS.... DC?T... GKL.... SMR.... HLV.... MMA.... DS?.... GCD.... SGO.... HMN.... MLS.... DS?.... GKL.... SMR.... HLV.... MMA.... DC?T... GCD.... SGO.... HMN.... MLS.... DC?T.M. GKL.... SMR.... HLV.... MMA.... DC?T.M. GCD.... SGO.... HMN.... MLS.... DC?T.M. GKL.... SMR.... HLV.... MMA.... DC?T... GCD.... SGO.... HMN.... MLS.... DD1T... GKL.... SMR.... HLV.... MMA.... DHI.VM. GCD.... SGO.... HMN.... MLS.... DS?..M. GKL.... SMR.... HLV.... MMA.... DS?..M. GCD.... SGO.... HMN.... MLS.... DC?T.M. GKL.... SMR.... HLV.... MMA.... DC?T.M. GCD.... SGO.... HMN.... MLS.... DC?T.M. GKL.... SMR.... HLV.... MMA.... DC?T.V. GCD.... SGO.... HMN.... MLS.... DC?T... GKL.... SMR.... HLV...."
+==============================================================
+Program Output(2): 9
+
+==============================================================
+Move:  {
+  "move": "MA",
+  "message": "",
+  "timer": 80
+}
+> Moving from: LS
+> Life Points: 9
+> Player 3 made move:
+> +++
+  move: MA
+  message: 
+  timer: 80
+> ---
+--------------------------------------------------------------------------
+Player is currently disqualified. Making a move on their behalf.4
+Default Dracula Move: "D2"
+> End of Round:  21
+> Starting Round:  22
+--------------------------------------------------------------------------
+> Running player 0... 
+Running with input: "pastPlays": "GCD.... SFR.... HMN.... MSR.... DKL.V.. GKLVD.. SNU.... HLV.... MMA.... DCDT... GCDTD.. SMU.... HMN.... MLS.... DC?T... GJM.... SVE.... HLV.... MMA.... DC?T... GSZ.... SGO.... HMN.... MLS.... DC?T... GKL.... SMR.... HLV.... MMA.... DS?.... GCD.... SGO.... HMN.... MLS.... DS?.... GKL.... SMR.... HLV.... MMA.... DC?T... GCD.... SGO.... HMN.... MLS.... DC?T.M. GKL.... SMR.... HLV.... MMA.... DC?T.M. GCD.... SGO.... HMN.... MLS.... DC?T.M. GKL.... SMR.... HLV.... MMA.... DC?T... GCD.... SGO.... HMN.... MLS.... DD1T... GKL.... SMR.... HLV.... MMA.... DHI.VM. GCD.... SGO.... HMN.... MLS.... DS?..M. GKL.... SMR.... HLV.... MMA.... DS?..M. GCD.... SGO.... HMN.... MLS.... DC?T.M. GKL.... SMR.... HLV.... MMA.... DC?T.M. GCD.... SGO.... HMN.... MLS.... DC?T.M. GKL.... SMR.... HLV.... MMA.... DC?T.V. GCD.... SGO.... HMN.... MLS.... DC?T... GKL.... SMR.... HLV.... MMA.... DD2T..."
+==============================================================
+Program Output(2): 9
+
+==============================================================
+Move:  {
+  "move": "CD",
+  "message": "",
+  "timer": 83
+}
+> Moving from: KL
+> Life Points: 9
+> Player 0 made move:
+> +++
+  move: CD
+  message: 
+  timer: 83
+> ---
+--------------------------------------------------------------------------
+> Running player 1... 
+Running with input: "pastPlays": "GCD.... SFR.... HMN.... MSR.... DKL.V.. GKLVD.. SNU.... HLV.... MMA.... DCDT... GCDTD.. SMU.... HMN.... MLS.... DC?T... GJM.... SVE.... HLV.... MMA.... DC?T... GSZ.... SGO.... HMN.... MLS.... DC?T... GKL.... SMR.... HLV.... MMA.... DS?.... GCD.... SGO.... HMN.... MLS.... DS?.... GKL.... SMR.... HLV.... MMA.... DC?T... GCD.... SGO.... HMN.... MLS.... DC?T.M. GKL.... SMR.... HLV.... MMA.... DC?T.M. GCD.... SGO.... HMN.... MLS.... DC?T.M. GKL.... SMR.... HLV.... MMA.... DC?T... GCD.... SGO.... HMN.... MLS.... DD1T... GKL.... SMR.... HLV.... MMA.... DHI.VM. GCD.... SGO.... HMN.... MLS.... DS?..M. GKL.... SMR.... HLV.... MMA.... DS?..M. GCD.... SGO.... HMN.... MLS.... DC?T.M. GKL.... SMR.... HLV.... MMA.... DC?T.M. GCD.... SGO.... HMN.... MLS.... DC?T.M. GKL.... SMR.... HLV.... MMA.... DC?T.V. GCD.... SGO.... HMN.... MLS.... DC?T... GKL.... SMR.... HLV.... MMA.... DD2T... GCD...."
+==============================================================
+Program Output(2): 9
+
+==============================================================
+Move:  {
+  "move": "GO",
+  "message": "",
+  "timer": 84
+}
+> Moving from: MR
+> Life Points: 9
+> Player 1 made move:
+> +++
+  move: GO
+  message: 
+  timer: 84
+> ---
+--------------------------------------------------------------------------
+> Running player 2... 
+Running with input: "pastPlays": "GCD.... SFR.... HMN.... MSR.... DKL.V.. GKLVD.. SNU.... HLV.... MMA.... DCDT... GCDTD.. SMU.... HMN.... MLS.... DC?T... GJM.... SVE.... HLV.... MMA.... DC?T... GSZ.... SGO.... HMN.... MLS.... DC?T... GKL.... SMR.... HLV.... MMA.... DS?.... GCD.... SGO.... HMN.... MLS.... DS?.... GKL.... SMR.... HLV.... MMA.... DC?T... GCD.... SGO.... HMN.... MLS.... DC?T.M. GKL.... SMR.... HLV.... MMA.... DC?T.M. GCD.... SGO.... HMN.... MLS.... DC?T.M. GKL.... SMR.... HLV.... MMA.... DC?T... GCD.... SGO.... HMN.... MLS.... DD1T... GKL.... SMR.... HLV.... MMA.... DHI.VM. GCD.... SGO.... HMN.... MLS.... DS?..M. GKL.... SMR.... HLV.... MMA.... DS?..M. GCD.... SGO.... HMN.... MLS.... DC?T.M. GKL.... SMR.... HLV.... MMA.... DC?T.M. GCD.... SGO.... HMN.... MLS.... DC?T.M. GKL.... SMR.... HLV.... MMA.... DC?T.V. GCD.... SGO.... HMN.... MLS.... DC?T... GKL.... SMR.... HLV.... MMA.... DD2T... GCD.... SGO...."
+==============================================================
+Program Output(2): 9
+
+==============================================================
+Move:  {
+  "move": "MN",
+  "message": "",
+  "timer": 84
+}
+> Moving from: LV
+> Life Points: 9
+> Player 2 made move:
+> +++
+  move: MN
+  message: 
+  timer: 84
+> ---
+--------------------------------------------------------------------------
+> Running player 3... 
+Running with input: "pastPlays": "GCD.... SFR.... HMN.... MSR.... DKL.V.. GKLVD.. SNU.... HLV.... MMA.... DCDT... GCDTD.. SMU.... HMN.... MLS.... DC?T... GJM.... SVE.... HLV.... MMA.... DC?T... GSZ.... SGO.... HMN.... MLS.... DC?T... GKL.... SMR.... HLV.... MMA.... DS?.... GCD.... SGO.... HMN.... MLS.... DS?.... GKL.... SMR.... HLV.... MMA.... DC?T... GCD.... SGO.... HMN.... MLS.... DC?T.M. GKL.... SMR.... HLV.... MMA.... DC?T.M. GCD.... SGO.... HMN.... MLS.... DC?T.M. GKL.... SMR.... HLV.... MMA.... DC?T... GCD.... SGO.... HMN.... MLS.... DD1T... GKL.... SMR.... HLV.... MMA.... DHI.VM. GCD.... SGO.... HMN.... MLS.... DS?..M. GKL.... SMR.... HLV.... MMA.... DS?..M. GCD.... SGO.... HMN.... MLS.... DC?T.M. GKL.... SMR.... HLV.... MMA.... DC?T.M. GCD.... SGO.... HMN.... MLS.... DC?T.M. GKL.... SMR.... HLV.... MMA.... DC?T.V. GCD.... SGO.... HMN.... MLS.... DC?T... GKL.... SMR.... HLV.... MMA.... DD2T... GCD.... SGO.... HMN...."
+==============================================================
+Program Output(2): 9
+
+==============================================================
+Move:  {
+  "move": "LS",
+  "message": "",
+  "timer": 84
+}
+> Moving from: MA
+> Life Points: 9
+> Player 3 made move:
+> +++
+  move: LS
+  message: 
+  timer: 84
+> ---
+--------------------------------------------------------------------------
+Player is currently disqualified. Making a move on their behalf.4
+Default Dracula Move: "BI"
+> End of Round:  22
+> Starting Round:  23
+--------------------------------------------------------------------------
+> Running player 0... 
+Running with input: "pastPlays": "GCD.... SFR.... HMN.... MSR.... DKL.V.. GKLVD.. SNU.... HLV.... MMA.... DCDT... GCDTD.. SMU.... HMN.... MLS.... DC?T... GJM.... SVE.... HLV.... MMA.... DC?T... GSZ.... SGO.... HMN.... MLS.... DC?T... GKL.... SMR.... HLV.... MMA.... DS?.... GCD.... SGO.... HMN.... MLS.... DS?.... GKL.... SMR.... HLV.... MMA.... DC?T... GCD.... SGO.... HMN.... MLS.... DC?T.M. GKL.... SMR.... HLV.... MMA.... DC?T.M. GCD.... SGO.... HMN.... MLS.... DC?T.M. GKL.... SMR.... HLV.... MMA.... DC?T... GCD.... SGO.... HMN.... MLS.... DD1T... GKL.... SMR.... HLV.... MMA.... DHI.VM. GCD.... SGO.... HMN.... MLS.... DS?..M. GKL.... SMR.... HLV.... MMA.... DS?..M. GCD.... SGO.... HMN.... MLS.... DC?T.M. GKL.... SMR.... HLV.... MMA.... DC?T.M. GCD.... SGO.... HMN.... MLS.... DC?T.M. GKL.... SMR.... HLV.... MMA.... DC?T.V. GCD.... SGO.... HMN.... MLS.... DC?T... GKL.... SMR.... HLV.... MMA.... DD2T... GCD.... SGO.... HMN.... MLS.... DC?T.M."
+==============================================================
+Program Output(2): 9
+
+==============================================================
+Move:  {
+  "move": "KL",
+  "message": "",
+  "timer": 143
+}
+> Moving from: CD
+> Life Points: 9
+> Player 0 made move:
+> +++
+  move: KL
+  message: 
+  timer: 143
+> ---
+--------------------------------------------------------------------------
+> Running player 1... 
+Running with input: "pastPlays": "GCD.... SFR.... HMN.... MSR.... DKL.V.. GKLVD.. SNU.... HLV.... MMA.... DCDT... GCDTD.. SMU.... HMN.... MLS.... DC?T... GJM.... SVE.... HLV.... MMA.... DC?T... GSZ.... SGO.... HMN.... MLS.... DC?T... GKL.... SMR.... HLV.... MMA.... DS?.... GCD.... SGO.... HMN.... MLS.... DS?.... GKL.... SMR.... HLV.... MMA.... DC?T... GCD.... SGO.... HMN.... MLS.... DC?T.M. GKL.... SMR.... HLV.... MMA.... DC?T.M. GCD.... SGO.... HMN.... MLS.... DC?T.M. GKL.... SMR.... HLV.... MMA.... DC?T... GCD.... SGO.... HMN.... MLS.... DD1T... GKL.... SMR.... HLV.... MMA.... DHI.VM. GCD.... SGO.... HMN.... MLS.... DS?..M. GKL.... SMR.... HLV.... MMA.... DS?..M. GCD.... SGO.... HMN.... MLS.... DC?T.M. GKL.... SMR.... HLV.... MMA.... DC?T.M. GCD.... SGO.... HMN.... MLS.... DC?T.M. GKL.... SMR.... HLV.... MMA.... DC?T.V. GCD.... SGO.... HMN.... MLS.... DC?T... GKL.... SMR.... HLV.... MMA.... DD2T... GCD.... SGO.... HMN.... MLS.... DC?T.M. GKL...."
+==============================================================
+Program Output(2): 9
+
+==============================================================
+Move:  {
+  "move": "MR",
+  "message": "",
+  "timer": 160
+}
+> Moving from: GO
+> Life Points: 9
+> Player 1 made move:
+> +++
+  move: MR
+  message: 
+  timer: 160
+> ---
+--------------------------------------------------------------------------
+> Running player 2... 
+Running with input: "pastPlays": "GCD.... SFR.... HMN.... MSR.... DKL.V.. GKLVD.. SNU.... HLV.... MMA.... DCDT... GCDTD.. SMU.... HMN.... MLS.... DC?T... GJM.... SVE.... HLV.... MMA.... DC?T... GSZ.... SGO.... HMN.... MLS.... DC?T... GKL.... SMR.... HLV.... MMA.... DS?.... GCD.... SGO.... HMN.... MLS.... DS?.... GKL.... SMR.... HLV.... MMA.... DC?T... GCD.... SGO.... HMN.... MLS.... DC?T.M. GKL.... SMR.... HLV.... MMA.... DC?T.M. GCD.... SGO.... HMN.... MLS.... DC?T.M. GKL.... SMR.... HLV.... MMA.... DC?T... GCD.... SGO.... HMN.... MLS.... DD1T... GKL.... SMR.... HLV.... MMA.... DHI.VM. GCD.... SGO.... HMN.... MLS.... DS?..M. GKL.... SMR.... HLV.... MMA.... DS?..M. GCD.... SGO.... HMN.... MLS.... DC?T.M. GKL.... SMR.... HLV.... MMA.... DC?T.M. GCD.... SGO.... HMN.... MLS.... DC?T.M. GKL.... SMR.... HLV.... MMA.... DC?T.V. GCD.... SGO.... HMN.... MLS.... DC?T... GKL.... SMR.... HLV.... MMA.... DD2T... GCD.... SGO.... HMN.... MLS.... DC?T.M. GKL.... SMR...."
+==============================================================
+Program Output(2): 9
+
+==============================================================
+Move:  {
+  "move": "LV",
+  "message": "",
+  "timer": 160
+}
+> Moving from: MN
+> Life Points: 9
+> Player 2 made move:
+> +++
+  move: LV
+  message: 
+  timer: 160
+> ---
+--------------------------------------------------------------------------
+> Running player 3... 
+Running with input: "pastPlays": "GCD.... SFR.... HMN.... MSR.... DKL.V.. GKLVD.. SNU.... HLV.... MMA.... DCDT... GCDTD.. SMU.... HMN.... MLS.... DC?T... GJM.... SVE.... HLV.... MMA.... DC?T... GSZ.... SGO.... HMN.... MLS.... DC?T... GKL.... SMR.... HLV.... MMA.... DS?.... GCD.... SGO.... HMN.... MLS.... DS?.... GKL.... SMR.... HLV.... MMA.... DC?T... GCD.... SGO.... HMN.... MLS.... DC?T.M. GKL.... SMR.... HLV.... MMA.... DC?T.M. GCD.... SGO.... HMN.... MLS.... DC?T.M. GKL.... SMR.... HLV.... MMA.... DC?T... GCD.... SGO.... HMN.... MLS.... DD1T... GKL.... SMR.... HLV.... MMA.... DHI.VM. GCD.... SGO.... HMN.... MLS.... DS?..M. GKL.... SMR.... HLV.... MMA.... DS?..M. GCD.... SGO.... HMN.... MLS.... DC?T.M. GKL.... SMR.... HLV.... MMA.... DC?T.M. GCD.... SGO.... HMN.... MLS.... DC?T.M. GKL.... SMR.... HLV.... MMA.... DC?T.V. GCD.... SGO.... HMN.... MLS.... DC?T... GKL.... SMR.... HLV.... MMA.... DD2T... GCD.... SGO.... HMN.... MLS.... DC?T.M. GKL.... SMR.... HLV...."
+==============================================================
+Program Output(2): 9
+
+==============================================================
+Move:  {
+  "move": "MA",
+  "message": "",
+  "timer": 161
+}
+> Moving from: LS
+> Life Points: 9
+> Player 3 made move:
+> +++
+  move: MA
+  message: 
+  timer: 161
+> ---
+--------------------------------------------------------------------------
+Player is currently disqualified. Making a move on their behalf.4
+Default Dracula Move: "AS"
+> End of Round:  23
+> Starting Round:  24
+--------------------------------------------------------------------------
+> Running player 0... 
+Running with input: "pastPlays": "GCD.... SFR.... HMN.... MSR.... DKL.V.. GKLVD.. SNU.... HLV.... MMA.... DCDT... GCDTD.. SMU.... HMN.... MLS.... DC?T... GJM.... SVE.... HLV.... MMA.... DC?T... GSZ.... SGO.... HMN.... MLS.... DC?T... GKL.... SMR.... HLV.... MMA.... DS?.... GCD.... SGO.... HMN.... MLS.... DS?.... GKL.... SMR.... HLV.... MMA.... DC?T... GCD.... SGO.... HMN.... MLS.... DC?T.M. GKL.... SMR.... HLV.... MMA.... DC?T.M. GCD.... SGO.... HMN.... MLS.... DC?T.M. GKL.... SMR.... HLV.... MMA.... DC?T... GCD.... SGO.... HMN.... MLS.... DD1T... GKL.... SMR.... HLV.... MMA.... DHI.VM. GCD.... SGO.... HMN.... MLS.... DS?..M. GKL.... SMR.... HLV.... MMA.... DS?..M. GCD.... SGO.... HMN.... MLS.... DC?T.M. GKL.... SMR.... HLV.... MMA.... DC?T.M. GCD.... SGO.... HMN.... MLS.... DC?T.M. GKL.... SMR.... HLV.... MMA.... DC?T.V. GCD.... SGO.... HMN.... MLS.... DC?T... GKL.... SMR.... HLV.... MMA.... DD2T... GCD.... SGO.... HMN.... MLS.... DC?T.M. GKL.... SMR.... HLV.... MMA.... DS?..M."
+==============================================================
+Program Output(2): 9
+
+==============================================================
+Move:  {
+  "move": "CD",
+  "message": "",
+  "timer": 165
+}
+> Moving from: KL
+> Life Points: 9
+> Player 0 made move:
+> +++
+  move: CD
+  message: 
+  timer: 165
+> ---
+--------------------------------------------------------------------------
+> Running player 1... 
+Running with input: "pastPlays": "GCD.... SFR.... HMN.... MSR.... DKL.V.. GKLVD.. SNU.... HLV.... MMA.... DCDT... GCDTD.. SMU.... HMN.... MLS.... DC?T... GJM.... SVE.... HLV.... MMA.... DC?T... GSZ.... SGO.... HMN.... MLS.... DC?T... GKL.... SMR.... HLV.... MMA.... DS?.... GCD.... SGO.... HMN.... MLS.... DS?.... GKL.... SMR.... HLV.... MMA.... DC?T... GCD.... SGO.... HMN.... MLS.... DC?T.M. GKL.... SMR.... HLV.... MMA.... DC?T.M. GCD.... SGO.... HMN.... MLS.... DC?T.M. GKL.... SMR.... HLV.... MMA.... DC?T... GCD.... SGO.... HMN.... MLS.... DD1T... GKL.... SMR.... HLV.... MMA.... DHI.VM. GCD.... SGO.... HMN.... MLS.... DS?..M. GKL.... SMR.... HLV.... MMA.... DS?..M. GCD.... SGO.... HMN.... MLS.... DC?T.M. GKL.... SMR.... HLV.... MMA.... DC?T.M. GCD.... SGO.... HMN.... MLS.... DC?T.M. GKL.... SMR.... HLV.... MMA.... DC?T.V. GCD.... SGO.... HMN.... MLS.... DC?T... GKL.... SMR.... HLV.... MMA.... DD2T... GCD.... SGO.... HMN.... MLS.... DC?T.M. GKL.... SMR.... HLV.... MMA.... DS?..M. GCD...."
+==============================================================
+Program Output(2): 9
+
+==============================================================
+Move:  {
+  "move": "GO",
+  "message": "",
+  "timer": 165
+}
+> Moving from: MR
+> Life Points: 9
+> Player 1 made move:
+> +++
+  move: GO
+  message: 
+  timer: 165
+> ---
+--------------------------------------------------------------------------
+> Running player 2... 
+Running with input: "pastPlays": "GCD.... SFR.... HMN.... MSR.... DKL.V.. GKLVD.. SNU.... HLV.... MMA.... DCDT... GCDTD.. SMU.... HMN.... MLS.... DC?T... GJM.... SVE.... HLV.... MMA.... DC?T... GSZ.... SGO.... HMN.... MLS.... DC?T... GKL.... SMR.... HLV.... MMA.... DS?.... GCD.... SGO.... HMN.... MLS.... DS?.... GKL.... SMR.... HLV.... MMA.... DC?T... GCD.... SGO.... HMN.... MLS.... DC?T.M. GKL.... SMR.... HLV.... MMA.... DC?T.M. GCD.... SGO.... HMN.... MLS.... DC?T.M. GKL.... SMR.... HLV.... MMA.... DC?T... GCD.... SGO.... HMN.... MLS.... DD1T... GKL.... SMR.... HLV.... MMA.... DHI.VM. GCD.... SGO.... HMN.... MLS.... DS?..M. GKL.... SMR.... HLV.... MMA.... DS?..M. GCD.... SGO.... HMN.... MLS.... DC?T.M. GKL.... SMR.... HLV.... MMA.... DC?T.M. GCD.... SGO.... HMN.... MLS.... DC?T.M. GKL.... SMR.... HLV.... MMA.... DC?T.V. GCD.... SGO.... HMN.... MLS.... DC?T... GKL.... SMR.... HLV.... MMA.... DD2T... GCD.... SGO.... HMN.... MLS.... DC?T.M. GKL.... SMR.... HLV.... MMA.... DS?..M. GCD.... SGO...."
+==============================================================
+Program Output(2): 9
+
+==============================================================
+Move:  {
+  "move": "MN",
+  "message": "",
+  "timer": 163
+}
+> Moving from: LV
+> Life Points: 9
+> Player 2 made move:
+> +++
+  move: MN
+  message: 
+  timer: 163
+> ---
+--------------------------------------------------------------------------
+> Running player 3... 
+Running with input: "pastPlays": "GCD.... SFR.... HMN.... MSR.... DKL.V.. GKLVD.. SNU.... HLV.... MMA.... DCDT... GCDTD.. SMU.... HMN.... MLS.... DC?T... GJM.... SVE.... HLV.... MMA.... DC?T... GSZ.... SGO.... HMN.... MLS.... DC?T... GKL.... SMR.... HLV.... MMA.... DS?.... GCD.... SGO.... HMN.... MLS.... DS?.... GKL.... SMR.... HLV.... MMA.... DC?T... GCD.... SGO.... HMN.... MLS.... DC?T.M. GKL.... SMR.... HLV.... MMA.... DC?T.M. GCD.... SGO.... HMN.... MLS.... DC?T.M. GKL.... SMR.... HLV.... MMA.... DC?T... GCD.... SGO.... HMN.... MLS.... DD1T... GKL.... SMR.... HLV.... MMA.... DHI.VM. GCD.... SGO.... HMN.... MLS.... DS?..M. GKL.... SMR.... HLV.... MMA.... DS?..M. GCD.... SGO.... HMN.... MLS.... DC?T.M. GKL.... SMR.... HLV.... MMA.... DC?T.M. GCD.... SGO.... HMN.... MLS.... DC?T.M. GKL.... SMR.... HLV.... MMA.... DC?T.V. GCD.... SGO.... HMN.... MLS.... DC?T... GKL.... SMR.... HLV.... MMA.... DD2T... GCD.... SGO.... HMN.... MLS.... DC?T.M. GKL.... SMR.... HLV.... MMA.... DS?..M. GCD.... SGO.... HMN...."
+==============================================================
+Program Output(2): 9
+
+==============================================================
+Move:  {
+  "move": "LS",
+  "message": "",
+  "timer": 167
+}
+> Moving from: MA
+> Life Points: 9
+> Player 3 made move:
+> +++
+  move: LS
+  message: 
+  timer: 167
+> ---
+--------------------------------------------------------------------------
+Player is currently disqualified. Making a move on their behalf.4
+Default Dracula Move: "VE"
+> End of Round:  24
+> Starting Round:  25
+--------------------------------------------------------------------------
+> Running player 0... 
+Running with input: "pastPlays": "GCD.... SFR.... HMN.... MSR.... DKL.V.. GKLVD.. SNU.... HLV.... MMA.... DCDT... GCDTD.. SMU.... HMN.... MLS.... DC?T... GJM.... SVE.... HLV.... MMA.... DC?T... GSZ.... SGO.... HMN.... MLS.... DC?T... GKL.... SMR.... HLV.... MMA.... DS?.... GCD.... SGO.... HMN.... MLS.... DS?.... GKL.... SMR.... HLV.... MMA.... DC?T... GCD.... SGO.... HMN.... MLS.... DC?T.M. GKL.... SMR.... HLV.... MMA.... DC?T.M. GCD.... SGO.... HMN.... MLS.... DC?T.M. GKL.... SMR.... HLV.... MMA.... DC?T... GCD.... SGO.... HMN.... MLS.... DD1T... GKL.... SMR.... HLV.... MMA.... DHI.VM. GCD.... SGO.... HMN.... MLS.... DS?..M. GKL.... SMR.... HLV.... MMA.... DS?..M. GCD.... SGO.... HMN.... MLS.... DC?T.M. GKL.... SMR.... HLV.... MMA.... DC?T.M. GCD.... SGO.... HMN.... MLS.... DC?T.M. GKL.... SMR.... HLV.... MMA.... DC?T.V. GCD.... SGO.... HMN.... MLS.... DC?T... GKL.... SMR.... HLV.... MMA.... DD2T... GCD.... SGO.... HMN.... MLS.... DC?T.M. GKL.... SMR.... HLV.... MMA.... DS?..M. GCD.... SGO.... HMN.... MLS.... DC?T.M."
+==============================================================
+Program Output(2): 9
+
+==============================================================
+Move:  {
+  "move": "KL",
+  "message": "",
+  "timer": 168
+}
+> Moving from: CD
+> Life Points: 9
+> Player 0 made move:
+> +++
+  move: KL
+  message: 
+  timer: 168
+> ---
+--------------------------------------------------------------------------
+> Running player 1... 
+Running with input: "pastPlays": "GCD.... SFR.... HMN.... MSR.... DKL.V.. GKLVD.. SNU.... HLV.... MMA.... DCDT... GCDTD.. SMU.... HMN.... MLS.... DC?T... GJM.... SVE.... HLV.... MMA.... DC?T... GSZ.... SGO.... HMN.... MLS.... DC?T... GKL.... SMR.... HLV.... MMA.... DS?.... GCD.... SGO.... HMN.... MLS.... DS?.... GKL.... SMR.... HLV.... MMA.... DC?T... GCD.... SGO.... HMN.... MLS.... DC?T.M. GKL.... SMR.... HLV.... MMA.... DC?T.M. GCD.... SGO.... HMN.... MLS.... DC?T.M. GKL.... SMR.... HLV.... MMA.... DC?T... GCD.... SGO.... HMN.... MLS.... DD1T... GKL.... SMR.... HLV.... MMA.... DHI.VM. GCD.... SGO.... HMN.... MLS.... DS?..M. GKL.... SMR.... HLV.... MMA.... DS?..M. GCD.... SGO.... HMN.... MLS.... DC?T.M. GKL.... SMR.... HLV.... MMA.... DC?T.M. GCD.... SGO.... HMN.... MLS.... DC?T.M. GKL.... SMR.... HLV.... MMA.... DC?T.V. GCD.... SGO.... HMN.... MLS.... DC?T... GKL.... SMR.... HLV.... MMA.... DD2T... GCD.... SGO.... HMN.... MLS.... DC?T.M. GKL.... SMR.... HLV.... MMA.... DS?..M. GCD.... SGO.... HMN.... MLS.... DC?T.M. GKL...."
+==============================================================
+Program Output(2): 9
+
+==============================================================
+Move:  {
+  "move": "MR",
+  "message": "",
+  "timer": 168
+}
+> Moving from: GO
+> Life Points: 9
+> Player 1 made move:
+> +++
+  move: MR
+  message: 
+  timer: 168
+> ---
+--------------------------------------------------------------------------
+> Running player 2... 
+Running with input: "pastPlays": "GCD.... SFR.... HMN.... MSR.... DKL.V.. GKLVD.. SNU.... HLV.... MMA.... DCDT... GCDTD.. SMU.... HMN.... MLS.... DC?T... GJM.... SVE.... HLV.... MMA.... DC?T... GSZ.... SGO.... HMN.... MLS.... DC?T... GKL.... SMR.... HLV.... MMA.... DS?.... GCD.... SGO.... HMN.... MLS.... DS?.... GKL.... SMR.... HLV.... MMA.... DC?T... GCD.... SGO.... HMN.... MLS.... DC?T.M. GKL.... SMR.... HLV.... MMA.... DC?T.M. GCD.... SGO.... HMN.... MLS.... DC?T.M. GKL.... SMR.... HLV.... MMA.... DC?T... GCD.... SGO.... HMN.... MLS.... DD1T... GKL.... SMR.... HLV.... MMA.... DHI.VM. GCD.... SGO.... HMN.... MLS.... DS?..M. GKL.... SMR.... HLV.... MMA.... DS?..M. GCD.... SGO.... HMN.... MLS.... DC?T.M. GKL.... SMR.... HLV.... MMA.... DC?T.M. GCD.... SGO.... HMN.... MLS.... DC?T.M. GKL.... SMR.... HLV.... MMA.... DC?T.V. GCD.... SGO.... HMN.... MLS.... DC?T... GKL.... SMR.... HLV.... MMA.... DD2T... GCD.... SGO.... HMN.... MLS.... DC?T.M. GKL.... SMR.... HLV.... MMA.... DS?..M. GCD.... SGO.... HMN.... MLS.... DC?T.M. GKL.... SMR...."
+==============================================================
+Program Output(2): 9
+
+==============================================================
+Move:  {
+  "move": "LV",
+  "message": "",
+  "timer": 170
+}
+> Moving from: MN
+> Life Points: 9
+> Player 2 made move:
+> +++
+  move: LV
+  message: 
+  timer: 170
+> ---
+--------------------------------------------------------------------------
+> Running player 3... 
+Running with input: "pastPlays": "GCD.... SFR.... HMN.... MSR.... DKL.V.. GKLVD.. SNU.... HLV.... MMA.... DCDT... GCDTD.. SMU.... HMN.... MLS.... DC?T... GJM.... SVE.... HLV.... MMA.... DC?T... GSZ.... SGO.... HMN.... MLS.... DC?T... GKL.... SMR.... HLV.... MMA.... DS?.... GCD.... SGO.... HMN.... MLS.... DS?.... GKL.... SMR.... HLV.... MMA.... DC?T... GCD.... SGO.... HMN.... MLS.... DC?T.M. GKL.... SMR.... HLV.... MMA.... DC?T.M. GCD.... SGO.... HMN.... MLS.... DC?T.M. GKL.... SMR.... HLV.... MMA.... DC?T... GCD.... SGO.... HMN.... MLS.... DD1T... GKL.... SMR.... HLV.... MMA.... DHI.VM. GCD.... SGO.... HMN.... MLS.... DS?..M. GKL.... SMR.... HLV.... MMA.... DS?..M. GCD.... SGO.... HMN.... MLS.... DC?T.M. GKL.... SMR.... HLV.... MMA.... DC?T.M. GCD.... SGO.... HMN.... MLS.... DC?T.M. GKL.... SMR.... HLV.... MMA.... DC?T.V. GCD.... SGO.... HMN.... MLS.... DC?T... GKL.... SMR.... HLV.... MMA.... DD2T... GCD.... SGO.... HMN.... MLS.... DC?T.M. GKL.... SMR.... HLV.... MMA.... DS?..M. GCD.... SGO.... HMN.... MLS.... DC?T.M. GKL.... SMR.... HLV...."
+==============================================================
+Program Output(2): 9
+
+==============================================================
+Move:  {
+  "move": "MA",
+  "message": "",
+  "timer": 167
+}
+> Moving from: LS
+> Life Points: 9
+> Player 3 made move:
+> +++
+  move: MA
+  message: 
+  timer: 167
+> ---
+--------------------------------------------------------------------------
+Player is currently disqualified. Making a move on their behalf.4
+Default Dracula Move: "GO"
+> End of Round:  25
+> Starting Round:  26
+--------------------------------------------------------------------------
+> Running player 0... 
+Running with input: "pastPlays": "GCD.... SFR.... HMN.... MSR.... DKL.V.. GKLVD.. SNU.... HLV.... MMA.... DCDT... GCDTD.. SMU.... HMN.... MLS.... DC?T... GJM.... SVE.... HLV.... MMA.... DC?T... GSZ.... SGO.... HMN.... MLS.... DC?T... GKL.... SMR.... HLV.... MMA.... DS?.... GCD.... SGO.... HMN.... MLS.... DS?.... GKL.... SMR.... HLV.... MMA.... DC?T... GCD.... SGO.... HMN.... MLS.... DC?T.M. GKL.... SMR.... HLV.... MMA.... DC?T.M. GCD.... SGO.... HMN.... MLS.... DC?T.M. GKL.... SMR.... HLV.... MMA.... DC?T... GCD.... SGO.... HMN.... MLS.... DD1T... GKL.... SMR.... HLV.... MMA.... DHI.VM. GCD.... SGO.... HMN.... MLS.... DS?..M. GKL.... SMR.... HLV.... MMA.... DS?..M. GCD.... SGO.... HMN.... MLS.... DC?T.M. GKL.... SMR.... HLV.... MMA.... DC?T.M. GCD.... SGO.... HMN.... MLS.... DC?T.M. GKL.... SMR.... HLV.... MMA.... DC?T.V. GCD.... SGO.... HMN.... MLS.... DHIT... GKL.... SMR.... HLV.... MMA.... DD2T... GCD.... SGO.... HMN.... MLS.... DC?T.M. GKL.... SMR.... HLV.... MMA.... DS?..M. GCD.... SGO.... HMN.... MLS.... DC?T.M. GKL.... SMR.... HLV.... MMA.... DC?T.M."
+==============================================================
+Program Output(2): 9
+
+==============================================================
+Move:  {
+  "move": "CD",
+  "message": "",
+  "timer": 171
+}
+> Moving from: KL
+> Life Points: 9
+> Player 0 made move:
+> +++
+  move: CD
+  message: 
+  timer: 171
+> ---
+--------------------------------------------------------------------------
+> Running player 1... 
+Running with input: "pastPlays": "GCD.... SFR.... HMN.... MSR.... DKL.V.. GKLVD.. SNU.... HLV.... MMA.... DCDT... GCDTD.. SMU.... HMN.... MLS.... DC?T... GJM.... SVE.... HLV.... MMA.... DC?T... GSZ.... SGO.... HMN.... MLS.... DC?T... GKL.... SMR.... HLV.... MMA.... DS?.... GCD.... SGO.... HMN.... MLS.... DS?.... GKL.... SMR.... HLV.... MMA.... DC?T... GCD.... SGO.... HMN.... MLS.... DC?T.M. GKL.... SMR.... HLV.... MMA.... DC?T.M. GCD.... SGO.... HMN.... MLS.... DC?T.M. GKL.... SMR.... HLV.... MMA.... DC?T... GCD.... SGO.... HMN.... MLS.... DD1T... GKL.... SMR.... HLV.... MMA.... DHI.VM. GCD.... SGO.... HMN.... MLS.... DS?..M. GKL.... SMR.... HLV.... MMA.... DS?..M. GCD.... SGO.... HMN.... MLS.... DC?T.M. GKL.... SMR.... HLV.... MMA.... DC?T.M. GCD.... SGO.... HMN.... MLS.... DC?T.M. GKL.... SMR.... HLV.... MMA.... DC?T.V. GCD.... SGO.... HMN.... MLS.... DHIT... GKL.... SMR.... HLV.... MMA.... DD2T... GCD.... SGO.... HMN.... MLS.... DC?T.M. GKL.... SMR.... HLV.... MMA.... DS?..M. GCD.... SGO.... HMN.... MLS.... DC?T.M. GKL.... SMR.... HLV.... MMA.... DC?T.M. GCD...."
+==============================================================
+Program Output(2): 9
+
+==============================================================
+Move:  {
+  "move": "GO",
+  "message": "",
+  "timer": 171
+}
+> Moving from: MR
+> Life Points: 9
+> Player 1 made move:
+> +++
+  move: GO
+  message: 
+  timer: 171
+> ---
+--------------------------------------------------------------------------
+> Running player 2... 
+Running with input: "pastPlays": "GCD.... SFR.... HMN.... MSR.... DKL.V.. GKLVD.. SNU.... HLV.... MMA.... DCDT... GCDTD.. SMU.... HMN.... MLS.... DC?T... GJM.... SVE.... HLV.... MMA.... DC?T... GSZ.... SGO.... HMN.... MLS.... DC?T... GKL.... SMR.... HLV.... MMA.... DS?.... GCD.... SGO.... HMN.... MLS.... DS?.... GKL.... SMR.... HLV.... MMA.... DC?T... GCD.... SGO.... HMN.... MLS.... DC?T.M. GKL.... SMR.... HLV.... MMA.... DC?T.M. GCD.... SGO.... HMN.... MLS.... DC?T.M. GKL.... SMR.... HLV.... MMA.... DC?T... GCD.... SGO.... HMN.... MLS.... DD1T... GKL.... SMR.... HLV.... MMA.... DHI.VM. GCD.... SGO.... HMN.... MLS.... DS?..M. GKL.... SMR.... HLV.... MMA.... DS?..M. GCD.... SGO.... HMN.... MLS.... DC?T.M. GKL.... SMR.... HLV.... MMA.... DC?T.M. GCD.... SGO.... HMN.... MLS.... DC?T.M. GKL.... SMR.... HLV.... MMA.... DC?T.V. GCD.... SGO.... HMN.... MLS.... DHIT... GKL.... SMR.... HLV.... MMA.... DD2T... GCD.... SGO.... HMN.... MLS.... DC?T.M. GKL.... SMR.... HLV.... MMA.... DS?..M. GCD.... SGO.... HMN.... MLS.... DC?T.M. GKL.... SMR.... HLV.... MMA.... DGOT.M. GCD.... SGOTD.."
+==============================================================
+Program Output(2): 9
+
+==============================================================
+Move:  {
+  "move": "MN",
+  "message": "",
+  "timer": 170
+}
+> Moving from: LV
+> Life Points: 9
+> Player 2 made move:
+> +++
+  move: MN
+  message: 
+  timer: 170
+> ---
+--------------------------------------------------------------------------
+> Running player 3... 
+Running with input: "pastPlays": "GCD.... SFR.... HMN.... MSR.... DKL.V.. GKLVD.. SNU.... HLV.... MMA.... DCDT... GCDTD.. SMU.... HMN.... MLS.... DC?T... GJM.... SVE.... HLV.... MMA.... DC?T... GSZ.... SGO.... HMN.... MLS.... DC?T... GKL.... SMR.... HLV.... MMA.... DS?.... GCD.... SGO.... HMN.... MLS.... DS?.... GKL.... SMR.... HLV.... MMA.... DC?T... GCD.... SGO.... HMN.... MLS.... DC?T.M. GKL.... SMR.... HLV.... MMA.... DC?T.M. GCD.... SGO.... HMN.... MLS.... DC?T.M. GKL.... SMR.... HLV.... MMA.... DC?T... GCD.... SGO.... HMN.... MLS.... DD1T... GKL.... SMR.... HLV.... MMA.... DHI.VM. GCD.... SGO.... HMN.... MLS.... DS?..M. GKL.... SMR.... HLV.... MMA.... DS?..M. GCD.... SGO.... HMN.... MLS.... DC?T.M. GKL.... SMR.... HLV.... MMA.... DC?T.M. GCD.... SGO.... HMN.... MLS.... DC?T.M. GKL.... SMR.... HLV.... MMA.... DC?T.V. GCD.... SGO.... HMN.... MLS.... DHIT... GKL.... SMR.... HLV.... MMA.... DD2T... GCD.... SGO.... HMN.... MLS.... DC?T.M. GKL.... SMR.... HLV.... MMA.... DS?..M. GCD.... SGO.... HMN.... MLS.... DC?T.M. GKL.... SMR.... HLV.... MMA.... DGOT.M. GCD.... SGOTD.. HMN...."
+==============================================================
+Program Output(2): 9
+
+==============================================================
+Move:  {
+  "move": "LS",
+  "message": "",
+  "timer": 174
+}
+> Moving from: MA
+> Life Points: 9
+> Player 3 made move:
+> +++
+  move: LS
+  message: 
+  timer: 174
+> ---
+--------------------------------------------------------------------------
+Player is currently disqualified. Making a move on their behalf.4
+Default Dracula Move: "TS"
+> End of Round:  26
+> Starting Round:  27
+--------------------------------------------------------------------------
+> Running player 0... 
+Running with input: "pastPlays": "GCD.... SFR.... HMN.... MSR.... DKL.V.. GKLVD.. SNU.... HLV.... MMA.... DCDT... GCDTD.. SMU.... HMN.... MLS.... DC?T... GJM.... SVE.... HLV.... MMA.... DC?T... GSZ.... SGO.... HMN.... MLS.... DC?T... GKL.... SMR.... HLV.... MMA.... DS?.... GCD.... SGO.... HMN.... MLS.... DS?.... GKL.... SMR.... HLV.... MMA.... DC?T... GCD.... SGO.... HMN.... MLS.... DC?T.M. GKL.... SMR.... HLV.... MMA.... DC?T.M. GCD.... SGO.... HMN.... MLS.... DC?T.M. GKL.... SMR.... HLV.... MMA.... DC?T... GCD.... SGO.... HMN.... MLS.... DD1T... GKL.... SMR.... HLV.... MMA.... DHI.VM. GCD.... SGO.... HMN.... MLS.... DS?..M. GKL.... SMR.... HLV.... MMA.... DS?..M. GCD.... SGO.... HMN.... MLS.... DC?T.M. GKL.... SMR.... HLV.... MMA.... DC?T.M. GCD.... SGO.... HMN.... MLS.... DC?T.M. GKL.... SMR.... HLV.... MMA.... DC?T.V. GCD.... SGO.... HMN.... MLS.... DHIT... GKL.... SMR.... HLV.... MMA.... DD2T... GCD.... SGO.... HMN.... MLS.... DC?T.M. GKL.... SMR.... HLV.... MMA.... DS?..M. GCD.... SGO.... HMN.... MLS.... DC?T.M. GKL.... SMR.... HLV.... MMA.... DGOT.M. GCD.... SGOTD.. HMN.... MLS.... DS?..M."
+==============================================================
+Program Output(2): 9
+
+==============================================================
+Move:  {
+  "move": "KL",
+  "message": "",
+  "timer": 173
+}
+> Moving from: CD
+> Life Points: 9
+> Player 0 made move:
+> +++
+  move: KL
+  message: 
+  timer: 173
+> ---
+--------------------------------------------------------------------------
+> Running player 1... 
+Running with input: "pastPlays": "GCD.... SFR.... HMN.... MSR.... DKL.V.. GKLVD.. SNU.... HLV.... MMA.... DCDT... GCDTD.. SMU.... HMN.... MLS.... DC?T... GJM.... SVE.... HLV.... MMA.... DC?T... GSZ.... SGO.... HMN.... MLS.... DC?T... GKL.... SMR.... HLV.... MMA.... DS?.... GCD.... SGO.... HMN.... MLS.... DS?.... GKL.... SMR.... HLV.... MMA.... DC?T... GCD.... SGO.... HMN.... MLS.... DC?T.M. GKL.... SMR.... HLV.... MMA.... DC?T.M. GCD.... SGO.... HMN.... MLS.... DC?T.M. GKL.... SMR.... HLV.... MMA.... DC?T... GCD.... SGO.... HMN.... MLS.... DD1T... GKL.... SMR.... HLV.... MMA.... DHI.VM. GCD.... SGO.... HMN.... MLS.... DS?..M. GKL.... SMR.... HLV.... MMA.... DS?..M. GCD.... SGO.... HMN.... MLS.... DC?T.M. GKL.... SMR.... HLV.... MMA.... DC?T.M. GCD.... SGO.... HMN.... MLS.... DC?T.M. GKL.... SMR.... HLV.... MMA.... DC?T.V. GCD.... SGO.... HMN.... MLS.... DHIT... GKL.... SMR.... HLV.... MMA.... DD2T... GCD.... SGO.... HMN.... MLS.... DC?T.M. GKL.... SMR.... HLV.... MMA.... DS?..M. GCD.... SGO.... HMN.... MLS.... DC?T.M. GKL.... SMR.... HLV.... MMA.... DGOT.M. GCD.... SGOTD.. HMN.... MLS.... DS?..M. GKL...."
+==============================================================
+Program Output(2): 3
+
+==============================================================
+Move:  {
+  "move": "GO",
+  "message": "",
+  "timer": 174
+}
+> Moving from: GO
+> Life Points: 3
+> Player 1 made move:
+> +++
+  move: GO
+  message: 
+  timer: 174
+> ---
+--------------------------------------------------------------------------
+> Running player 2... 
+Running with input: "pastPlays": "GCD.... SFR.... HMN.... MSR.... DKL.V.. GKLVD.. SNU.... HLV.... MMA.... DCDT... GCDTD.. SMU.... HMN.... MLS.... DC?T... GJM.... SVE.... HLV.... MMA.... DC?T... GSZ.... SGO.... HMN.... MLS.... DC?T... GKL.... SMR.... HLV.... MMA.... DS?.... GCD.... SGO.... HMN.... MLS.... DS?.... GKL.... SMR.... HLV.... MMA.... DC?T... GCD.... SGO.... HMN.... MLS.... DC?T.M. GKL.... SMR.... HLV.... MMA.... DC?T.M. GCD.... SGO.... HMN.... MLS.... DC?T.M. GKL.... SMR.... HLV.... MMA.... DC?T... GCD.... SGO.... HMN.... MLS.... DD1T... GKL.... SMR.... HLV.... MMA.... DHI.VM. GCD.... SGO.... HMN.... MLS.... DS?..M. GKL.... SMR.... HLV.... MMA.... DS?..M. GCD.... SGO.... HMN.... MLS.... DC?T.M. GKL.... SMR.... HLV.... MMA.... DC?T.M. GCD.... SGO.... HMN.... MLS.... DC?T.M. GKL.... SMR.... HLV.... MMA.... DC?T.V. GCD.... SGO.... HMN.... MLS.... DHIT... GKL.... SMR.... HLV.... MMA.... DD2T... GCD.... SGO.... HMN.... MLS.... DC?T.M. GKL.... SMR.... HLV.... MMA.... DS?..M. GCD.... SGO.... HMN.... MLS.... DC?T.M. GKL.... SMR.... HLV.... MMA.... DGOT.M. GCD.... SGOTD.. HMN.... MLS.... DS?..M. GKL.... SGO...."
+==============================================================
+Program Output(2): 9
+
+==============================================================
+Move:  {
+  "move": "LV",
+  "message": "",
+  "timer": 174
+}
+> Moving from: MN
+> Life Points: 9
+> Player 2 made move:
+> +++
+  move: LV
+  message: 
+  timer: 174
+> ---
+--------------------------------------------------------------------------
+> Running player 3... 
+Running with input: "pastPlays": "GCD.... SFR.... HMN.... MSR.... DKL.V.. GKLVD.. SNU.... HLV.... MMA.... DCDT... GCDTD.. SMU.... HMN.... MLS.... DC?T... GJM.... SVE.... HLV.... MMA.... DC?T... GSZ.... SGO.... HMN.... MLS.... DC?T... GKL.... SMR.... HLV.... MMA.... DS?.... GCD.... SGO.... HMN.... MLS.... DS?.... GKL.... SMR.... HLV.... MMA.... DC?T... GCD.... SGO.... HMN.... MLS.... DC?T.M. GKL.... SMR.... HLV.... MMA.... DC?T.M. GCD.... SGO.... HMN.... MLS.... DC?T.M. GKL.... SMR.... HLV.... MMA.... DC?T... GCD.... SGO.... HMN.... MLS.... DD1T... GKL.... SMR.... HLV.... MMA.... DHI.VM. GCD.... SGO.... HMN.... MLS.... DS?..M. GKL.... SMR.... HLV.... MMA.... DS?..M. GCD.... SGO.... HMN.... MLS.... DC?T.M. GKL.... SMR.... HLV.... MMA.... DC?T.M. GCD.... SGO.... HMN.... MLS.... DC?T.M. GKL.... SMR.... HLV.... MMA.... DC?T.V. GCD.... SGO.... HMN.... MLS.... DHIT... GKL.... SMR.... HLV.... MMA.... DD2T... GCD.... SGO.... HMN.... MLS.... DC?T.M. GKL.... SMR.... HLV.... MMA.... DS?..M. GCD.... SGO.... HMN.... MLS.... DC?T.M. GKL.... SMR.... HLV.... MMA.... DGOT.M. GCD.... SGOTD.. HMN.... MLS.... DS?..M. GKL.... SGO.... HLV...."
+==============================================================
+Program Output(2): 9
+
+==============================================================
+Move:  {
+  "move": "MA",
+  "message": "",
+  "timer": 176
+}
+> Moving from: LS
+> Life Points: 9
+> Player 3 made move:
+> +++
+  move: MA
+  message: 
+  timer: 176
+> ---
+--------------------------------------------------------------------------
+Player is currently disqualified. Making a move on their behalf.4
+Default Dracula Move: "CG"
+> End of Round:  27
+> Starting Round:  28
+--------------------------------------------------------------------------
+> Running player 0... 
+Running with input: "pastPlays": "GCD.... SFR.... HMN.... MSR.... DKL.V.. GKLVD.. SNU.... HLV.... MMA.... DCDT... GCDTD.. SMU.... HMN.... MLS.... DC?T... GJM.... SVE.... HLV.... MMA.... DC?T... GSZ.... SGO.... HMN.... MLS.... DC?T... GKL.... SMR.... HLV.... MMA.... DS?.... GCD.... SGO.... HMN.... MLS.... DS?.... GKL.... SMR.... HLV.... MMA.... DC?T... GCD.... SGO.... HMN.... MLS.... DC?T.M. GKL.... SMR.... HLV.... MMA.... DC?T.M. GCD.... SGO.... HMN.... MLS.... DC?T.M. GKL.... SMR.... HLV.... MMA.... DC?T... GCD.... SGO.... HMN.... MLS.... DD1T... GKL.... SMR.... HLV.... MMA.... DHI.VM. GCD.... SGO.... HMN.... MLS.... DS?..M. GKL.... SMR.... HLV.... MMA.... DS?..M. GCD.... SGO.... HMN.... MLS.... DC?T.M. GKL.... SMR.... HLV.... MMA.... DC?T.M. GCD.... SGO.... HMN.... MLS.... DC?T.M. GKL.... SMR.... HLV.... MMA.... DC?T.V. GCD.... SGO.... HMN.... MLS.... DHIT... GKL.... SMR.... HLV.... MMA.... DD2T... GCD.... SGO.... HMN.... MLS.... DC?T.M. GKL.... SMR.... HLV.... MMA.... DS?..M. GCD.... SGO.... HMN.... MLS.... DC?T.M. GKL.... SMR.... HLV.... MMA.... DGOT.M. GCD.... SGOTD.. HMN.... MLS.... DS?..M. GKL.... SGO.... HLV.... MMA.... DC?T.M."
+==============================================================
+Program Output(2): 9
+
+==============================================================
+Move:  {
+  "move": "CD",
+  "message": "",
+  "timer": 178
+}
+> Moving from: KL
+> Life Points: 9
+> Player 0 made move:
+> +++
+  move: CD
+  message: 
+  timer: 178
+> ---
+--------------------------------------------------------------------------
+> Running player 1... 
+Running with input: "pastPlays": "GCD.... SFR.... HMN.... MSR.... DKL.V.. GKLVD.. SNU.... HLV.... MMA.... DCDT... GCDTD.. SMU.... HMN.... MLS.... DC?T... GJM.... SVE.... HLV.... MMA.... DC?T... GSZ.... SGO.... HMN.... MLS.... DC?T... GKL.... SMR.... HLV.... MMA.... DS?.... GCD.... SGO.... HMN.... MLS.... DS?.... GKL.... SMR.... HLV.... MMA.... DC?T... GCD.... SGO.... HMN.... MLS.... DC?T.M. GKL.... SMR.... HLV.... MMA.... DC?T.M. GCD.... SGO.... HMN.... MLS.... DC?T.M. GKL.... SMR.... HLV.... MMA.... DC?T... GCD.... SGO.... HMN.... MLS.... DD1T... GKL.... SMR.... HLV.... MMA.... DHI.VM. GCD.... SGO.... HMN.... MLS.... DS?..M. GKL.... SMR.... HLV.... MMA.... DS?..M. GCD.... SGO.... HMN.... MLS.... DC?T.M. GKL.... SMR.... HLV.... MMA.... DC?T.M. GCD.... SGO.... HMN.... MLS.... DC?T.M. GKL.... SMR.... HLV.... MMA.... DC?T.V. GCD.... SGO.... HMN.... MLS.... DHIT... GKL.... SMR.... HLV.... MMA.... DD2T... GCD.... SGO.... HMN.... MLS.... DC?T.M. GKL.... SMR.... HLV.... MMA.... DS?..M. GCD.... SGO.... HMN.... MLS.... DC?T.M. GKL.... SMR.... HLV.... MMA.... DGOT.M. GCD.... SGOTD.. HMN.... MLS.... DS?..M. GKL.... SGO.... HLV.... MMA.... DC?T.M. GCD...."
+==============================================================
+Program Output(2): 6
+
+==============================================================
+Move:  {
+  "move": "MR",
+  "message": "",
+  "timer": 176
+}
+> Moving from: GO
+> Life Points: 6
+> Player 1 made move:
+> +++
+  move: MR
+  message: 
+  timer: 176
+> ---
+--------------------------------------------------------------------------
+> Running player 2... 
+Running with input: "pastPlays": "GCD.... SFR.... HMN.... MSR.... DKL.V.. GKLVD.. SNU.... HLV.... MMA.... DCDT... GCDTD.. SMU.... HMN.... MLS.... DC?T... GJM.... SVE.... HLV.... MMA.... DC?T... GSZ.... SGO.... HMN.... MLS.... DC?T... GKL.... SMR.... HLV.... MMA.... DS?.... GCD.... SGO.... HMN.... MLS.... DS?.... GKL.... SMR.... HLV.... MMA.... DC?T... GCD.... SGO.... HMN.... MLS.... DC?T.M. GKL.... SMR.... HLV.... MMA.... DC?T.M. GCD.... SGO.... HMN.... MLS.... DC?T.M. GKL.... SMR.... HLV.... MMA.... DC?T... GCD.... SGO.... HMN.... MLS.... DD1T... GKL.... SMR.... HLV.... MMA.... DHI.VM. GCD.... SGO.... HMN.... MLS.... DS?..M. GKL.... SMR.... HLV.... MMA.... DS?..M. GCD.... SGO.... HMN.... MLS.... DC?T.M. GKL.... SMR.... HLV.... MMA.... DC?T.M. GCD.... SGO.... HMN.... MLS.... DC?T.M. GKL.... SMR.... HLV.... MMA.... DC?T.V. GCD.... SGO.... HMN.... MLS.... DHIT... GKL.... SMR.... HLV.... MMA.... DD2T... GCD.... SGO.... HMN.... MLS.... DC?T.M. GKL.... SMR.... HLV.... MMA.... DS?..M. GCD.... SGO.... HMN.... MLS.... DC?T.M. GKL.... SMR.... HLV.... MMA.... DGOT.M. GCD.... SGOTD.. HMN.... MLS.... DS?..M. GKL.... SGO.... HLV.... MMA.... DC?T.M. GCD.... SMR...."
+==============================================================
+Program Output(2): 9
+
+==============================================================
+Move:  {
+  "move": "MN",
+  "message": "",
+  "timer": 176
+}
+> Moving from: LV
+> Life Points: 9
+> Player 2 made move:
+> +++
+  move: MN
+  message: 
+  timer: 176
+> ---
+--------------------------------------------------------------------------
+> Running player 3... 
+Running with input: "pastPlays": "GCD.... SFR.... HMN.... MSR.... DKL.V.. GKLVD.. SNU.... HLV.... MMA.... DCDT... GCDTD.. SMU.... HMN.... MLS.... DC?T... GJM.... SVE.... HLV.... MMA.... DC?T... GSZ.... SGO.... HMN.... MLS.... DC?T... GKL.... SMR.... HLV.... MMA.... DS?.... GCD.... SGO.... HMN.... MLS.... DS?.... GKL.... SMR.... HLV.... MMA.... DC?T... GCD.... SGO.... HMN.... MLS.... DC?T.M. GKL.... SMR.... HLV.... MMA.... DC?T.M. GCD.... SGO.... HMN.... MLS.... DC?T.M. GKL.... SMR.... HLV.... MMA.... DC?T... GCD.... SGO.... HMN.... MLS.... DD1T... GKL.... SMR.... HLV.... MMA.... DHI.VM. GCD.... SGO.... HMN.... MLS.... DS?..M. GKL.... SMR.... HLV.... MMA.... DS?..M. GCD.... SGO.... HMN.... MLS.... DC?T.M. GKL.... SMR.... HLV.... MMA.... DC?T.M. GCD.... SGO.... HMN.... MLS.... DC?T.M. GKL.... SMR.... HLV.... MMA.... DC?T.V. GCD.... SGO.... HMN.... MLS.... DHIT... GKL.... SMR.... HLV.... MMA.... DD2T... GCD.... SGO.... HMN.... MLS.... DC?T.M. GKL.... SMR.... HLV.... MMA.... DS?..M. GCD.... SGO.... HMN.... MLS.... DC?T.M. GKL.... SMR.... HLV.... MMA.... DGOT.M. GCD.... SGOTD.. HMN.... MLS.... DS?..M. GKL.... SGO.... HLV.... MMA.... DC?T.M. GCD.... SMR.... HMN...."
+==============================================================
+Program Output(2): 9
+
+==============================================================
+Move:  {
+  "move": "LS",
+  "message": "",
+  "timer": 182
+}
+> Moving from: MA
+> Life Points: 9
+> Player 3 made move:
+> +++
+  move: LS
+  message: 
+  timer: 182
+> ---
+--------------------------------------------------------------------------
+Player is currently disqualified. Making a move on their behalf.4
+Default Dracula Move: "MS"
+> End of Round:  28
+> Starting Round:  29
+--------------------------------------------------------------------------
+> Running player 0... 
+Running with input: "pastPlays": "GCD.... SFR.... HMN.... MSR.... DKL.V.. GKLVD.. SNU.... HLV.... MMA.... DCDT... GCDTD.. SMU.... HMN.... MLS.... DC?T... GJM.... SVE.... HLV.... MMA.... DC?T... GSZ.... SGO.... HMN.... MLS.... DC?T... GKL.... SMR.... HLV.... MMA.... DS?.... GCD.... SGO.... HMN.... MLS.... DS?.... GKL.... SMR.... HLV.... MMA.... DC?T... GCD.... SGO.... HMN.... MLS.... DC?T.M. GKL.... SMR.... HLV.... MMA.... DC?T.M. GCD.... SGO.... HMN.... MLS.... DC?T.M. GKL.... SMR.... HLV.... MMA.... DC?T... GCD.... SGO.... HMN.... MLS.... DD1T... GKL.... SMR.... HLV.... MMA.... DHI.VM. GCD.... SGO.... HMN.... MLS.... DS?..M. GKL.... SMR.... HLV.... MMA.... DS?..M. GCD.... SGO.... HMN.... MLS.... DC?T.M. GKL.... SMR.... HLV.... MMA.... DC?T.M. GCD.... SGO.... HMN.... MLS.... DC?T.M. GKL.... SMR.... HLV.... MMA.... DC?T.V. GCD.... SGO.... HMN.... MLS.... DHIT... GKL.... SMR.... HLV.... MMA.... DD2T... GCD.... SGO.... HMN.... MLS.... DC?T.M. GKL.... SMR.... HLV.... MMA.... DS?..M. GCD.... SGO.... HMN.... MLS.... DC?T.M. GKL.... SMR.... HLV.... MMA.... DGOT.M. GCD.... SGOTD.. HMN.... MLS.... DS?..M. GKL.... SGO.... HLV.... MMA.... DC?T.M. GCD.... SMR.... HMN.... MLS.... DS?..M."
+==============================================================
+Program Output(2): 9
+
+==============================================================
+Move:  {
+  "move": "KL",
+  "message": "",
+  "timer": 181
+}
+> Moving from: CD
+> Life Points: 9
+> Player 0 made move:
+> +++
+  move: KL
+  message: 
+  timer: 181
+> ---
+--------------------------------------------------------------------------
+> Running player 1... 
+Running with input: "pastPlays": "GCD.... SFR.... HMN.... MSR.... DKL.V.. GKLVD.. SNU.... HLV.... MMA.... DCDT... GCDTD.. SMU.... HMN.... MLS.... DC?T... GJM.... SVE.... HLV.... MMA.... DC?T... GSZ.... SGO.... HMN.... MLS.... DC?T... GKL.... SMR.... HLV.... MMA.... DS?.... GCD.... SGO.... HMN.... MLS.... DS?.... GKL.... SMR.... HLV.... MMA.... DC?T... GCD.... SGO.... HMN.... MLS.... DC?T.M. GKL.... SMR.... HLV.... MMA.... DC?T.M. GCD.... SGO.... HMN.... MLS.... DC?T.M. GKL.... SMR.... HLV.... MMA.... DC?T... GCD.... SGO.... HMN.... MLS.... DD1T... GKL.... SMR.... HLV.... MMA.... DHI.VM. GCD.... SGO.... HMN.... MLS.... DS?..M. GKL.... SMR.... HLV.... MMA.... DS?..M. GCD.... SGO.... HMN.... MLS.... DC?T.M. GKL.... SMR.... HLV.... MMA.... DC?T.M. GCD.... SGO.... HMN.... MLS.... DC?T.M. GKL.... SMR.... HLV.... MMA.... DC?T.V. GCD.... SGO.... HMN.... MLS.... DHIT... GKL.... SMR.... HLV.... MMA.... DD2T... GCD.... SGO.... HMN.... MLS.... DC?T.M. GKL.... SMR.... HLV.... MMA.... DS?..M. GCD.... SGO.... HMN.... MLS.... DC?T.M. GKL.... SMR.... HLV.... MMA.... DGOT.M. GCD.... SGOTD.. HMN.... MLS.... DS?..M. GKL.... SGO.... HLV.... MMA.... DC?T.M. GCD.... SMR.... HMN.... MLS.... DS?..M. GKL...."
+==============================================================
+Program Output(2): 6
+
+==============================================================
+Move:  {
+  "move": "GO",
+  "message": "",
+  "timer": 186
+}
+> Moving from: MR
+> Life Points: 6
+> Player 1 made move:
+> +++
+  move: GO
+  message: 
+  timer: 186
+> ---
+--------------------------------------------------------------------------
+> Running player 2... 
+Running with input: "pastPlays": "GCD.... SFR.... HMN.... MSR.... DKL.V.. GKLVD.. SNU.... HLV.... MMA.... DCDT... GCDTD.. SMU.... HMN.... MLS.... DC?T... GJM.... SVE.... HLV.... MMA.... DC?T... GSZ.... SGO.... HMN.... MLS.... DC?T... GKL.... SMR.... HLV.... MMA.... DS?.... GCD.... SGO.... HMN.... MLS.... DS?.... GKL.... SMR.... HLV.... MMA.... DC?T... GCD.... SGO.... HMN.... MLS.... DC?T.M. GKL.... SMR.... HLV.... MMA.... DC?T.M. GCD.... SGO.... HMN.... MLS.... DC?T.M. GKL.... SMR.... HLV.... MMA.... DC?T... GCD.... SGO.... HMN.... MLS.... DD1T... GKL.... SMR.... HLV.... MMA.... DHI.VM. GCD.... SGO.... HMN.... MLS.... DS?..M. GKL.... SMR.... HLV.... MMA.... DS?..M. GCD.... SGO.... HMN.... MLS.... DC?T.M. GKL.... SMR.... HLV.... MMA.... DC?T.M. GCD.... SGO.... HMN.... MLS.... DC?T.M. GKL.... SMR.... HLV.... MMA.... DC?T.V. GCD.... SGO.... HMN.... MLS.... DHIT... GKL.... SMR.... HLV.... MMA.... DD2T... GCD.... SGO.... HMN.... MLS.... DC?T.M. GKL.... SMR.... HLV.... MMA.... DS?..M. GCD.... SGO.... HMN.... MLS.... DC?T.M. GKL.... SMR.... HLV.... MMA.... DGOT.M. GCD.... SGOTD.. HMN.... MLS.... DS?..M. GKL.... SGO.... HLV.... MMA.... DC?T.M. GCD.... SMR.... HMN.... MLS.... DS?..M. GKL.... SGO...."
+==============================================================
+Program Output(2): 9
+
+==============================================================
+Move:  {
+  "move": "LV",
+  "message": "",
+  "timer": 182
+}
+> Moving from: MN
+> Life Points: 9
+> Player 2 made move:
+> +++
+  move: LV
+  message: 
+  timer: 182
+> ---
+--------------------------------------------------------------------------
+> Running player 3... 
+Running with input: "pastPlays": "GCD.... SFR.... HMN.... MSR.... DKL.V.. GKLVD.. SNU.... HLV.... MMA.... DCDT... GCDTD.. SMU.... HMN.... MLS.... DC?T... GJM.... SVE.... HLV.... MMA.... DC?T... GSZ.... SGO.... HMN.... MLS.... DC?T... GKL.... SMR.... HLV.... MMA.... DS?.... GCD.... SGO.... HMN.... MLS.... DS?.... GKL.... SMR.... HLV.... MMA.... DC?T... GCD.... SGO.... HMN.... MLS.... DC?T.M. GKL.... SMR.... HLV.... MMA.... DC?T.M. GCD.... SGO.... HMN.... MLS.... DC?T.M. GKL.... SMR.... HLV.... MMA.... DC?T... GCD.... SGO.... HMN.... MLS.... DD1T... GKL.... SMR.... HLV.... MMA.... DHI.VM. GCD.... SGO.... HMN.... MLS.... DS?..M. GKL.... SMR.... HLV.... MMA.... DS?..M. GCD.... SGO.... HMN.... MLS.... DC?T.M. GKL.... SMR.... HLV.... MMA.... DC?T.M. GCD.... SGO.... HMN.... MLS.... DC?T.M. GKL.... SMR.... HLV.... MMA.... DC?T.V. GCD.... SGO.... HMN.... MLS.... DHIT... GKL.... SMR.... HLV.... MMA.... DD2T... GCD.... SGO.... HMN.... MLS.... DC?T.M. GKL.... SMR.... HLV.... MMA.... DS?..M. GCD.... SGO.... HMN.... MLS.... DC?T.M. GKL.... SMR.... HLV.... MMA.... DGOT.M. GCD.... SGOTD.. HMN.... MLS.... DS?..M. GKL.... SGO.... HLV.... MMA.... DC?T.M. GCD.... SMR.... HMN.... MLS.... DS?..M. GKL.... SGO.... HLV...."
+==============================================================
+Program Output(2): 9
+
+==============================================================
+Move:  {
+  "move": "MA",
+  "message": "",
+  "timer": 181
+}
+> Moving from: LS
+> Life Points: 9
+> Player 3 made move:
+> +++
+  move: MA
+  message: 
+  timer: 181
+> ---
+--------------------------------------------------------------------------
+Player is currently disqualified. Making a move on their behalf.4
+Default Dracula Move: "AL"
+> End of Round:  29
+> Starting Round:  30
+--------------------------------------------------------------------------
+> Running player 0... 
+Running with input: "pastPlays": "GCD.... SFR.... HMN.... MSR.... DKL.V.. GKLVD.. SNU.... HLV.... MMA.... DCDT... GCDTD.. SMU.... HMN.... MLS.... DC?T... GJM.... SVE.... HLV.... MMA.... DC?T... GSZ.... SGO.... HMN.... MLS.... DC?T... GKL.... SMR.... HLV.... MMA.... DS?.... GCD.... SGO.... HMN.... MLS.... DS?.... GKL.... SMR.... HLV.... MMA.... DC?T... GCD.... SGO.... HMN.... MLS.... DC?T.M. GKL.... SMR.... HLV.... MMA.... DC?T.M. GCD.... SGO.... HMN.... MLS.... DC?T.M. GKL.... SMR.... HLV.... MMA.... DC?T... GCD.... SGO.... HMN.... MLS.... DD1T... GKL.... SMR.... HLV.... MMA.... DHI.VM. GCD.... SGO.... HMN.... MLS.... DS?..M. GKL.... SMR.... HLV.... MMA.... DS?..M. GCD.... SGO.... HMN.... MLS.... DC?T.M. GKL.... SMR.... HLV.... MMA.... DC?T.M. GCD.... SGO.... HMN.... MLS.... DC?T.M. GKL.... SMR.... HLV.... MMA.... DC?T.V. GCD.... SGO.... HMN.... MLS.... DHIT... GKL.... SMR.... HLV.... MMA.... DD2T... GCD.... SGO.... HMN.... MLS.... DC?T.M. GKL.... SMR.... HLV.... MMA.... DS?..M. GCD.... SGO.... HMN.... MLS.... DC?T.M. GKL.... SMR.... HLV.... MMA.... DGOT.M. GCD.... SGOTD.. HMN.... MLS.... DS?..M. GKL.... SGO.... HLV.... MMA.... DC?T.M. GCD.... SMR.... HMN.... MLS.... DS?..M. GKL.... SGO.... HLV.... MMA.... DC?T..."
+==============================================================
+Program Output(2): 9
+
+==============================================================
+Move:  {
+  "move": "CD",
+  "message": "",
+  "timer": 185
+}
+> Moving from: KL
+> Life Points: 9
+> Player 0 made move:
+> +++
+  move: CD
+  message: 
+  timer: 185
+> ---
+--------------------------------------------------------------------------
+> Running player 1... 
+Running with input: "pastPlays": "GCD.... SFR.... HMN.... MSR.... DKL.V.. GKLVD.. SNU.... HLV.... MMA.... DCDT... GCDTD.. SMU.... HMN.... MLS.... DC?T... GJM.... SVE.... HLV.... MMA.... DC?T... GSZ.... SGO.... HMN.... MLS.... DC?T... GKL.... SMR.... HLV.... MMA.... DS?.... GCD.... SGO.... HMN.... MLS.... DS?.... GKL.... SMR.... HLV.... MMA.... DC?T... GCD.... SGO.... HMN.... MLS.... DC?T.M. GKL.... SMR.... HLV.... MMA.... DC?T.M. GCD.... SGO.... HMN.... MLS.... DC?T.M. GKL.... SMR.... HLV.... MMA.... DC?T... GCD.... SGO.... HMN.... MLS.... DD1T... GKL.... SMR.... HLV.... MMA.... DHI.VM. GCD.... SGO.... HMN.... MLS.... DS?..M. GKL.... SMR.... HLV.... MMA.... DS?..M. GCD.... SGO.... HMN.... MLS.... DC?T.M. GKL.... SMR.... HLV.... MMA.... DC?T.M. GCD.... SGO.... HMN.... MLS.... DC?T.M. GKL.... SMR.... HLV.... MMA.... DC?T.V. GCD.... SGO.... HMN.... MLS.... DHIT... GKL.... SMR.... HLV.... MMA.... DD2T... GCD.... SGO.... HMN.... MLS.... DC?T.M. GKL.... SMR.... HLV.... MMA.... DS?..M. GCD.... SGO.... HMN.... MLS.... DC?T.M. GKL.... SMR.... HLV.... MMA.... DGOT.M. GCD.... SGOTD.. HMN.... MLS.... DS?..M. GKL.... SGO.... HLV.... MMA.... DC?T.M. GCD.... SMR.... HMN.... MLS.... DS?..M. GKL.... SGO.... HLV.... MMA.... DC?T... GCD...."
+==============================================================
+Program Output(2): 6
+
+==============================================================
+Move:  {
+  "move": "MR",
+  "message": "",
+  "timer": 184
+}
+> Moving from: GO
+> Life Points: 6
+> Player 1 made move:
+> +++
+  move: MR
+  message: 
+  timer: 184
+> ---
+--------------------------------------------------------------------------
+> Running player 2... 
+Running with input: "pastPlays": "GCD.... SFR.... HMN.... MSR.... DKL.V.. GKLVD.. SNU.... HLV.... MMA.... DCDT... GCDTD.. SMU.... HMN.... MLS.... DC?T... GJM.... SVE.... HLV.... MMA.... DC?T... GSZ.... SGO.... HMN.... MLS.... DC?T... GKL.... SMR.... HLV.... MMA.... DS?.... GCD.... SGO.... HMN.... MLS.... DS?.... GKL.... SMR.... HLV.... MMA.... DC?T... GCD.... SGO.... HMN.... MLS.... DC?T.M. GKL.... SMR.... HLV.... MMA.... DC?T.M. GCD.... SGO.... HMN.... MLS.... DC?T.M. GKL.... SMR.... HLV.... MMA.... DC?T... GCD.... SGO.... HMN.... MLS.... DD1T... GKL.... SMR.... HLV.... MMA.... DHI.VM. GCD.... SGO.... HMN.... MLS.... DS?..M. GKL.... SMR.... HLV.... MMA.... DS?..M. GCD.... SGO.... HMN.... MLS.... DC?T.M. GKL.... SMR.... HLV.... MMA.... DC?T.M. GCD.... SGO.... HMN.... MLS.... DC?T.M. GKL.... SMR.... HLV.... MMA.... DC?T.V. GCD.... SGO.... HMN.... MLS.... DHIT... GKL.... SMR.... HLV.... MMA.... DD2T... GCD.... SGO.... HMN.... MLS.... DC?T.M. GKL.... SMR.... HLV.... MMA.... DS?..M. GCD.... SGO.... HMN.... MLS.... DC?T.M. GKL.... SMR.... HLV.... MMA.... DGOT.M. GCD.... SGOTD.. HMN.... MLS.... DS?..M. GKL.... SGO.... HLV.... MMA.... DC?T.M. GCD.... SMR.... HMN.... MLS.... DS?..M. GKL.... SGO.... HLV.... MMA.... DC?T... GCD.... SMR...."
+==============================================================
+Program Output(2): 9
+
+==============================================================
+Move:  {
+  "move": "MN",
+  "message": "",
+  "timer": 187
+}
+> Moving from: LV
+> Life Points: 9
+> Player 2 made move:
+> +++
+  move: MN
+  message: 
+  timer: 187
+> ---
+--------------------------------------------------------------------------
+> Running player 3... 
+Running with input: "pastPlays": "GCD.... SFR.... HMN.... MSR.... DKL.V.. GKLVD.. SNU.... HLV.... MMA.... DCDT... GCDTD.. SMU.... HMN.... MLS.... DC?T... GJM.... SVE.... HLV.... MMA.... DC?T... GSZ.... SGO.... HMN.... MLS.... DC?T... GKL.... SMR.... HLV.... MMA.... DS?.... GCD.... SGO.... HMN.... MLS.... DS?.... GKL.... SMR.... HLV.... MMA.... DC?T... GCD.... SGO.... HMN.... MLS.... DC?T.M. GKL.... SMR.... HLV.... MMA.... DC?T.M. GCD.... SGO.... HMN.... MLS.... DC?T.M. GKL.... SMR.... HLV.... MMA.... DC?T... GCD.... SGO.... HMN.... MLS.... DD1T... GKL.... SMR.... HLV.... MMA.... DHI.VM. GCD.... SGO.... HMN.... MLS.... DS?..M. GKL.... SMR.... HLV.... MMA.... DS?..M. GCD.... SGO.... HMN.... MLS.... DC?T.M. GKL.... SMR.... HLV.... MMA.... DC?T.M. GCD.... SGO.... HMN.... MLS.... DC?T.M. GKL.... SMR.... HLV.... MMA.... DC?T.V. GCD.... SGO.... HMN.... MLS.... DHIT... GKL.... SMR.... HLV.... MMA.... DD2T... GCD.... SGO.... HMN.... MLS.... DC?T.M. GKL.... SMR.... HLV.... MMA.... DS?..M. GCD.... SGO.... HMN.... MLS.... DC?T.M. GKL.... SMR.... HLV.... MMA.... DGOT.M. GCD.... SGOTD.. HMN.... MLS.... DS?..M. GKL.... SGO.... HLV.... MMA.... DC?T.M. GCD.... SMR.... HMN.... MLS.... DS?..M. GKL.... SGO.... HLV.... MMA.... DC?T... GCD.... SMR.... HMN...."
+==============================================================
+Program Output(2): 9
+
+==============================================================
+Move:  {
+  "move": "LS",
+  "message": "",
+  "timer": 188
+}
+> Moving from: MA
+> Life Points: 9
+> Player 3 made move:
+> +++
+  move: LS
+  message: 
+  timer: 188
+> ---
+--------------------------------------------------------------------------
+Player is currently disqualified. Making a move on their behalf.4
+Default Dracula Move: "HI"
+> End of Round:  30
+> Starting Round:  31
+--------------------------------------------------------------------------
+> Running player 0... 
+Running with input: "pastPlays": "GCD.... SFR.... HMN.... MSR.... DKL.V.. GKLVD.. SNU.... HLV.... MMA.... DCDT... GCDTD.. SMU.... HMN.... MLS.... DC?T... GJM.... SVE.... HLV.... MMA.... DC?T... GSZ.... SGO.... HMN.... MLS.... DC?T... GKL.... SMR.... HLV.... MMA.... DS?.... GCD.... SGO.... HMN.... MLS.... DS?.... GKL.... SMR.... HLV.... MMA.... DC?T... GCD.... SGO.... HMN.... MLS.... DC?T.M. GKL.... SMR.... HLV.... MMA.... DC?T.M. GCD.... SGO.... HMN.... MLS.... DC?T.M. GKL.... SMR.... HLV.... MMA.... DC?T... GCD.... SGO.... HMN.... MLS.... DD1T... GKL.... SMR.... HLV.... MMA.... DHI.VM. GCD.... SGO.... HMN.... MLS.... DS?..M. GKL.... SMR.... HLV.... MMA.... DS?..M. GCD.... SGO.... HMN.... MLS.... DC?T.M. GKL.... SMR.... HLV.... MMA.... DC?T.M. GCD.... SGO.... HMN.... MLS.... DC?T.M. GKL.... SMR.... HLV.... MMA.... DC?T.V. GCD.... SGO.... HMN.... MLS.... DHIT... GKL.... SMR.... HLV.... MMA.... DD2T... GCD.... SGO.... HMN.... MLS.... DC?T.M. GKL.... SMR.... HLV.... MMA.... DS?..M. GCD.... SGO.... HMN.... MLS.... DC?T.M. GKL.... SMR.... HLV.... MMA.... DGOT.M. GCD.... SGOTD.. HMN.... MLS.... DS?..M. GKL.... SGO.... HLV.... MMA.... DC?T.M. GCD.... SMR.... HMN.... MLS.... DS?..M. GKL.... SGO.... HLV.... MMA.... DC?T... GCD.... SMR.... HMN.... MLS.... DC?T.M."
+==============================================================
+Program Output(2): 9
+
+==============================================================
+Move:  {
+  "move": "KL",
+  "message": "",
+  "timer": 186
+}
+> Moving from: CD
+> Life Points: 9
+> Player 0 made move:
+> +++
+  move: KL
+  message: 
+  timer: 186
+> ---
+--------------------------------------------------------------------------
+> Running player 1... 
+Running with input: "pastPlays": "GCD.... SFR.... HMN.... MSR.... DKL.V.. GKLVD.. SNU.... HLV.... MMA.... DCDT... GCDTD.. SMU.... HMN.... MLS.... DC?T... GJM.... SVE.... HLV.... MMA.... DC?T... GSZ.... SGO.... HMN.... MLS.... DC?T... GKL.... SMR.... HLV.... MMA.... DS?.... GCD.... SGO.... HMN.... MLS.... DS?.... GKL.... SMR.... HLV.... MMA.... DC?T... GCD.... SGO.... HMN.... MLS.... DC?T.M. GKL.... SMR.... HLV.... MMA.... DC?T.M. GCD.... SGO.... HMN.... MLS.... DC?T.M. GKL.... SMR.... HLV.... MMA.... DC?T... GCD.... SGO.... HMN.... MLS.... DD1T... GKL.... SMR.... HLV.... MMA.... DHI.VM. GCD.... SGO.... HMN.... MLS.... DS?..M. GKL.... SMR.... HLV.... MMA.... DS?..M. GCD.... SGO.... HMN.... MLS.... DC?T.M. GKL.... SMR.... HLV.... MMA.... DC?T.M. GCD.... SGO.... HMN.... MLS.... DC?T.M. GKL.... SMR.... HLV.... MMA.... DC?T.V. GCD.... SGO.... HMN.... MLS.... DHIT... GKL.... SMR.... HLV.... MMA.... DD2T... GCD.... SGO.... HMN.... MLS.... DC?T.M. GKL.... SMR.... HLV.... MMA.... DS?..M. GCD.... SGO.... HMN.... MLS.... DC?T.M. GKL.... SMR.... HLV.... MMA.... DGOT.M. GCD.... SGOTD.. HMN.... MLS.... DS?..M. GKL.... SGO.... HLV.... MMA.... DC?T.M. GCD.... SMR.... HMN.... MLS.... DS?..M. GKL.... SGO.... HLV.... MMA.... DC?T... GCD.... SMR.... HMN.... MLS.... DC?T.M. GKL...."
+==============================================================
+Program Output(2): 6
+
+==============================================================
+Move:  {
+  "move": "GO",
+  "message": "",
+  "timer": 190
+}
+> Moving from: MR
+> Life Points: 6
+> Player 1 made move:
+> +++
+  move: GO
+  message: 
+  timer: 190
+> ---
+--------------------------------------------------------------------------
+> Running player 2... 
+Running with input: "pastPlays": "GCD.... SFR.... HMN.... MSR.... DKL.V.. GKLVD.. SNU.... HLV.... MMA.... DCDT... GCDTD.. SMU.... HMN.... MLS.... DC?T... GJM.... SVE.... HLV.... MMA.... DC?T... GSZ.... SGO.... HMN.... MLS.... DC?T... GKL.... SMR.... HLV.... MMA.... DS?.... GCD.... SGO.... HMN.... MLS.... DS?.... GKL.... SMR.... HLV.... MMA.... DC?T... GCD.... SGO.... HMN.... MLS.... DC?T.M. GKL.... SMR.... HLV.... MMA.... DC?T.M. GCD.... SGO.... HMN.... MLS.... DC?T.M. GKL.... SMR.... HLV.... MMA.... DC?T... GCD.... SGO.... HMN.... MLS.... DD1T... GKL.... SMR.... HLV.... MMA.... DHI.VM. GCD.... SGO.... HMN.... MLS.... DS?..M. GKL.... SMR.... HLV.... MMA.... DS?..M. GCD.... SGO.... HMN.... MLS.... DC?T.M. GKL.... SMR.... HLV.... MMA.... DC?T.M. GCD.... SGO.... HMN.... MLS.... DC?T.M. GKL.... SMR.... HLV.... MMA.... DC?T.V. GCD.... SGO.... HMN.... MLS.... DHIT... GKL.... SMR.... HLV.... MMA.... DD2T... GCD.... SGO.... HMN.... MLS.... DC?T.M. GKL.... SMR.... HLV.... MMA.... DS?..M. GCD.... SGO.... HMN.... MLS.... DC?T.M. GKL.... SMR.... HLV.... MMA.... DGOT.M. GCD.... SGOTD.. HMN.... MLS.... DS?..M. GKL.... SGO.... HLV.... MMA.... DC?T.M. GCD.... SMR.... HMN.... MLS.... DS?..M. GKL.... SGO.... HLV.... MMA.... DC?T... GCD.... SMR.... HMN.... MLS.... DC?T.M. GKL.... SGO...."
+==============================================================
+Program Output(2): 9
+
+==============================================================
+Move:  {
+  "move": "LV",
+  "message": "",
+  "timer": 188
+}
+> Moving from: MN
+> Life Points: 9
+> Player 2 made move:
+> +++
+  move: LV
+  message: 
+  timer: 188
+> ---
+--------------------------------------------------------------------------
+> Running player 3... 
+Running with input: "pastPlays": "GCD.... SFR.... HMN.... MSR.... DKL.V.. GKLVD.. SNU.... HLV.... MMA.... DCDT... GCDTD.. SMU.... HMN.... MLS.... DC?T... GJM.... SVE.... HLV.... MMA.... DC?T... GSZ.... SGO.... HMN.... MLS.... DC?T... GKL.... SMR.... HLV.... MMA.... DS?.... GCD.... SGO.... HMN.... MLS.... DS?.... GKL.... SMR.... HLV.... MMA.... DC?T... GCD.... SGO.... HMN.... MLS.... DC?T.M. GKL.... SMR.... HLV.... MMA.... DC?T.M. GCD.... SGO.... HMN.... MLS.... DC?T.M. GKL.... SMR.... HLV.... MMA.... DC?T... GCD.... SGO.... HMN.... MLS.... DD1T... GKL.... SMR.... HLV.... MMA.... DHI.VM. GCD.... SGO.... HMN.... MLS.... DS?..M. GKL.... SMR.... HLV.... MMA.... DS?..M. GCD.... SGO.... HMN.... MLS.... DC?T.M. GKL.... SMR.... HLV.... MMA.... DC?T.M. GCD.... SGO.... HMN.... MLS.... DC?T.M. GKL.... SMR.... HLV.... MMA.... DC?T.V. GCD.... SGO.... HMN.... MLS.... DHIT... GKL.... SMR.... HLV.... MMA.... DD2T... GCD.... SGO.... HMN.... MLS.... DC?T.M. GKL.... SMR.... HLV.... MMA.... DS?..M. GCD.... SGO.... HMN.... MLS.... DC?T.M. GKL.... SMR.... HLV.... MMA.... DGOT.M. GCD.... SGOTD.. HMN.... MLS.... DS?..M. GKL.... SGO.... HLV.... MMA.... DC?T.M. GCD.... SMR.... HMN.... MLS.... DS?..M. GKL.... SGO.... HLV.... MMA.... DC?T... GCD.... SMR.... HMN.... MLS.... DC?T.M. GKL.... SGO.... HLV...."
+==============================================================
+Program Output(2): 9
+
+==============================================================
+Move:  {
+  "move": "MA",
+  "message": "",
+  "timer": 189
+}
+> Moving from: LS
+> Life Points: 9
+> Player 3 made move:
+> +++
+  move: MA
+  message: 
+  timer: 189
+> ---
+--------------------------------------------------------------------------
+Player is currently disqualified. Making a move on their behalf.4
+Default Dracula Move: "MA"
+> End of Round:  31
+> Starting Round:  32
+--------------------------------------------------------------------------
+> Running player 0... 
+Running with input: "pastPlays": "GCD.... SFR.... HMN.... MSR.... DKL.V.. GKLVD.. SNU.... HLV.... MMA.... DCDT... GCDTD.. SMU.... HMN.... MLS.... DC?T... GJM.... SVE.... HLV.... MMA.... DC?T... GSZ.... SGO.... HMN.... MLS.... DC?T... GKL.... SMR.... HLV.... MMA.... DS?.... GCD.... SGO.... HMN.... MLS.... DS?.... GKL.... SMR.... HLV.... MMA.... DC?T... GCD.... SGO.... HMN.... MLS.... DC?T.M. GKL.... SMR.... HLV.... MMA.... DC?T.M. GCD.... SGO.... HMN.... MLS.... DC?T.M. GKL.... SMR.... HLV.... MMA.... DC?T... GCD.... SGO.... HMN.... MLS.... DD1T... GKL.... SMR.... HLV.... MMA.... DHI.VM. GCD.... SGO.... HMN.... MLS.... DS?..M. GKL.... SMR.... HLV.... MMA.... DS?..M. GCD.... SGO.... HMN.... MLS.... DC?T.M. GKL.... SMR.... HLV.... MMA.... DC?T.M. GCD.... SGO.... HMN.... MLS.... DC?T.M. GKL.... SMR.... HLV.... MMA.... DC?T.V. GCD.... SGO.... HMN.... MLS.... DHIT... GKL.... SMR.... HLV.... MMA.... DD2T... GCD.... SGO.... HMN.... MLS.... DC?T.M. GKL.... SMR.... HLV.... MMA.... DS?..M. GCD.... SGO.... HMN.... MLS.... DC?T.M. GKL.... SMR.... HLV.... MMA.... DGOT.M. GCD.... SGOTD.. HMN.... MLS.... DS?..M. GKL.... SGO.... HLV.... MMA.... DC?T.M. GCD.... SMR.... HMN.... MLS.... DS?..M. GKL.... SGO.... HLV.... MMA.... DC?T... GCD.... SMR.... HMN.... MLS.... DC?T.M. GKL.... SGO.... HLV.... MMA.... DMAT..."
+==============================================================
+Program Output(2): 9
+
+==============================================================
+Move:  {
+  "move": "CD",
+  "message": "",
+  "timer": 192
+}
+> Moving from: KL
+> Life Points: 9
+> Player 0 made move:
+> +++
+  move: CD
+  message: 
+  timer: 192
+> ---
+--------------------------------------------------------------------------
+> Running player 1... 
+Running with input: "pastPlays": "GCD.... SFR.... HMN.... MSR.... DKL.V.. GKLVD.. SNU.... HLV.... MMA.... DCDT... GCDTD.. SMU.... HMN.... MLS.... DC?T... GJM.... SVE.... HLV.... MMA.... DC?T... GSZ.... SGO.... HMN.... MLS.... DC?T... GKL.... SMR.... HLV.... MMA.... DS?.... GCD.... SGO.... HMN.... MLS.... DS?.... GKL.... SMR.... HLV.... MMA.... DC?T... GCD.... SGO.... HMN.... MLS.... DC?T.M. GKL.... SMR.... HLV.... MMA.... DC?T.M. GCD.... SGO.... HMN.... MLS.... DC?T.M. GKL.... SMR.... HLV.... MMA.... DC?T... GCD.... SGO.... HMN.... MLS.... DD1T... GKL.... SMR.... HLV.... MMA.... DHI.VM. GCD.... SGO.... HMN.... MLS.... DS?..M. GKL.... SMR.... HLV.... MMA.... DS?..M. GCD.... SGO.... HMN.... MLS.... DC?T.M. GKL.... SMR.... HLV.... MMA.... DC?T.M. GCD.... SGO.... HMN.... MLS.... DC?T.M. GKL.... SMR.... HLV.... MMA.... DC?T.V. GCD.... SGO.... HMN.... MLS.... DHIT... GKL.... SMR.... HLV.... MMA.... DD2T... GCD.... SGO.... HMN.... MLS.... DC?T.M. GKL.... SMR.... HLV.... MMA.... DS?..M. GCD.... SGO.... HMN.... MLS.... DC?T.M. GKL.... SMR.... HLV.... MMA.... DGOT.M. GCD.... SGOTD.. HMN.... MLS.... DS?..M. GKL.... SGO.... HLV.... MMA.... DC?T.M. GCD.... SMR.... HMN.... MLS.... DS?..M. GKL.... SGO.... HLV.... MMA.... DC?T... GCD.... SMR.... HMN.... MLS.... DC?T.M. GKL.... SGO.... HLV.... MMA.... DMAT... GCD...."
+==============================================================
+Program Output(2): 6
+
+==============================================================
+Move:  {
+  "move": "MR",
+  "message": "",
+  "timer": 192
+}
+> Moving from: GO
+> Life Points: 6
+> Player 1 made move:
+> +++
+  move: MR
+  message: 
+  timer: 192
+> ---
+--------------------------------------------------------------------------
+> Running player 2... 
+Running with input: "pastPlays": "GCD.... SFR.... HMN.... MSR.... DKL.V.. GKLVD.. SNU.... HLV.... MMA.... DCDT... GCDTD.. SMU.... HMN.... MLS.... DC?T... GJM.... SVE.... HLV.... MMA.... DC?T... GSZ.... SGO.... HMN.... MLS.... DC?T... GKL.... SMR.... HLV.... MMA.... DS?.... GCD.... SGO.... HMN.... MLS.... DS?.... GKL.... SMR.... HLV.... MMA.... DC?T... GCD.... SGO.... HMN.... MLS.... DC?T.M. GKL.... SMR.... HLV.... MMA.... DC?T.M. GCD.... SGO.... HMN.... MLS.... DC?T.M. GKL.... SMR.... HLV.... MMA.... DC?T... GCD.... SGO.... HMN.... MLS.... DD1T... GKL.... SMR.... HLV.... MMA.... DHI.VM. GCD.... SGO.... HMN.... MLS.... DS?..M. GKL.... SMR.... HLV.... MMA.... DS?..M. GCD.... SGO.... HMN.... MLS.... DC?T.M. GKL.... SMR.... HLV.... MMA.... DC?T.M. GCD.... SGO.... HMN.... MLS.... DC?T.M. GKL.... SMR.... HLV.... MMA.... DC?T.V. GCD.... SGO.... HMN.... MLS.... DHIT... GKL.... SMR.... HLV.... MMA.... DD2T... GCD.... SGO.... HMN.... MLS.... DC?T.M. GKL.... SMR.... HLV.... MMA.... DS?..M. GCD.... SGO.... HMN.... MLS.... DC?T.M. GKL.... SMR.... HLV.... MMA.... DGOT.M. GCD.... SGOTD.. HMN.... MLS.... DS?..M. GKL.... SGO.... HLV.... MMA.... DC?T.M. GCD.... SMR.... HMN.... MLS.... DS?..M. GKL.... SGO.... HLV.... MMA.... DC?T... GCD.... SMR.... HMN.... MLS.... DC?T.M. GKL.... SGO.... HLV.... MMA.... DMAT... GCD.... SMR...."
+==============================================================
+Program Output(2): 9
+
+==============================================================
+Move:  {
+  "move": "MN",
+  "message": "",
+  "timer": 194
+}
+> Moving from: LV
+> Life Points: 9
+> Player 2 made move:
+> +++
+  move: MN
+  message: 
+  timer: 194
+> ---
+--------------------------------------------------------------------------
+> Running player 3... 
+Running with input: "pastPlays": "GCD.... SFR.... HMN.... MSR.... DKL.V.. GKLVD.. SNU.... HLV.... MMA.... DCDT... GCDTD.. SMU.... HMN.... MLS.... DC?T... GJM.... SVE.... HLV.... MMA.... DC?T... GSZ.... SGO.... HMN.... MLS.... DC?T... GKL.... SMR.... HLV.... MMA.... DS?.... GCD.... SGO.... HMN.... MLS.... DS?.... GKL.... SMR.... HLV.... MMA.... DC?T... GCD.... SGO.... HMN.... MLS.... DC?T.M. GKL.... SMR.... HLV.... MMA.... DC?T.M. GCD.... SGO.... HMN.... MLS.... DC?T.M. GKL.... SMR.... HLV.... MMA.... DC?T... GCD.... SGO.... HMN.... MLS.... DD1T... GKL.... SMR.... HLV.... MMA.... DHI.VM. GCD.... SGO.... HMN.... MLS.... DS?..M. GKL.... SMR.... HLV.... MMA.... DS?..M. GCD.... SGO.... HMN.... MLS.... DC?T.M. GKL.... SMR.... HLV.... MMA.... DC?T.M. GCD.... SGO.... HMN.... MLS.... DC?T.M. GKL.... SMR.... HLV.... MMA.... DC?T.V. GCD.... SGO.... HMN.... MLS.... DHIT... GKL.... SMR.... HLV.... MMA.... DD2T... GCD.... SGO.... HMN.... MLS.... DC?T.M. GKL.... SMR.... HLV.... MMA.... DS?..M. GCD.... SGO.... HMN.... MLS.... DC?T.M. GKL.... SMR.... HLV.... MMA.... DGOT.M. GCD.... SGOTD.. HMN.... MLS.... DS?..M. GKL.... SGO.... HLV.... MMA.... DC?T.M. GCD.... SMR.... HMN.... MLS.... DS?..M. GKL.... SGO.... HLV.... MMA.... DC?T... GCD.... SMR.... HMN.... MLS.... DC?T.M. GKL.... SGO.... HLV.... MMA.... DMAT... GCD.... SMR.... HMN...."
+==============================================================
+Program Output(2): 9
+
+==============================================================
+Move:  {
+  "move": "LS",
+  "message": "",
+  "timer": 196
+}
+> Moving from: MA
+> Life Points: 9
+> Player 3 made move:
+> +++
+  move: LS
+  message: 
+  timer: 196
+> ---
+--------------------------------------------------------------------------
+Player is currently disqualified. Making a move on their behalf.4
+Default Dracula Move: "GR"
+> End of Round:  32
+> Starting Round:  33
+--------------------------------------------------------------------------
+> Running player 0... 
+Running with input: "pastPlays": "GCD.... SFR.... HMN.... MSR.... DKL.V.. GKLVD.. SNU.... HLV.... MMA.... DCDT... GCDTD.. SMU.... HMN.... MLS.... DC?T... GJM.... SVE.... HLV.... MMA.... DC?T... GSZ.... SGO.... HMN.... MLS.... DC?T... GKL.... SMR.... HLV.... MMA.... DS?.... GCD.... SGO.... HMN.... MLS.... DS?.... GKL.... SMR.... HLV.... MMA.... DC?T... GCD.... SGO.... HMN.... MLS.... DC?T.M. GKL.... SMR.... HLV.... MMA.... DC?T.M. GCD.... SGO.... HMN.... MLS.... DC?T.M. GKL.... SMR.... HLV.... MMA.... DC?T... GCD.... SGO.... HMN.... MLS.... DD1T... GKL.... SMR.... HLV.... MMA.... DHI.VM. GCD.... SGO.... HMN.... MLS.... DS?..M. GKL.... SMR.... HLV.... MMA.... DS?..M. GCD.... SGO.... HMN.... MLS.... DC?T.M. GKL.... SMR.... HLV.... MMA.... DC?T.M. GCD.... SGO.... HMN.... MLS.... DC?T.M. GKL.... SMR.... HLV.... MMA.... DC?T.V. GCD.... SGO.... HMN.... MLS.... DHIT... GKL.... SMR.... HLV.... MMA.... DD2T... GCD.... SGO.... HMN.... MLS.... DC?T.M. GKL.... SMR.... HLV.... MMA.... DS?..M. GCD.... SGO.... HMN.... MLS.... DC?T.M. GKL.... SMR.... HLV.... MMA.... DGOT.M. GCD.... SGOTD.. HMN.... MLS.... DS?..M. GKL.... SGO.... HLV.... MMA.... DC?T.M. GCD.... SMR.... HMN.... MLS.... DS?..M. GKL.... SGO.... HLV.... MMA.... DC?T... GCD.... SMR.... HMN.... MLS.... DC?T.M. GKL.... SGO.... HLV.... MMA.... DMAT... GCD.... SMR.... HMN.... MLS.... DC?T..."
+==============================================================
+Program Output(2): 9
+
+==============================================================
+Move:  {
+  "move": "KL",
+  "message": "",
+  "timer": 196
+}
+> Moving from: CD
+> Life Points: 9
+> Player 0 made move:
+> +++
+  move: KL
+  message: 
+  timer: 196
+> ---
+--------------------------------------------------------------------------
+> Running player 1... 
+Running with input: "pastPlays": "GCD.... SFR.... HMN.... MSR.... DKL.V.. GKLVD.. SNU.... HLV.... MMA.... DCDT... GCDTD.. SMU.... HMN.... MLS.... DC?T... GJM.... SVE.... HLV.... MMA.... DC?T... GSZ.... SGO.... HMN.... MLS.... DC?T... GKL.... SMR.... HLV.... MMA.... DS?.... GCD.... SGO.... HMN.... MLS.... DS?.... GKL.... SMR.... HLV.... MMA.... DC?T... GCD.... SGO.... HMN.... MLS.... DC?T.M. GKL.... SMR.... HLV.... MMA.... DC?T.M. GCD.... SGO.... HMN.... MLS.... DC?T.M. GKL.... SMR.... HLV.... MMA.... DC?T... GCD.... SGO.... HMN.... MLS.... DD1T... GKL.... SMR.... HLV.... MMA.... DHI.VM. GCD.... SGO.... HMN.... MLS.... DS?..M. GKL.... SMR.... HLV.... MMA.... DS?..M. GCD.... SGO.... HMN.... MLS.... DC?T.M. GKL.... SMR.... HLV.... MMA.... DC?T.M. GCD.... SGO.... HMN.... MLS.... DC?T.M. GKL.... SMR.... HLV.... MMA.... DC?T.V. GCD.... SGO.... HMN.... MLS.... DHIT... GKL.... SMR.... HLV.... MMA.... DD2T... GCD.... SGO.... HMN.... MLS.... DC?T.M. GKL.... SMR.... HLV.... MMA.... DS?..M. GCD.... SGO.... HMN.... MLS.... DC?T.M. GKL.... SMR.... HLV.... MMA.... DGOT.M. GCD.... SGOTD.. HMN.... MLS.... DS?..M. GKL.... SGO.... HLV.... MMA.... DC?T.M. GCD.... SMR.... HMN.... MLS.... DS?..M. GKL.... SGO.... HLV.... MMA.... DC?T... GCD.... SMR.... HMN.... MLS.... DC?T.M. GKL.... SGO.... HLV.... MMA.... DMAT... GCD.... SMR.... HMN.... MLS.... DC?T... GKL...."
+==============================================================
+Program Output(2): 6
+
+==============================================================
+Move:  {
+  "move": "GO",
+  "message": "",
+  "timer": 198
+}
+> Moving from: MR
+> Life Points: 6
+> Player 1 made move:
+> +++
+  move: GO
+  message: 
+  timer: 198
+> ---
+--------------------------------------------------------------------------
+> Running player 2... 
+Running with input: "pastPlays": "GCD.... SFR.... HMN.... MSR.... DKL.V.. GKLVD.. SNU.... HLV.... MMA.... DCDT... GCDTD.. SMU.... HMN.... MLS.... DC?T... GJM.... SVE.... HLV.... MMA.... DC?T... GSZ.... SGO.... HMN.... MLS.... DC?T... GKL.... SMR.... HLV.... MMA.... DS?.... GCD.... SGO.... HMN.... MLS.... DS?.... GKL.... SMR.... HLV.... MMA.... DC?T... GCD.... SGO.... HMN.... MLS.... DC?T.M. GKL.... SMR.... HLV.... MMA.... DC?T.M. GCD.... SGO.... HMN.... MLS.... DC?T.M. GKL.... SMR.... HLV.... MMA.... DC?T... GCD.... SGO.... HMN.... MLS.... DD1T... GKL.... SMR.... HLV.... MMA.... DHI.VM. GCD.... SGO.... HMN.... MLS.... DS?..M. GKL.... SMR.... HLV.... MMA.... DS?..M. GCD.... SGO.... HMN.... MLS.... DC?T.M. GKL.... SMR.... HLV.... MMA.... DC?T.M. GCD.... SGO.... HMN.... MLS.... DC?T.M. GKL.... SMR.... HLV.... MMA.... DC?T.V. GCD.... SGO.... HMN.... MLS.... DHIT... GKL.... SMR.... HLV.... MMA.... DD2T... GCD.... SGO.... HMN.... MLS.... DC?T.M. GKL.... SMR.... HLV.... MMA.... DS?..M. GCD.... SGO.... HMN.... MLS.... DC?T.M. GKL.... SMR.... HLV.... MMA.... DGOT.M. GCD.... SGOTD.. HMN.... MLS.... DS?..M. GKL.... SGO.... HLV.... MMA.... DC?T.M. GCD.... SMR.... HMN.... MLS.... DS?..M. GKL.... SGO.... HLV.... MMA.... DC?T... GCD.... SMR.... HMN.... MLS.... DC?T.M. GKL.... SGO.... HLV.... MMA.... DMAT... GCD.... SMR.... HMN.... MLS.... DC?T... GKL.... SGO...."
+==============================================================
+Program Output(2): 9
+
+==============================================================
+Move:  {
+  "move": "LV",
+  "message": "",
+  "timer": 186
+}
+> Moving from: MN
+> Life Points: 9
+> Player 2 made move:
+> +++
+  move: LV
+  message: 
+  timer: 186
+> ---
+--------------------------------------------------------------------------
+> Running player 3... 
+Running with input: "pastPlays": "GCD.... SFR.... HMN.... MSR.... DKL.V.. GKLVD.. SNU.... HLV.... MMA.... DCDT... GCDTD.. SMU.... HMN.... MLS.... DC?T... GJM.... SVE.... HLV.... MMA.... DC?T... GSZ.... SGO.... HMN.... MLS.... DC?T... GKL.... SMR.... HLV.... MMA.... DS?.... GCD.... SGO.... HMN.... MLS.... DS?.... GKL.... SMR.... HLV.... MMA.... DC?T... GCD.... SGO.... HMN.... MLS.... DC?T.M. GKL.... SMR.... HLV.... MMA.... DC?T.M. GCD.... SGO.... HMN.... MLS.... DC?T.M. GKL.... SMR.... HLV.... MMA.... DC?T... GCD.... SGO.... HMN.... MLS.... DD1T... GKL.... SMR.... HLV.... MMA.... DHI.VM. GCD.... SGO.... HMN.... MLS.... DS?..M. GKL.... SMR.... HLV.... MMA.... DS?..M. GCD.... SGO.... HMN.... MLS.... DC?T.M. GKL.... SMR.... HLV.... MMA.... DC?T.M. GCD.... SGO.... HMN.... MLS.... DC?T.M. GKL.... SMR.... HLV.... MMA.... DC?T.V. GCD.... SGO.... HMN.... MLS.... DHIT... GKL.... SMR.... HLV.... MMA.... DD2T... GCD.... SGO.... HMN.... MLS.... DC?T.M. GKL.... SMR.... HLV.... MMA.... DS?..M. GCD.... SGO.... HMN.... MLS.... DC?T.M. GKL.... SMR.... HLV.... MMA.... DGOT.M. GCD.... SGOTD.. HMN.... MLS.... DS?..M. GKL.... SGO.... HLV.... MMA.... DC?T.M. GCD.... SMR.... HMN.... MLS.... DS?..M. GKL.... SGO.... HLV.... MMA.... DC?T... GCD.... SMR.... HMN.... MLS.... DC?T.M. GKL.... SGO.... HLV.... MMA.... DMAT... GCD.... SMR.... HMN.... MLS.... DC?T... GKL.... SGO.... HLV...."
+==============================================================
+Program Output(2): 9
+
+==============================================================
+Move:  {
+  "move": "MA",
+  "message": "",
+  "timer": 184
+}
+> Moving from: LS
+> Life Points: 9
+> Player 3 made move:
+> +++
+  move: MA
+  message: 
+  timer: 184
+> ---
+--------------------------------------------------------------------------
+Player is currently disqualified. Making a move on their behalf.4
+Default Dracula Move: "CA"
+> End of Round:  33
+> Starting Round:  34
+--------------------------------------------------------------------------
+> Running player 0... 
+Running with input: "pastPlays": "GCD.... SFR.... HMN.... MSR.... DKL.V.. GKLVD.. SNU.... HLV.... MMA.... DCDT... GCDTD.. SMU.... HMN.... MLS.... DC?T... GJM.... SVE.... HLV.... MMA.... DC?T... GSZ.... SGO.... HMN.... MLS.... DC?T... GKL.... SMR.... HLV.... MMA.... DS?.... GCD.... SGO.... HMN.... MLS.... DS?.... GKL.... SMR.... HLV.... MMA.... DC?T... GCD.... SGO.... HMN.... MLS.... DC?T.M. GKL.... SMR.... HLV.... MMA.... DC?T.M. GCD.... SGO.... HMN.... MLS.... DC?T.M. GKL.... SMR.... HLV.... MMA.... DC?T... GCD.... SGO.... HMN.... MLS.... DD1T... GKL.... SMR.... HLV.... MMA.... DHI.VM. GCD.... SGO.... HMN.... MLS.... DS?..M. GKL.... SMR.... HLV.... MMA.... DS?..M. GCD.... SGO.... HMN.... MLS.... DC?T.M. GKL.... SMR.... HLV.... MMA.... DC?T.M. GCD.... SGO.... HMN.... MLS.... DC?T.M. GKL.... SMR.... HLV.... MMA.... DC?T.V. GCD.... SGO.... HMN.... MLS.... DHIT... GKL.... SMR.... HLV.... MMA.... DD2T... GCD.... SGO.... HMN.... MLS.... DC?T.M. GKL.... SMR.... HLV.... MMA.... DS?..M. GCD.... SGO.... HMN.... MLS.... DC?T.M. GKL.... SMR.... HLV.... MMA.... DGOT.M. GCD.... SGOTD.. HMN.... MLS.... DS?..M. GKL.... SGO.... HLV.... MMA.... DC?T.M. GCD.... SMR.... HMN.... MLS.... DS?..M. GKL.... SGO.... HLV.... MMA.... DC?T... GCD.... SMR.... HMN.... MLS.... DC?T.M. GKL.... SGO.... HLV.... MMA.... DMAT... GCD.... SMR.... HMN.... MLS.... DC?T... GKL.... SGO.... HLV.... MMAT... DC?T.M."
+==============================================================
+Program Output(2): 9
+
+==============================================================
+Move:  {
+  "move": "CD",
+  "message": "",
+  "timer": 198
+}
+> Moving from: KL
+> Life Points: 9
+> Player 0 made move:
+> +++
+  move: CD
+  message: 
+  timer: 198
+> ---
+--------------------------------------------------------------------------
+> Running player 1... 
+Running with input: "pastPlays": "GCD.... SFR.... HMN.... MSR.... DKL.V.. GKLVD.. SNU.... HLV.... MMA.... DCDT... GCDTD.. SMU.... HMN.... MLS.... DC?T... GJM.... SVE.... HLV.... MMA.... DC?T... GSZ.... SGO.... HMN.... MLS.... DC?T... GKL.... SMR.... HLV.... MMA.... DS?.... GCD.... SGO.... HMN.... MLS.... DS?.... GKL.... SMR.... HLV.... MMA.... DC?T... GCD.... SGO.... HMN.... MLS.... DC?T.M. GKL.... SMR.... HLV.... MMA.... DC?T.M. GCD.... SGO.... HMN.... MLS.... DC?T.M. GKL.... SMR.... HLV.... MMA.... DC?T... GCD.... SGO.... HMN.... MLS.... DD1T... GKL.... SMR.... HLV.... MMA.... DHI.VM. GCD.... SGO.... HMN.... MLS.... DS?..M. GKL.... SMR.... HLV.... MMA.... DS?..M. GCD.... SGO.... HMN.... MLS.... DC?T.M. GKL.... SMR.... HLV.... MMA.... DC?T.M. GCD.... SGO.... HMN.... MLS.... DC?T.M. GKL.... SMR.... HLV.... MMA.... DC?T.V. GCD.... SGO.... HMN.... MLS.... DHIT... GKL.... SMR.... HLV.... MMA.... DD2T... GCD.... SGO.... HMN.... MLS.... DC?T.M. GKL.... SMR.... HLV.... MMA.... DS?..M. GCD.... SGO.... HMN.... MLS.... DC?T.M. GKL.... SMR.... HLV.... MMA.... DGOT.M. GCD.... SGOTD.. HMN.... MLS.... DS?..M. GKL.... SGO.... HLV.... MMA.... DC?T.M. GCD.... SMR.... HMN.... MLS.... DS?..M. GKL.... SGO.... HLV.... MMA.... DC?T... GCD.... SMR.... HMN.... MLS.... DC?T.M. GKL.... SGO.... HLV.... MMA.... DMAT... GCD.... SMR.... HMN.... MLS.... DC?T... GKL.... SGO.... HLV.... MMAT... DC?T.M. GCD...."
+==============================================================
+Program Output(2): 6
+
+==============================================================
+Move:  {
+  "move": "MR",
+  "message": "",
+  "timer": 199
+}
+> Moving from: GO
+> Life Points: 6
+> Player 1 made move:
+> +++
+  move: MR
+  message: 
+  timer: 199
+> ---
+--------------------------------------------------------------------------
+> Running player 2... 
+Running with input: "pastPlays": "GCD.... SFR.... HMN.... MSR.... DKL.V.. GKLVD.. SNU.... HLV.... MMA.... DCDT... GCDTD.. SMU.... HMN.... MLS.... DC?T... GJM.... SVE.... HLV.... MMA.... DC?T... GSZ.... SGO.... HMN.... MLS.... DC?T... GKL.... SMR.... HLV.... MMA.... DS?.... GCD.... SGO.... HMN.... MLS.... DS?.... GKL.... SMR.... HLV.... MMA.... DC?T... GCD.... SGO.... HMN.... MLS.... DC?T.M. GKL.... SMR.... HLV.... MMA.... DC?T.M. GCD.... SGO.... HMN.... MLS.... DC?T.M. GKL.... SMR.... HLV.... MMA.... DC?T... GCD.... SGO.... HMN.... MLS.... DD1T... GKL.... SMR.... HLV.... MMA.... DHI.VM. GCD.... SGO.... HMN.... MLS.... DS?..M. GKL.... SMR.... HLV.... MMA.... DS?..M. GCD.... SGO.... HMN.... MLS.... DC?T.M. GKL.... SMR.... HLV.... MMA.... DC?T.M. GCD.... SGO.... HMN.... MLS.... DC?T.M. GKL.... SMR.... HLV.... MMA.... DC?T.V. GCD.... SGO.... HMN.... MLS.... DHIT... GKL.... SMR.... HLV.... MMA.... DD2T... GCD.... SGO.... HMN.... MLS.... DC?T.M. GKL.... SMR.... HLV.... MMA.... DS?..M. GCD.... SGO.... HMN.... MLS.... DC?T.M. GKL.... SMR.... HLV.... MMA.... DGOT.M. GCD.... SGOTD.. HMN.... MLS.... DS?..M. GKL.... SGO.... HLV.... MMA.... DC?T.M. GCD.... SMR.... HMN.... MLS.... DS?..M. GKL.... SGO.... HLV.... MMA.... DC?T... GCD.... SMR.... HMN.... MLS.... DC?T.M. GKL.... SGO.... HLV.... MMA.... DMAT... GCD.... SMR.... HMN.... MLS.... DC?T... GKL.... SGO.... HLV.... MMAT... DC?T.M. GCD.... SMR...."
+==============================================================
+Program Output(2): 9
+
+==============================================================
+Move:  {
+  "move": "MN",
+  "message": "",
+  "timer": 199
+}
+> Moving from: LV
+> Life Points: 9
+> Player 2 made move:
+> +++
+  move: MN
+  message: 
+  timer: 199
+> ---
+--------------------------------------------------------------------------
+> Running player 3... 
+Running with input: "pastPlays": "GCD.... SFR.... HMN.... MSR.... DKL.V.. GKLVD.. SNU.... HLV.... MMA.... DCDT... GCDTD.. SMU.... HMN.... MLS.... DC?T... GJM.... SVE.... HLV.... MMA.... DC?T... GSZ.... SGO.... HMN.... MLS.... DC?T... GKL.... SMR.... HLV.... MMA.... DS?.... GCD.... SGO.... HMN.... MLS.... DS?.... GKL.... SMR.... HLV.... MMA.... DC?T... GCD.... SGO.... HMN.... MLS.... DC?T.M. GKL.... SMR.... HLV.... MMA.... DC?T.M. GCD.... SGO.... HMN.... MLS.... DC?T.M. GKL.... SMR.... HLV.... MMA.... DC?T... GCD.... SGO.... HMN.... MLS.... DD1T... GKL.... SMR.... HLV.... MMA.... DHI.VM. GCD.... SGO.... HMN.... MLS.... DS?..M. GKL.... SMR.... HLV.... MMA.... DS?..M. GCD.... SGO.... HMN.... MLS.... DC?T.M. GKL.... SMR.... HLV.... MMA.... DC?T.M. GCD.... SGO.... HMN.... MLS.... DC?T.M. GKL.... SMR.... HLV.... MMA.... DC?T.V. GCD.... SGO.... HMN.... MLS.... DHIT... GKL.... SMR.... HLV.... MMA.... DD2T... GCD.... SGO.... HMN.... MLS.... DC?T.M. GKL.... SMR.... HLV.... MMA.... DS?..M. GCD.... SGO.... HMN.... MLS.... DC?T.M. GKL.... SMR.... HLV.... MMA.... DGOT.M. GCD.... SGOTD.. HMN.... MLS.... DS?..M. GKL.... SGO.... HLV.... MMA.... DC?T.M. GCD.... SMR.... HMN.... MLS.... DS?..M. GKL.... SGO.... HLV.... MMA.... DC?T... GCD.... SMR.... HMN.... MLS.... DC?T.M. GKL.... SGO.... HLV.... MMA.... DMAT... GCD.... SMR.... HMN.... MLS.... DC?T... GKL.... SGO.... HLV.... MMAT... DC?T.M. GCD.... SMR.... HMN...."
+==============================================================
+Program Output(2): 7
+
+==============================================================
+Move:  {
+  "move": "LS",
+  "message": "",
+  "timer": 202
+}
+> Moving from: MA
+> Life Points: 7
+> Player 3 made move:
+> +++
+  move: LS
+  message: 
+  timer: 202
+> ---
+--------------------------------------------------------------------------
+Player is currently disqualified. Making a move on their behalf.4
+Default Dracula Move: "D3"
+> End of Round:  34
+> Starting Round:  35
+--------------------------------------------------------------------------
+> Running player 0... 
+Running with input: "pastPlays": "GCD.... SFR.... HMN.... MSR.... DKL.V.. GKLVD.. SNU.... HLV.... MMA.... DCDT... GCDTD.. SMU.... HMN.... MLS.... DC?T... GJM.... SVE.... HLV.... MMA.... DC?T... GSZ.... SGO.... HMN.... MLS.... DC?T... GKL.... SMR.... HLV.... MMA.... DS?.... GCD.... SGO.... HMN.... MLS.... DS?.... GKL.... SMR.... HLV.... MMA.... DC?T... GCD.... SGO.... HMN.... MLS.... DC?T.M. GKL.... SMR.... HLV.... MMA.... DC?T.M. GCD.... SGO.... HMN.... MLS.... DC?T.M. GKL.... SMR.... HLV.... MMA.... DC?T... GCD.... SGO.... HMN.... MLS.... DD1T... GKL.... SMR.... HLV.... MMA.... DHI.VM. GCD.... SGO.... HMN.... MLS.... DS?..M. GKL.... SMR.... HLV.... MMA.... DS?..M. GCD.... SGO.... HMN.... MLS.... DC?T.M. GKL.... SMR.... HLV.... MMA.... DC?T.M. GCD.... SGO.... HMN.... MLS.... DC?T.M. GKL.... SMR.... HLV.... MMA.... DC?T.V. GCD.... SGO.... HMN.... MLS.... DHIT... GKL.... SMR.... HLV.... MMA.... DD2T... GCD.... SGO.... HMN.... MLS.... DC?T.M. GKL.... SMR.... HLV.... MMA.... DS?..M. GCD.... SGO.... HMN.... MLS.... DC?T.M. GKL.... SMR.... HLV.... MMA.... DGOT.M. GCD.... SGOTD.. HMN.... MLS.... DS?..M. GKL.... SGO.... HLV.... MMA.... DC?T.M. GCD.... SMR.... HMN.... MLS.... DS?..M. GKL.... SGO.... HLV.... MMA.... DC?T... GCD.... SMR.... HMN.... MLS.... DC?T.M. GKL.... SGO.... HLV.... MMA.... DMAT... GCD.... SMR.... HMN.... MLS.... DC?T... GKL.... SGO.... HLV.... MMAT... DC?T.M. GCD.... SMR.... HMN.... MLS.... DD3T..."
+==============================================================
+Program Output(2): 9
+
+==============================================================
+Move:  {
+  "move": "KL",
+  "message": "",
+  "timer": 202
+}
+> Moving from: CD
+> Life Points: 9
+> Player 0 made move:
+> +++
+  move: KL
+  message: 
+  timer: 202
+> ---
+--------------------------------------------------------------------------
+> Running player 1... 
+Running with input: "pastPlays": "GCD.... SFR.... HMN.... MSR.... DKL.V.. GKLVD.. SNU.... HLV.... MMA.... DCDT... GCDTD.. SMU.... HMN.... MLS.... DC?T... GJM.... SVE.... HLV.... MMA.... DC?T... GSZ.... SGO.... HMN.... MLS.... DC?T... GKL.... SMR.... HLV.... MMA.... DS?.... GCD.... SGO.... HMN.... MLS.... DS?.... GKL.... SMR.... HLV.... MMA.... DC?T... GCD.... SGO.... HMN.... MLS.... DC?T.M. GKL.... SMR.... HLV.... MMA.... DC?T.M. GCD.... SGO.... HMN.... MLS.... DC?T.M. GKL.... SMR.... HLV.... MMA.... DC?T... GCD.... SGO.... HMN.... MLS.... DD1T... GKL.... SMR.... HLV.... MMA.... DHI.VM. GCD.... SGO.... HMN.... MLS.... DS?..M. GKL.... SMR.... HLV.... MMA.... DS?..M. GCD.... SGO.... HMN.... MLS.... DC?T.M. GKL.... SMR.... HLV.... MMA.... DC?T.M. GCD.... SGO.... HMN.... MLS.... DC?T.M. GKL.... SMR.... HLV.... MMA.... DC?T.V. GCD.... SGO.... HMN.... MLS.... DHIT... GKL.... SMR.... HLV.... MMA.... DD2T... GCD.... SGO.... HMN.... MLS.... DC?T.M. GKL.... SMR.... HLV.... MMA.... DS?..M. GCD.... SGO.... HMN.... MLS.... DC?T.M. GKL.... SMR.... HLV.... MMA.... DGOT.M. GCD.... SGOTD.. HMN.... MLS.... DS?..M. GKL.... SGO.... HLV.... MMA.... DC?T.M. GCD.... SMR.... HMN.... MLS.... DS?..M. GKL.... SGO.... HLV.... MMA.... DC?T... GCD.... SMR.... HMN.... MLS.... DC?T.M. GKL.... SGO.... HLV.... MMA.... DMAT... GCD.... SMR.... HMN.... MLS.... DC?T... GKL.... SGO.... HLV.... MMAT... DC?T.M. GCD.... SMR.... HMN.... MLS.... DD3T... GKL...."
+==============================================================
+Program Output(2): 6
+
+==============================================================
+Move:  {
+  "move": "GO",
+  "message": "",
+  "timer": 203
+}
+> Moving from: MR
+> Life Points: 6
+> Player 1 made move:
+> +++
+  move: GO
+  message: 
+  timer: 203
+> ---
+--------------------------------------------------------------------------
+> Running player 2... 
+Running with input: "pastPlays": "GCD.... SFR.... HMN.... MSR.... DKL.V.. GKLVD.. SNU.... HLV.... MMA.... DCDT... GCDTD.. SMU.... HMN.... MLS.... DC?T... GJM.... SVE.... HLV.... MMA.... DC?T... GSZ.... SGO.... HMN.... MLS.... DC?T... GKL.... SMR.... HLV.... MMA.... DS?.... GCD.... SGO.... HMN.... MLS.... DS?.... GKL.... SMR.... HLV.... MMA.... DC?T... GCD.... SGO.... HMN.... MLS.... DC?T.M. GKL.... SMR.... HLV.... MMA.... DC?T.M. GCD.... SGO.... HMN.... MLS.... DC?T.M. GKL.... SMR.... HLV.... MMA.... DC?T... GCD.... SGO.... HMN.... MLS.... DD1T... GKL.... SMR.... HLV.... MMA.... DHI.VM. GCD.... SGO.... HMN.... MLS.... DS?..M. GKL.... SMR.... HLV.... MMA.... DS?..M. GCD.... SGO.... HMN.... MLS.... DC?T.M. GKL.... SMR.... HLV.... MMA.... DC?T.M. GCD.... SGO.... HMN.... MLS.... DC?T.M. GKL.... SMR.... HLV.... MMA.... DC?T.V. GCD.... SGO.... HMN.... MLS.... DHIT... GKL.... SMR.... HLV.... MMA.... DD2T... GCD.... SGO.... HMN.... MLS.... DC?T.M. GKL.... SMR.... HLV.... MMA.... DS?..M. GCD.... SGO.... HMN.... MLS.... DC?T.M. GKL.... SMR.... HLV.... MMA.... DGOT.M. GCD.... SGOTD.. HMN.... MLS.... DS?..M. GKL.... SGO.... HLV.... MMA.... DC?T.M. GCD.... SMR.... HMN.... MLS.... DS?..M. GKL.... SGO.... HLV.... MMA.... DC?T... GCD.... SMR.... HMN.... MLS.... DC?T.M. GKL.... SGO.... HLV.... MMA.... DMAT... GCD.... SMR.... HMN.... MLS.... DC?T... GKL.... SGO.... HLV.... MMAT... DC?T.M. GCD.... SMR.... HMN.... MLS.... DD3T... GKL.... SGO...."
+==============================================================
+Program Output(2): 9
+
+==============================================================
+Move:  {
+  "move": "LV",
+  "message": "",
+  "timer": 203
+}
+> Moving from: MN
+> Life Points: 9
+> Player 2 made move:
+> +++
+  move: LV
+  message: 
+  timer: 203
+> ---
+--------------------------------------------------------------------------
+> Running player 3... 
+Running with input: "pastPlays": "GCD.... SFR.... HMN.... MSR.... DKL.V.. GKLVD.. SNU.... HLV.... MMA.... DCDT... GCDTD.. SMU.... HMN.... MLS.... DC?T... GJM.... SVE.... HLV.... MMA.... DC?T... GSZ.... SGO.... HMN.... MLS.... DC?T... GKL.... SMR.... HLV.... MMA.... DS?.... GCD.... SGO.... HMN.... MLS.... DS?.... GKL.... SMR.... HLV.... MMA.... DC?T... GCD.... SGO.... HMN.... MLS.... DC?T.M. GKL.... SMR.... HLV.... MMA.... DC?T.M. GCD.... SGO.... HMN.... MLS.... DC?T.M. GKL.... SMR.... HLV.... MMA.... DC?T... GCD.... SGO.... HMN.... MLS.... DD1T... GKL.... SMR.... HLV.... MMA.... DHI.VM. GCD.... SGO.... HMN.... MLS.... DS?..M. GKL.... SMR.... HLV.... MMA.... DS?..M. GCD.... SGO.... HMN.... MLS.... DC?T.M. GKL.... SMR.... HLV.... MMA.... DC?T.M. GCD.... SGO.... HMN.... MLS.... DC?T.M. GKL.... SMR.... HLV.... MMA.... DC?T.V. GCD.... SGO.... HMN.... MLS.... DHIT... GKL.... SMR.... HLV.... MMA.... DD2T... GCD.... SGO.... HMN.... MLS.... DC?T.M. GKL.... SMR.... HLV.... MMA.... DS?..M. GCD.... SGO.... HMN.... MLS.... DC?T.M. GKL.... SMR.... HLV.... MMA.... DGOT.M. GCD.... SGOTD.. HMN.... MLS.... DS?..M. GKL.... SGO.... HLV.... MMA.... DC?T.M. GCD.... SMR.... HMN.... MLS.... DS?..M. GKL.... SGO.... HLV.... MMA.... DC?T... GCD.... SMR.... HMN.... MLS.... DC?T.M. GKL.... SGO.... HLV.... MMA.... DMAT... GCD.... SMR.... HMN.... MLS.... DC?T... GKL.... SGO.... HLV.... MMAT... DC?T.M. GCD.... SMR.... HMN.... MLS.... DD3T... GKL.... SGO.... HLV...."
+==============================================================
+Program Output(2): 7
+
+==============================================================
+Move:  {
+  "move": "MA",
+  "message": "",
+  "timer": 204
+}
+> Moving from: LS
+> Life Points: 7
+> Player 3 made move:
+> +++
+  move: MA
+  message: 
+  timer: 204
+> ---
+--------------------------------------------------------------------------
+> End of game: 
+> +++
+  score: 312
+  revealedPastPlays: GCD.... SFR.... HMN.... MSR.... DKL.V.. GKLVD.. SNU.... HLV.... MMA.... DCDT... GCDTD.. SMU.... HMN.... MLS.... DGAT... GJM.... SVE.... HLV.... MMA.... DBCT... GSZ.... SGO.... HMN.... MLS.... DCNT... GKL.... SMR.... HLV.... MMA.... DBS.... GCD.... SGO.... HMN.... MLS.... DIO.... GKL.... SMR.... HLV.... MMA.... DSAT... GCD.... SGO.... HMN.... MLS.... DSOT.M. GKL.... SMR.... HLV.... MMA.... DSJT.M. GCD.... SGO.... HMN.... MLS.... DVAT.M. GKL.... SMR.... HLV.... MMA.... DATT... GCD.... SGO.... HMN.... MLS.... DD1T... GKL.... SMR.... HLV.... MMA.... DHI.VM. GCD.... SGO.... HMN.... MLS.... DIO..M. GKL.... SMR.... HLV.... MMA.... DAS..M. GCD.... SGO.... HMN.... MLS.... DVET.M. GKL.... SMR.... HLV.... MMA.... DFLT.M. GCD.... SGO.... HMN.... MLS.... DROT.M. GKL.... SMR.... HLV.... MMA.... DNPT.V. GCD.... SGO.... HMN.... MLS.... DHIT... GKL.... SMR.... HLV.... MMA.... DD2T... GCD.... SGO.... HMN.... MLS.... DBIT.M. GKL.... SMR.... HLV.... MMA.... DAS..M. GCD.... SGO.... HMN.... MLS.... DVET.M. GKL.... SMR.... HLV.... MMA.... DGOT.M. GCD.... SGOTD.. HMN.... MLS.... DTS..M. GKL.... SGO.... HLV.... MMA.... DCGT.M. GCD.... SMR.... HMN.... MLS.... DMS..M. GKL.... SGO.... HLV.... MMA.... DALT... GCD.... SMR.... HMN.... MLS.... DHIT.M. GKL.... SGO.... HLV.... MMA.... DMAT... GCD.... SMR.... HMN.... MLS.... DGRT... GKL.... SGO.... HLV.... MMAT... DCAT.M. GCD.... SMR.... HMN.... MLS.... DD3T... GKL.... SGO.... HLV.... MMATD..
+  messages: ["","","","","KL","","","","","CD","","","","","GA","","","","","BC","","","","","CN","","","","","BS","","","","","IO","","","","","SA","","","","","SO","","","","","SJ","","","","","VA","","","","","AT","","","","","D1","","","","","HIDE","","","","","===== Generating default move...player disqualified... =====","","","","","===== Generating default move...player disqualified... =====","","","","","===== Generating default move...player disqualified... =====","","","","","===== Generating default move...player disqualified... =====","","","","","===== Generating default move...player disqualified... =====","","","","","===== Generating default move...player disqualified... =====","","","","","===== Generating default move...player disqualified... =====","","","","","===== Generating default move...player disqualified... =====","","","","","===== Generating default move...player disqualified... =====","","","","","===== Generating default move...player disqualified... =====","","","","","===== Generating default move...player disqualified... =====","","","","","===== Generating default move...player disqualified... =====","","","","","===== Generating default move...player disqualified... =====","","","","","===== Generating default move...player disqualified... =====","","","","","===== Generating default move...player disqualified... =====","","","","","===== Generating default move...player disqualified... =====","","","","","===== Generating default move...player disqualified... =====","","","","","===== Generating default move...player disqualified... =====","","","","","===== Generating default move...player disqualified... =====","","","","","===== Generating default move...player disqualified... =====","","","","","===== Generating default move...player disqualified... =====","","","",""]
+> ---
+> Game Over
+312
+35
+Player 4 was disqualified? true
+
