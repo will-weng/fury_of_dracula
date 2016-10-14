@@ -10,7 +10,10 @@
 
 #define LENGTH_OF_PLAY 3
 #define NUM_OF_PLAYERS 5
+#define ARRAY_SIZE 9
 
+char *LoopMove (DracView gameState);
+/*
 static struct
 {
     LocationID currLocation[NUM_OF_PLAYERS];
@@ -18,12 +21,17 @@ static struct
 } player;
 
 static int *legalMoves(DracView gameState, int *path, int *numLocations, LocationID trail[TRAIL_SIZE], LocationID start);
-
+*/
 void decideDraculaMove(DracView gameState)
 {
     // initializes all used vairables
     char *play = "KL";
-//    char message[MESSAGE_SIZE] = "";
+    char message[MESSAGE_SIZE] = "Run away!";
+
+    //Move around in a loop
+    play = LoopMove(gameState);
+    registerBestPlay(play, message);
+/*
     int numLocations, counter, counter1, start, end;
     LocationID *path, trail[TRAIL_SIZE];
     
@@ -70,8 +78,9 @@ void decideDraculaMove(DracView gameState)
     }
 
     registerBestPlay(play, play);
+*/
 }
-
+/*
 static int *legalMoves(DracView gameState, int *path, int *numLocations, LocationID trail[TRAIL_SIZE], LocationID start) {
     // remove places in trail from path
     int counter, counter1;
@@ -90,4 +99,10 @@ static int *legalMoves(DracView gameState, int *path, int *numLocations, Locatio
         }
     }
     return path;
+}
+*/
+char *LoopMove(DracView gameState) {
+    char* moves[ARRAY_SIZE]={"GA","CN","BS","IO","AT","VA","SA","SO","BC"};
+    int i = giveMeTheRound(gameState)%ARRAY_SIZE;
+    return moves[i];
 }
