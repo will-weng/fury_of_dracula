@@ -6,6 +6,15 @@
 #include "Game.h"
 #include "HunterView.h"
 #include "Places.h"
+#include "queue.h"
+#include "Map.h"
+
+#define MAX_PATH_LENGTH 20
+#define NOT_SEEN -1
+
+
+//  =====   UNFINISHED  =====
+//static int *shotestPath(LocationID start, LocationID end, int *path);
 
 static struct
 {
@@ -21,6 +30,10 @@ void decideHunterMove(HunterView gameState)
     char *play = "CD";
     char message[MESSAGE_SIZE] = "";
     int numLocations, counter;
+    
+    //  =====   UNFINISHED  =====
+    // used to record the shortest path to destination 
+    // int path[MAX_PATH_LENGTH];
 
     // fills out the game info struct
     gameInfo.me = whoAmI(gameState);
@@ -30,10 +43,27 @@ void decideHunterMove(HunterView gameState)
         gameInfo.currLocation[counter] = whereIs(gameState, counter);
     }
 
+    // *****algorithm to decide where to go*****
+        // TODO
+        /* 
+            try and make decisions depending on the player
+            eg. player 1 go to where dracula might be heading,
+                player 2 go to where dracula was
+                player 3 go to where dracula is
+                player 4 stay around DC
+            this pretty much decides our AI's intelligence
+         */
+    // ***** any one can work on this *****
+
+    //  =====   UNFINISHED  =====
+    // find shortest path to where we want to go
+    // don't know how to do it just yet
+    //shotestPath(gameInfo.currLocation[gameInfo.me], gameInfo.currLocation[PLAYER_DRACULA], path);
 
     // individual decisions of hunters
     if(gameInfo.me == PLAYER_LORD_GODALMING)
     {
+
     }
     else if(gameInfo.me == PLAYER_DR_SEWARD)
     {
@@ -60,3 +90,35 @@ void decideHunterMove(HunterView gameState)
 
     registerBestPlay(play, message);
 }
+
+/*
+=====   UNFINISHED  =====
+static int *shotestPath(LocationID start, LocationID end, int *path) {
+
+    int seen[NUM_MAP_LOCATIONS], counter = 0;
+
+    // initialises seen array;
+    while(counter < NUM_MAP_LOCATIONS) {
+        seen[counter] = NOT_SEEN;
+        counter++;
+    }
+
+    Queue locations = newQueue();
+    enterQueue(locations, start);
+    LocationID *places;
+
+    while(!emptyQueue(locations)) {
+        
+        LocationID distance = 0, j = leaveQueue(locations);
+        
+        if(seen[j] != NOT_SEEN)
+            continue;
+
+        places = Locations();
+        seen[j] = distance;
+
+    }
+
+    return path;
+}
+*/
