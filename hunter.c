@@ -3,6 +3,7 @@
 
 #include <stdlib.h>
 #include <stdio.h>
+#include <time.h>
 #include "Game.h"
 #include "HunterView.h"
 #include "Places.h"
@@ -11,6 +12,8 @@
 
 #define MAX_PATH_LENGTH 20
 #define NOT_SEEN -1
+
+static LocationID *randMove(int numLocations);
 
 
 //  =====   UNFINISHED  =====
@@ -63,7 +66,7 @@ void decideHunterMove(HunterView gameState)
     // individual decisions of hunters
     if(gameInfo.me == PLAYER_LORD_GODALMING)
     {
-
+        play = randMove(numLocations);
     }
     else if(gameInfo.me == PLAYER_DR_SEWARD)
     {
@@ -122,3 +125,16 @@ static int *shotestPath(LocationID start, LocationID end, int *path) {
     return path;
 }
 */
+
+/*** Make a random move ***/
+/* Players will choose a random location to move to from the 
+   get *connectedLocations array */
+
+static LocationID *randMove(int numLocations) {
+    LocationID *moves = gameInfo.places;
+    //Pick a random location from within this array
+    
+    srand(time(NULL));  //set seed by using system time
+    int i = rand()%&numLocations;
+    return moves[i];
+}
