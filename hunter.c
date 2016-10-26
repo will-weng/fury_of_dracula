@@ -83,7 +83,7 @@ void decideHunterMove(HunterView gameState)
     if(gameInfo.round == 7) {
         play = idToAbbrev(gameInfo.currLocation[gameInfo.me]);
     } else if(gameInfo.round > 0) {
-        play = idToAbbrev(gameInfo.places[numLocations/2]);
+        play = randMove(numLocations);
     }
 
     // if hunter is lower than 5 health, it would rest
@@ -135,4 +135,5 @@ static char *randMove(HunterView gameState, int numLocations) {
     srand(time(NULL));  //set seed for rand() by using system time
     int i = rand()%numLocations;
     return moves[i];
+<<<<<<< HEAD
 }*/
