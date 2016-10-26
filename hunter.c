@@ -66,7 +66,6 @@ void decideHunterMove(HunterView gameState)
     // individual decisions of hunters
     if(gameInfo.me == PLAYER_LORD_GODALMING)
     {
-        play = randMove(numLocations);
     }
     else if(gameInfo.me == PLAYER_DR_SEWARD)
     {
@@ -85,7 +84,7 @@ void decideHunterMove(HunterView gameState)
     if(gameInfo.round == 7) {
         play = idToAbbrev(gameInfo.currLocation[gameInfo.me]);
     } else if(gameInfo.round > 0) {
-        play = idToAbbrev(gameInfo.places[numLocations/2]);
+        play = randMove(numLocations);
     }
 
     // if hunter is lower than 5 health, it would rest
