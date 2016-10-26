@@ -13,11 +13,9 @@
 #define MAX_PATH_LENGTH 20
 #define NOT_SEEN -1
 
-static LocationID *randMove(int numLocations);
-
-
 //  =====   UNFINISHED  =====
 //static int *shotestPath(LocationID start, LocationID end, int *path);
+//static char *randMove(HunterView gameState, int numLocations);
 
 static struct
 {
@@ -66,7 +64,7 @@ void decideHunterMove(HunterView gameState)
     // individual decisions of hunters
     if(gameInfo.me == PLAYER_LORD_GODALMING)
     {
-        play = randMove(numLocations);
+        //play = randMove(gameState, numLocations);
     }
     else if(gameInfo.me == PLAYER_DR_SEWARD)
     {
@@ -130,11 +128,11 @@ static int *shotestPath(LocationID start, LocationID end, int *path) {
 /* Players will choose a random location to move to from the 
    get *connectedLocations array */
 
-static LocationID *randMove(int numLocations) {
-    LocationID *moves = gameInfo.places;
+/*
+static char *randMove(HunterView gameState, int numLocations) {
+    char *moves = whereCanIgo(gameState, numLocations, TRUE, TRUE, TRUE);
     //Pick a random location from within this array
-    
-    srand(time(NULL));  //set seed by using system time
-    int i = rand()%&numLocations;
+    srand(time(NULL));  //set seed for rand() by using system time
+    int i = rand()%numLocations;
     return moves[i];
-}
+}*/
